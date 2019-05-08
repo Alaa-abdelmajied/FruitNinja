@@ -1,5 +1,5 @@
 package model.fruit;
 
-public class Orange extends Fruits {
+public class Orange implements Fruit{
 
 }
