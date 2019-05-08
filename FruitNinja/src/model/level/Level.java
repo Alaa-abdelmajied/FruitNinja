@@ -1,5 +1,5 @@
 package model.level;
 
-public class Level {
+public class Level implements Levels {
 
 }
