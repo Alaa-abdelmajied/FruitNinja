@@ -2,7 +2,7 @@ package model.level;
 
 import model.fruit.Fruit;
 
-public interface Levels{
+public interface LevelStrategy{
 	
 	public double maxHeight();
 	

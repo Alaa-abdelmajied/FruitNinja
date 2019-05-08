@@ -2,21 +2,21 @@ package model.level;
 
 import model.fruit.Fruit;
 
-public class Medium implements Levels{
+public class Medium implements LevelStrategy{
 
 	@Override
 	public double maxHeight() {
-		return 0;
+		return 4;
 	}
 
 	@Override
 	public double getInitialVelocity() {
-		return 0;
+		return 7;
 	}
 
 	@Override
 	public double getFallingVelocity() {
-		return 0;
+		return 7;
 	}
 
 	@Override
