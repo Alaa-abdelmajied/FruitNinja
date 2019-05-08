@@ -6,10 +6,10 @@ public class FruitFactory {
 
 		if (fruitName == null)
 			return null;
-		if (fruitName.equals("Apple"))
-			return new Apple();
-		if (fruitName.equals("Grape"))
-			return new Grape();
+		if (fruitName.equals("SpecialApple"))
+			return new SpecialApple();
+		if (fruitName.equals("SpecialGrape"))
+			return new SpecialGrape();
 		if (fruitName.equals("Orange"))
 			return new Orange();
 		if (fruitName.equals("WaterMelon"))
