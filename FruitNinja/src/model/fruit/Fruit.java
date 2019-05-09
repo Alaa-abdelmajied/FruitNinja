@@ -1,6 +1,8 @@
 package model.fruit;
 
-public interface Fruit {
+import model.Element;
+
+public interface Fruit extends Element {
 
 	public boolean isSliced();
 

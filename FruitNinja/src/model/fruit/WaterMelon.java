@@ -1,5 +1,7 @@
 package model.fruit;
 
+import model.Element;
+
 public class WaterMelon implements Fruit{
 
 	private boolean sliced = false;
@@ -17,5 +19,11 @@ public class WaterMelon implements Fruit{
 	@Override
 	public void setSliced(boolean sliced) {
 		this.sliced = sliced;
+	}
+
+	@Override
+	public Element gameQueue() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -1,6 +1,8 @@
 package model.bomb;
 
-public interface Bombs {
+import model.Element;
+
+public interface Bombs extends Element{
 	
 	public boolean endGame();
 	public int loseLife ();

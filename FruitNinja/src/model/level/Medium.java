@@ -1,6 +1,9 @@
 package model.level;
 
-import model.fruit.Fruit;
+import java.util.LinkedList;
+import java.util.Queue;
+
+import model.Element;
 
 public class Medium implements LevelStrategy{
 
@@ -20,8 +23,21 @@ public class Medium implements LevelStrategy{
 	}
 
 	@Override
-	public Fruit gameQueue() {
-		return null;
+	public Element gameQueue() {
+		
+	Queue<Element> queue = new LinkedList<Element>();
+		
+		queue.add(apple);
+		queue.add(strawberry);
+		queue.add(fatal);
+		queue.add(orange);
+		queue.add(dangerous);
+		queue.add(watermelon);
+		queue.add(grape);
+		queue.add(strawberry);
+		queue.add(fatal);
+		
+		return (Element) queue;
 	}
 
 }
