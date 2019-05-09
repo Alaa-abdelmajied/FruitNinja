@@ -19,8 +19,7 @@ public interface LevelStrategy{
 	Fruit strawberry = new Strawberry();
 	Fruit grape = new SpecialGrape();
 	Fruit watermelon = new WaterMelon();
-	
-	Bombs fatal = new Fatal();
+	Bombs fatal = Fatal.getInstance();
 	Bombs dangerous = new Dangerous();
 	
 	
@@ -31,6 +30,6 @@ public interface LevelStrategy{
 	
 	public double getFallingVelocity();
 
-	Element gameQueue();
+	public Element gameQueue();
 
 }

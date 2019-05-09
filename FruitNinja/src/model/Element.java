@@ -2,7 +2,7 @@ package model;
 
 public interface Element {
 	
-	public Element gameQueue();
+	//public Element gameQueue();
 
 	
 }

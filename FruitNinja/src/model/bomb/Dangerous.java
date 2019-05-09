@@ -16,10 +16,4 @@ public class Dangerous implements Bombs {
 		return 0;
 	}
 
-	@Override
-	public Element gameQueue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

@@ -27,12 +27,7 @@ public class Fatal implements Bombs {
 	public int loseLife() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
 
-	@Override
-	public Element gameQueue() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

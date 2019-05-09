@@ -21,9 +21,4 @@ public class SpecialApple implements Fruit{
 		this.sliced = sliced;
 	}
 
-	@Override
-	public Element gameQueue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
