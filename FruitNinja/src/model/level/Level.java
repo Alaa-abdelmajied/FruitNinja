@@ -1,7 +1,6 @@
 package model.level;
 
 import model.Element;
-import model.fruit.Fruit;
 
 public class Level {
 	
@@ -34,8 +33,8 @@ public class Level {
 
 	
 	public Element gameQueue() {
-		Element fruit = this.strategy.gameQueue();
-		return fruit;
+		Element element= this.strategy.gameQueue();
+		return element;
 	}
 
 }

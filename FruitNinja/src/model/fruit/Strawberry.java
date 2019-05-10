@@ -1,6 +1,5 @@
 package model.fruit;
 
-import model.Element;
 
 public class Strawberry implements Fruit {
 
