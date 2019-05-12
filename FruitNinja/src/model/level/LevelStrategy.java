@@ -1,5 +1,7 @@
 package model.level;
 
+import java.util.Queue;
+
 import model.Element;
 import model.bomb.Bombs;
 import model.bomb.Dangerous;
@@ -30,6 +32,6 @@ public interface LevelStrategy{
 	
 	public double getFallingVelocity();
 
-	public Element gameQueue();
+	public Queue<Element> gameQueue();
 
 }

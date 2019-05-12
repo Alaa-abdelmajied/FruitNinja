@@ -20,4 +20,9 @@ public class SpecialApple implements Fruit{
 		this.sliced = sliced;
 	}
 
+	/*@Override
+	public final boolean isSpecial() {
+		return true;
+	}
+*/
 }

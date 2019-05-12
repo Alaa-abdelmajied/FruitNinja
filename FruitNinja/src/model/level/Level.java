@@ -1,5 +1,7 @@
 package model.level;
 
+import java.util.Queue;
+
 import model.Element;
 
 public class Level {
@@ -32,9 +34,9 @@ public class Level {
 	}
 
 	
-	public Element gameQueue() {
-		Element element= this.strategy.gameQueue();
-		return element;
+	public Queue<Element> gameQueue() {
+		Queue<Element> queue= this.strategy.gameQueue();
+		return queue;
 	}
 
 }

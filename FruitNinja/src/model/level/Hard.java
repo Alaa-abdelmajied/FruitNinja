@@ -4,8 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import model.Element;
-import model.fruit.Fruit;
-import model.fruit.Orange;
+
 
 public class Hard implements LevelStrategy{
 
@@ -25,7 +24,7 @@ public class Hard implements LevelStrategy{
 	}
 
 	@Override
-	public Element gameQueue() {
+	public Queue<Element> gameQueue() {
 	
 	Queue<Element> queue = new LinkedList<Element>();
 		
@@ -39,7 +38,7 @@ public class Hard implements LevelStrategy{
 		queue.add(strawberry);
 		queue.add(fatal);
 		
-		return (Element) queue;
+		return queue;
 		
 	}
 

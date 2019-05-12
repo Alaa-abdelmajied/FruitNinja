@@ -23,7 +23,7 @@ public class Medium implements LevelStrategy{
 	}
 
 	@Override
-	public Element gameQueue() {
+	public Queue<Element> gameQueue() {
 		
 	Queue<Element> queue = new LinkedList<Element>();
 		
@@ -37,7 +37,7 @@ public class Medium implements LevelStrategy{
 		queue.add(strawberry);
 		queue.add(fatal);
 		
-		return (Element) queue;
+		return queue;
 	}
 
 }

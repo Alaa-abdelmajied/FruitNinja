@@ -24,7 +24,7 @@ public class Fatal implements Bombs {
 
 	@Override
 	public int loseLife() {
-		return 0;
+		return 3;
 
 	}
 

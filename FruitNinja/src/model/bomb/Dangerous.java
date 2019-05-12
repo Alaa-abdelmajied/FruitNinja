@@ -12,7 +12,7 @@ public class Dangerous implements Bombs {
 
 	@Override
 	public int loseLife() {
-		return 0;
+		return 1;
 	}
 
 	@Override
