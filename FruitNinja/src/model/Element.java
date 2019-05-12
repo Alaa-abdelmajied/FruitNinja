@@ -6,4 +6,6 @@ public interface Element {
 
 	public boolean isSliced();
 	
+	public void setSliced(boolean sliced);
+	
 }

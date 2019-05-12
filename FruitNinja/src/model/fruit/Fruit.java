@@ -8,6 +8,6 @@ public interface Fruit extends Element {
 
 	public int increaseScore();
 	
-	public void setSliced(boolean sliced);
+	//public void setSliced(boolean sliced);
 	
 }
