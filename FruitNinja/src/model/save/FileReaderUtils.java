@@ -13,7 +13,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class FileReader {
+public class FileReaderUtils {
 	
 	public static ArrayList<Integer> read() {
 
@@ -44,7 +44,7 @@ public class FileReader {
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
 			Element eElement = (Element) nNode;
-			scores.add(Integer.parseInt(eElement.getTextContent().replaceAll("\\s", "")));
+			scores.add(Integer.parseInt(eElement.getTextContent()));
 
 		}
 
@@ -54,7 +54,7 @@ public class FileReader {
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
 			Element eElement = (Element) nNode;
-			scores.add(Integer.parseInt(eElement.getTextContent().replaceAll("\\s", "")));
+			scores.add(Integer.parseInt(eElement.getTextContent()));
 		}
 
 		nList = doc.getElementsByTagName("Hard");
@@ -63,7 +63,7 @@ public class FileReader {
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
 			Element eElement = (Element) nNode;
-			scores.add(Integer.parseInt(eElement.getTextContent().replaceAll("\\s", "")));
+			scores.add(Integer.parseInt(eElement.getTextContent()));
 		}
 		return scores;
 	}

@@ -16,7 +16,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class FileWriter {
+public class FileWriterUtils {
 
 	public static void write(ArrayList<Integer> scores) {
 
