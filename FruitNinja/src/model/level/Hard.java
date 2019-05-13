@@ -4,9 +4,17 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import model.Element;
+import model.bomb.Bombs;
+import model.bomb.Dangerous;
+import model.bomb.Fatal;
+import model.fruit.Fruit;
+import model.fruit.Orange;
+import model.fruit.SpecialApple;
+import model.fruit.SpecialGrape;
+import model.fruit.Strawberry;
+import model.fruit.WaterMelon;
 
-
-public class Hard implements LevelStrategy{
+public class Hard implements LevelStrategy {
 
 	@Override
 	public double maxHeight() {
@@ -25,21 +33,21 @@ public class Hard implements LevelStrategy{
 
 	@Override
 	public Queue<Element> gameQueue() {
-	
-	Queue<Element> queue = new LinkedList<Element>();
-		
-		queue.add(apple);
-		queue.add(strawberry);
+
+		Queue<Element> queue = new LinkedList<Element>();
+
+		queue.add(new SpecialApple());
+		queue.add(new Strawberry());
 		queue.add(fatal);
-		queue.add(orange);
-		queue.add(dangerous);
-		queue.add(watermelon);
-		queue.add(grape);
-		queue.add(strawberry);
+		queue.add(new Orange());
+		queue.add(new Dangerous());
+		queue.add(new WaterMelon());
+		queue.add(new SpecialGrape());
+		queue.add(new Strawberry());
 		queue.add(fatal);
-		
+
 		return queue;
-		
+
 	}
 
 }

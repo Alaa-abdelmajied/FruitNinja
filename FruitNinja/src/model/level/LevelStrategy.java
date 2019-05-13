@@ -16,13 +16,13 @@ import model.fruit.WaterMelon;
 public interface LevelStrategy{
 	
 
-	Fruit orange = new Orange();
-	Fruit apple = new SpecialApple();
-	Fruit strawberry = new Strawberry();
-	Fruit grape = new SpecialGrape();
-	Fruit watermelon = new WaterMelon();
+	//Fruit orange = new Orange();
+	//Fruit apple = new SpecialApple();
+	//Fruit strawberry = new Strawberry();
+	//Fruit grape = new SpecialGrape();
+	//Fruit watermelon = new WaterMelon();
 	Bombs fatal = Fatal.getInstance();
-	Bombs dangerous = new Dangerous();
+	//Bombs dangerous = new Dangerous();
 	
 	
 	
