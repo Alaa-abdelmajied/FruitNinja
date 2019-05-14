@@ -11,7 +11,6 @@ import model.fruit.Orange;
 import model.fruit.SpecialApple;
 import model.fruit.SpecialGrape;
 import model.fruit.Strawberry;
-import model.fruit.WaterMelon;
 
 public interface LevelStrategy{
 	
