@@ -12,10 +12,12 @@ public class FruitFactory {
 			return new SpecialGrape();
 		if (fruitName.equals("Orange"))
 			return new Orange();
-		if (fruitName.equals("WaterMelon"))
-			return new WaterMelon();
+		if (fruitName.equals("Pear"))
+			return new Pear();
 		if (fruitName.equals("Strawberry"))
 			return new Strawberry();
+		if (fruitName.equals("Apple"))
+			return new Apple();
 
 		return null;
 

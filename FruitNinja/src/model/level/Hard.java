@@ -9,10 +9,10 @@ import model.bomb.Dangerous;
 import model.bomb.Fatal;
 import model.fruit.Fruit;
 import model.fruit.Orange;
+import model.fruit.Pear;
 import model.fruit.SpecialApple;
 import model.fruit.SpecialGrape;
 import model.fruit.Strawberry;
-import model.fruit.WaterMelon;
 
 public class Hard implements LevelStrategy {
 
@@ -41,7 +41,7 @@ public class Hard implements LevelStrategy {
 		queue.add(fatal);
 		queue.add(new Orange());
 		queue.add(new Dangerous());
-		queue.add(new WaterMelon());
+		queue.add(new Pear());
 		queue.add(new SpecialGrape());
 		queue.add(new Strawberry());
 		queue.add(fatal);

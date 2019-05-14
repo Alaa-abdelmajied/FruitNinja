@@ -1,8 +1,7 @@
 package model.fruit;
 
-
-public class WaterMelon implements Fruit{
-
+public class Apple implements Fruit {
+	
 	private boolean sliced = false;
 	
 	@Override
@@ -20,9 +19,10 @@ public class WaterMelon implements Fruit{
 		this.sliced = sliced;
 	}
 
-/*	@Override
+	/*@Override
 	public final boolean isSpecial() {
 		return false;
 	}
 */
+
 }

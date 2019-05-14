@@ -1,7 +1,7 @@
 package model.fruit;
 
 
-public class SpecialGrape implements Fruit{
+public class Pear implements Fruit{
 
 	private boolean sliced = false;
 	
@@ -12,7 +12,7 @@ public class SpecialGrape implements Fruit{
 
 	@Override
 	public int increaseScore() {
-		return 10;
+		return 1;
 	}
 	
 	@Override
@@ -22,7 +22,7 @@ public class SpecialGrape implements Fruit{
 
 /*	@Override
 	public final boolean isSpecial() {
-		return true;
+		return false;
 	}
 */
 }
