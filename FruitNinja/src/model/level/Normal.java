@@ -6,54 +6,54 @@ import model.Element;
 import model.bomb.BombFactory;
 import model.fruit.FruitFactory;
 
-class Hard implements LevelStrategy {
 
+public class Normal implements LevelStrategy {
+	
 	@Override
 	public double maxHeight() {
-		return 3;
+		return 4;
 	}
 
 	@Override
 	public double getInitialVelocity() {
-		return 10;
+		return 7;
 	}
 
 	@Override
 	public double getFallingVelocity() {
-		return 10;
+		return 7;
 	}
 
 	@Override
 	public Queue<Element> gameQueue() {
-
+		
 		Queue<Element> queue = new LinkedList<Element>();
 		FruitFactory fruitFactory = new FruitFactory();
 		BombFactory bombFactory = new BombFactory();
 		
 		queue.add(fruitFactory.getFruit("Apple"));
 		queue.add(fruitFactory.getFruit("Orange"));
-		queue.add(bombFactory.getBomb("Dangerous"));
 		queue.add(bombFactory.getBomb("Fatal"));
 		queue.add(fruitFactory.getFruit("Pear"));
-		queue.add(bombFactory.getBomb("Fatal"));
 		queue.add(fruitFactory.getFruit("SpecialGrape"));
-		queue.add(bombFactory.getBomb("Dangerous"));
 		queue.add(fruitFactory.getFruit("Orange"));
 		queue.add(bombFactory.getBomb("Dangerous"));
+		queue.add(fruitFactory.getFruit("SpecialGrape"));
 		queue.add(fruitFactory.getFruit("Strawberry"));
 		queue.add(bombFactory.getBomb("Dangerous"));
-		queue.add(fruitFactory.getFruit("SpecialGrape"));
-		queue.add(bombFactory.getBomb("Dangerous"));
+		queue.add(fruitFactory.getFruit("Apple"));
+		queue.add(fruitFactory.getFruit("Orange"));
 		queue.add(bombFactory.getBomb("Fatal"));
-		queue.add(fruitFactory.getFruit("Orange"));
 		queue.add(fruitFactory.getFruit("SpecialApple"));
-		queue.add(fruitFactory.getFruit("Orange"));
 		queue.add(fruitFactory.getFruit("Apple"));
 		queue.add(bombFactory.getBomb("Fatal"));
 		queue.add(fruitFactory.getFruit("Orange"));
-		
-		return queue;
+		queue.add(fruitFactory.getFruit("Pear"));
+		queue.add(fruitFactory.getFruit("Orange"));
+		queue.add(bombFactory.getBomb("Dangerous"));
+		queue.add(fruitFactory.getFruit("Apple"));
 
+		return queue;
 	}
 
 }

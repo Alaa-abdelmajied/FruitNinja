@@ -12,6 +12,5 @@ public class BombFactory {
 			return new Dangerous();
 
 		return null;
-
 	}
 }
