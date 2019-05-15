@@ -1,4 +1,4 @@
-package view.sample;
+package view;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
@@ -180,47 +180,15 @@ public class Level1 {
         loss3.setX(955);
         loss3.setY(12);
 
-//        live1.setOnMouse
-//        while (Lives != 0){
-//            Node apple1 = Apple() ;
-//            Node bomb = oneLiveBomb();
-//            Node strawberry = Strawberry();
-//            throwUp(apple1,0,-600,2,2,1);
-//            throwUp(strawberry,0,-450,1.7,1,1);
-//            throwUp(bomb,0,-850,1.5,2,-1);
-//            root.getChildren().addAll(apple1,bomb,strawberry);
-//            if(DisplayedScore%20==0){
-//                Node GoldenApple;
-//            }
-//
-//        }
-
         root.getChildren().addAll(image, SCOREVIEW, BESTSCOREView, score, best, back, live1, live2, live3, loss1, loss2, loss3);
-//        Node redapple = redApple() ;
-//        Node greenapple = greenApple() ;
-//        Node strawberry = Strawberry();
-//        Node orange = Orange();
-//        Node bomb = oneLiveBomb();
-//        Node fatalBomb = FatalBomb();
-//        throwUp(redapple,0,2,2,1);
-//        throwUp(greenapple,0,2,2,1);
-//        throwUp(strawberry,0,1.7,1,1);
-//        throwUp(orange,0,1.3,2.2,-1);
-//        throwUp(bomb,0,1.5,2,-1);
-//        throwUp(fatalBomb,0,1.5,2,-1);
-//        root.getChildren().addAll(redapple,greenapple,strawberry,orange,bomb,fatalBomb);
 
         backGround = new Image("Slider.png");
         BACKGROUND = new ImageView(backGround);
         BACKGROUND.setVisible(false);
         BACKGROUND.setFitWidth(1240);
         BACKGROUND.setFitHeight(711);
-//        BACKGROUND.setFitWidth(522);
-//        BACKGROUND.setFitHeight(319);
         BACKGROUND.setX(-20);
         BACKGROUND.setY(-20);
-//        BACKGROUND.setX(339);
-//        BACKGROUND.setY(176);
 
         gameOver = new Image("Game Over.png");
         GAMEOVER = new ImageView(gameOver);
@@ -255,84 +223,6 @@ public class Level1 {
 
         });
 
-        redApple(root);
-        redApple(root);
-        redApple(root);
-        redApple(root);
-        redApple(root);
-        redApple(root);
-        redApple(root);
-        redApple(root);
-        redApple(root);
-        redApple(root);
-//        Strawberry(root);
-//        Orange(root);
-//        Grapes(root);
-//        redApple(root);
-//        Strawberry(root);
-//        Orange(root);
-//        Grapes(root);
-//        redApple(root);
-//        Strawberry(root);
-//        Orange(root);
-//        Grapes(root);
-//        redApple(root);
-//        Strawberry(root);
-//        Orange(root);
-//        Grapes(root);
-//        redApple(root);
-//        Strawberry(root);
-//        Orange(root);
-//        Grapes(root);
-//        redApple(root);
-//        Strawberry(root);
-//        Orange(root);
-//        Grapes(root);
-//        redApple(root);
-//        Strawberry(root);
-//        Orange(root);
-//        Grapes(root);
-//        redApple(root);
-//        Strawberry(root);
-//        Orange(root);
-//        Grapes(root);
-//        redApple(root);
-//        Strawberry(root);
-//        Orange(root);
-//        Grapes(root);
-//        redApple(root);
-//        Strawberry(root);
-//        Orange(root);
-//        Grapes(root);
-//        redApple(root);
-//        Strawberry(root);
-//        Orange(root);
-//        Grapes(root);
-//        redApple(root);
-//        Strawberry(root);
-//        Orange(root);
-//        Grapes(root);
-        oneLiveBomb();
-        oneLiveBomb();
-        oneLiveBomb();
-        oneLiveBomb();
-        oneLiveBomb();
-        oneLiveBomb();
-        oneLiveBomb();
-
-
-//        push();
-//        while(Lives != 0){
-//            greenApple(root);
-//        }
-//        greenApple(root);
-//        greenApple(root);
-//        redApple(root);
-//        Strawberry(root);
-//        Orange(root);
-//        Grapes(root);
-
-
         Image Timer = new Image("Timer.png");
         ImageView t = new ImageView(Timer);
         t.setFitWidth(85);
@@ -344,7 +234,6 @@ public class Level1 {
         timer.setLayoutX(100);
         timer.setLayoutY(110);
         timer.setTextFill(Color.WHITE);
-
         doTime();
 
         root.getChildren().addAll(t, timer, BACKGROUND, GAMEOVER, BACK);
@@ -356,7 +245,6 @@ public class Level1 {
         fSCOREVIEW.setY(319);
         fSCOREVIEW.setFitHeight(50);
         fSCOREVIEW.setFitWidth(156);
-
 
         fscore = new Label();
         fscore.setFont(new Font("Impact", 45));
@@ -481,7 +369,6 @@ public class Level1 {
             Slice.setAutoPlay(true);
             MediaView mediaView = new MediaView(Slice);
         });
-
         root.getChildren().addAll(GreenApple1, SlicedGreenApple1);
     }
 
@@ -603,7 +490,6 @@ public class Level1 {
             Slice.setAutoPlay(true);
             MediaView mediaView = new MediaView(Slice);
         });
-
         root.getChildren().addAll(Grapes, SlicedGrapes);
     }
 
@@ -692,10 +578,7 @@ public class Level1 {
     }
 
     double delay;
-
     public void Throw(Node node, int X, int y, double speed, Boolean slice) {
-
-
         if (!slice) {
             Random d = new Random();
             delay = 1 + d.nextInt(10);
@@ -719,8 +602,7 @@ public class Level1 {
         rotateTransition.setNode(node);
         rotateTransition.play();
 
-
-//        Slice(node ,Score);
+        //        Slice(node ,Score);
     }
 //    public void Slice(Node node , int Score){
 //        node.setOnMouseExited(e->{
@@ -796,12 +678,10 @@ public class Level1 {
                     hours++;
                     minutes = 0;
                     seconds = -1;
-
                 }
                 if (Lives == 0) {
                     time.stop();
                 }
-
             }
         });
         time.getKeyFrames().add(frame);
@@ -820,6 +700,19 @@ public class Level1 {
                 Grapes(root);
                 break;
             case 4:
+                Strawberry(root);
+                break;
+            case 5:
+                Orange(root);
+                break;
+            case 6:
+                oneLiveBomb();
+                break;
+            case 7:
+                FatalBomb();
+                break;
+            default:
+
 
         }
     }

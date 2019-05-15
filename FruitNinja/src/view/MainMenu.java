@@ -1,4 +1,4 @@
-package view.sample;
+package view;
 
 import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
@@ -105,6 +105,7 @@ public class MainMenu {
             start.setX(100);
             start.setY(329);
         });
+//        start.setOnMousePressed();
 
         btn2 = new Image("Credit.png");
         credit = new ImageView(btn2);
