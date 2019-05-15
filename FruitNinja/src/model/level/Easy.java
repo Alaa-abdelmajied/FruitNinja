@@ -4,7 +4,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import model.Element;
+import model.bomb.BombFactory;
 import model.bomb.Dangerous;
+import model.fruit.FruitFactory;
 import model.fruit.Orange;
 import model.fruit.Pear;
 import model.fruit.SpecialApple;
@@ -32,17 +34,20 @@ public class Easy implements LevelStrategy {
 	public Queue<Element> gameQueue() {
 
 		Queue<Element> queue = new LinkedList<Element>();
-
-		queue.add(new SpecialApple());
-		queue.add(new Strawberry());
-		queue.add(fatal);
-		queue.add(new Orange());
-		queue.add(new Dangerous());
-		queue.add(new Pear());
-		queue.add(new SpecialGrape());
-		queue.add(new Strawberry());
-		queue.add(fatal);
-
+		FruitFactory fruitFactory = new FruitFactory();
+		BombFactory bombFactory = new BombFactory();
+		
+		queue.add(fruitFactory.getFruit("Apple"));
+		queue.add(fruitFactory.getFruit("Strawberry"));
+		queue.add(fruitFactory.getFruit("SpecialApple"));
+		queue.add(bombFactory.getBomb("Fatal"));
+		queue.add(fruitFactory.getFruit("Orange"));
+		queue.add(bombFactory.getBomb("Dangerous"));
+		queue.add(fruitFactory.getFruit("Pear"));
+		queue.add(fruitFactory.getFruit("SpecialGrape"));
+		queue.add(fruitFactory.getFruit("Strawberry"));
+		queue.add(bombFactory.getBomb("Fatal"));
+		
 		return queue;
 
 	}
