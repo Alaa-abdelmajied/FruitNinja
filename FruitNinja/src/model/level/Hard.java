@@ -6,22 +6,7 @@ import model.Element;
 import model.bomb.BombFactory;
 import model.fruit.FruitFactory;
 
-class Hard implements LevelStrategy {
-
-	@Override
-	public double maxHeight() {
-		return 3;
-	}
-
-	@Override
-	public double getInitialVelocity() {
-		return 10;
-	}
-
-	@Override
-	public double getFallingVelocity() {
-		return 10;
-	}
+public class Hard implements LevelStrategy {
 
 	@Override
 	public Queue<Element> gameQueue() {

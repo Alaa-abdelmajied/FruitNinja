@@ -81,18 +81,9 @@ public class GameEngine {
 		FileWriterUtils.write(scores);
 	}
 
-	/*
-	 * public int getXlocation​() { return 0; }
-	 * 
-	 * public int getYlocation​() { return 0; }
-	 */
+	public int getLives() {
+		return lives;
+	}
 
-	/*
-	 * public void updateObjectsLocations​() {
-	 * 
-	 * } public void sliceObjects() {
-	 * 
-	 * }
-	 */
 
 }

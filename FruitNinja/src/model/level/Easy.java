@@ -9,20 +9,6 @@ import model.fruit.FruitFactory;
 
 public class Easy implements LevelStrategy {
 
-	@Override
-	public double maxHeight() {
-		return 5;
-	}
-
-	@Override
-	public double getInitialVelocity() {
-		return 3;
-	}
-
-	@Override
-	public double getFallingVelocity() {
-		return 3;
-	}
 
 	@Override
 	public Queue<Element> gameQueue() {

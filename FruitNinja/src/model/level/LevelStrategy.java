@@ -15,22 +15,6 @@ import model.fruit.Strawberry;
 public interface LevelStrategy{
 	
 
-	//Fruit orange = new Orange();
-	//Fruit apple = new SpecialApple();
-	//Fruit strawberry = new Strawberry();
-	//Fruit grape = new SpecialGrape();
-	//Fruit watermelon = new WaterMelon();
-	Bombs fatal = Fatal.getInstance();
-	//Bombs dangerous = new Dangerous();
-	
-	
-	
-	public double maxHeight();
-	
-	public double getInitialVelocity();
-	
-	public double getFallingVelocity();
-
 	public Queue<Element> gameQueue();
 
 }
