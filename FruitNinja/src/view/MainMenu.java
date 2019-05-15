@@ -17,7 +17,7 @@ import javafx.util.Duration;
 import java.io.File;
 
 public class MainMenu {
-    Stage stage;
+	Stage stage;
     Scene scene;
     AnchorPane root;
     Image background;

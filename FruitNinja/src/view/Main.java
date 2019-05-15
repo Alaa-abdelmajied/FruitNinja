@@ -12,9 +12,16 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 
+	private static Stage st = new Stage();
 
-    @Override
+	public static Stage getSt() {
+		return st;
+	}
+
+
+	@Override
     public void start(Stage stage) throws Exception {
+    	stage = st;
         stage.setResizable(false);
         MainMenu main = new MainMenu(stage);
         main.buildScene();

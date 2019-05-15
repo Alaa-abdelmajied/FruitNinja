@@ -19,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Element;
 
 import java.io.File;
 import java.util.Random;
@@ -688,7 +689,7 @@ public class Level1 {
         time.playFromStart();
     }
 
-    public void convert(int fruitNo) {
+    public void convert(int fruitNo,Element element) {
         switch (fruitNo) {
             case 1:
                 redApple(root);
