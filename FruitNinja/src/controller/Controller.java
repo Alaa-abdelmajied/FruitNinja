@@ -38,24 +38,28 @@ public class Controller {
 	LevelStrategy level;
 	Queue<Element> gameQueue = new LinkedList<>();
 	Level1 level1 = new Level1(Main.getSt());
-	Level2 level2 = new Level2(Main.getSt());
-	Level3 level3 = new Level3(Main.getSt());
-	view.Arcade arcade = new view.Arcade(Main.getSt());
+//	Level2 level2 = new Level2(Main.getSt());
+//	Level3 level3 = new Level3(Main.getSt());
+//	view.Arcade arcade = new view.Arcade(Main.getSt());
+	int levelNumber;
 	
 	public void play(int levelNumber) {
 		
-		if (levelNumber == 1) {
+		this.levelNumber = levelNumber;
+		
+		if (this.levelNumber == 1) {
 			level = new Easy();
 			gameQueue = level.gameQueue();
-		} else if (levelNumber == 2) {
+		} else if (this.levelNumber == 2) {
 			level = new Normal();
 			gameQueue = level.gameQueue();
-		} else if (levelNumber == 3) {
+		} else if (this.levelNumber == 3) {
 			level = new Hard();
 			gameQueue = level.gameQueue();
-		} else if (levelNumber == 4) {
+		} else if (this.levelNumber == 4) {
 			level = new Arcade();
 			gameQueue = level.gameQueue();
+			System.out.println("Arcade");
 		}
 		gameEngine.newGame(level);
 		elementThrower();
@@ -63,33 +67,60 @@ public class Controller {
 
 	public void elementThrower() {
 		int elementNumber;
-		while (gameEngine.getLives() > 0) {
-			gameQueue = level.gameQueue();
+		int z = 25;
+
+		while (z > 0) {
+			z--;
+			System.out.println("test element thrower "+gameQueue.poll());
 			for (int i = 0; i < 20; i++) {
 				if (gameQueue.peek() instanceof Fruit) {
 					if (gameQueue.peek() instanceof Apple) {
 						elementNumber = 1;
-						level1.convert(elementNumber, gameQueue.poll());
+						if(this.levelNumber == 1)
+							level1.convert(elementNumber, gameQueue.poll());
+//						else if(this.levelNumber == 2)
+//						else if(this.levelNumber == 3)
+//						else if(this.levelNumber == 4)
 					}
 					else if (gameQueue.peek() instanceof Orange) {
 						elementNumber = 2;
-						level1.convert(elementNumber, gameQueue.poll());
+						if(this.levelNumber == 1)
+							level1.convert(elementNumber, gameQueue.poll());
+//						else if(this.levelNumber == 2)
+//						else if(this.levelNumber == 3)
+//						else if(this.levelNumber == 4)
 					}
 					else if (gameQueue.peek() instanceof Pear) {
 						elementNumber = 3;
-						level1.convert(elementNumber, gameQueue.poll());
+						if(this.levelNumber == 1)
+							level1.convert(elementNumber, gameQueue.poll());
+//						else if(this.levelNumber == 2)
+//						else if(this.levelNumber == 3)
+//						else if(this.levelNumber == 4)
 					}
 					else if (gameQueue.peek() instanceof Strawberry) {
 						elementNumber = 4;
-						level1.convert(elementNumber, gameQueue.poll());
-					}
+						if(this.levelNumber == 1)
+							level1.convert(elementNumber, gameQueue.poll());
+//						else if(this.levelNumber == 2)
+//						else if(this.levelNumber == 3)
+//						else if(this.levelNumber == 4)					
+						}
 					else if (gameQueue.peek() instanceof SpecialApple) {
 						elementNumber = 5;
-						level1.convert(elementNumber, gameQueue.poll());
+						if(this.levelNumber == 1)
+							level1.convert(elementNumber, gameQueue.poll());
+//						else if(this.levelNumber == 2)
+//						else if(this.levelNumber == 3)
+//						else if(this.levelNumber == 4)
 					}
 					else if (gameQueue.peek() instanceof SpecialGrape) {
 						elementNumber = 6;
-						level1.convert(elementNumber, gameQueue.poll());
+						if(this.levelNumber == 1)
+							level1.convert(elementNumber, gameQueue.poll());
+//						else if(this.levelNumber == 2)
+//						else if(this.levelNumber == 3)
+//						else if(this.levelNumber == 4)
 					}
 				}
 
@@ -97,11 +128,19 @@ public class Controller {
 
 					if (gameQueue.peek() instanceof Fatal) {
 						elementNumber = 7;
-						level1.convert(elementNumber, gameQueue.poll());
+						if(this.levelNumber == 1)
+							level1.convert(elementNumber, gameQueue.poll());
+//						else if(this.levelNumber == 2)
+//						else if(this.levelNumber == 3)
+//						else if(this.levelNumber == 4)
 					}
 					else if (gameQueue.peek() instanceof Dangerous) {
 						elementNumber = 8;
-						level1.convert(elementNumber, gameQueue.poll());
+						if(this.levelNumber == 1)
+							level1.convert(elementNumber, gameQueue.poll());
+//						else if(this.levelNumber == 2)
+//						else if(this.levelNumber == 3)
+//						else if(this.levelNumber == 4)
 					}
 
 				}

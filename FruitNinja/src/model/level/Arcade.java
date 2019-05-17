@@ -35,7 +35,7 @@ public class Arcade implements LevelStrategy{
 		queue.add(fruitFactory.getFruit("Apple"));
 		queue.add(fruitFactory.getFruit("Strawberry"));
 		
-		return null;
+		return queue;
 	}
 	
 	

@@ -17,7 +17,7 @@ import javafx.util.Duration;
 import java.io.File;
 
 public class MainMenu {
-	Stage stage;
+    Stage stage;
     Scene scene;
     AnchorPane root;
     Image background;
@@ -105,7 +105,19 @@ public class MainMenu {
             start.setX(100);
             start.setY(329);
         });
-//        start.setOnMousePressed();
+        start.setOnMousePressed(e->{
+            start.setFitWidth(200);
+            start.setFitHeight(70);
+            start.setX(100);
+            start.setY(329);
+        });
+        start.setOnMouseReleased(e->{
+            start.setFitWidth(206);
+            start.setFitHeight(76);
+            start.setX(97);
+            start.setY(326);
+        });
+        
 
         btn2 = new Image("Credit.png");
         credit = new ImageView(btn2);
@@ -130,6 +142,19 @@ public class MainMenu {
             credit.setX(300);
             credit.setY(467);
         });
+        credit.setOnMousePressed(e->{
+        	credit.setFitWidth(200);
+        	credit.setFitHeight(70);
+        	credit.setX(300);
+        	credit.setY(467);
+        });
+        credit.setOnMouseReleased(e->{
+        	credit.setFitWidth(206);
+        	credit.setFitHeight(76);
+        	credit.setX(297);
+        	credit.setY(464);
+        });
+        
 
         btn3 = new Image("Exit.png");
         exit = new ImageView(btn3);
@@ -152,6 +177,18 @@ public class MainMenu {
             exit.setX(400);
             exit.setY(536);
         });
+        exit.setOnMousePressed(e->{
+        	exit.setFitWidth(200);
+        	exit.setFitHeight(70);
+        	exit.setX(400);
+        	exit.setY(536);
+        });
+//        exit.setOnMouseReleased(e->{
+//        	exit.setFitWidth(206);
+//        	exit.setFitHeight(76);
+//        	exit.setX(397);
+//        	exit.setY(533);
+//        });
 
         btn4 = new Image("Arcade.png");
         Arcade = new ImageView(btn4);
@@ -176,6 +213,18 @@ public class MainMenu {
             Arcade.setX(200);
             Arcade.setY(398);
         });
+        Arcade.setOnMousePressed(e->{
+        	Arcade.setFitWidth(200);
+        	Arcade.setFitHeight(70);
+        	Arcade.setX(200);
+        	Arcade.setY(398);
+        });
+//        Arcade.setOnMouseReleased(e->{
+//        	Arcade.setFitWidth(206);
+//        	Arcade.setFitHeight(76);
+//        	Arcade.setX(197);
+//        	Arcade.setY(395);
+//        });
 //----------------------------------------------------------------------------
         StartSlider = new AnchorPane();
         StartSlider.setVisible(true);
@@ -265,6 +314,12 @@ public class MainMenu {
             easy.setX(795);
             easy.setY(420);
         });
+        easy.setOnMousePressed(e->{
+        	easy.setFitHeight(48);
+            easy.setFitWidth(136);
+            easy.setX(795);
+            easy.setY(420);
+        });
         easy.setVisible(false);
         easy.setFitHeight(48);
         easy.setFitWidth(136);
@@ -287,11 +342,18 @@ public class MainMenu {
         });
         normal.setOnMouseExited(e->{
             normalDescription.setVisible(false);
-            normal.setFitHeight(48);
             normal.setFitWidth(136);
+            normal.setFitHeight(48);
             normal.setX(795);
             normal.setY(474);
         });
+        normal.setOnMousePressed(e->{
+            normal.setFitWidth(136);
+            normal.setFitHeight(48);
+            normal.setX(795);
+            normal.setY(474);
+        });
+        
         normal.setOnMouseClicked(e->{
             Level2 normalLevel = new Level2(stage);
             normalLevel.buildScene();
@@ -311,7 +373,12 @@ public class MainMenu {
             hard.setFitWidth(142);
             hard.setX(792);
             hard.setY(524);
-
+        });
+        hard.setOnMousePressed(e->{
+            hard.setFitHeight(48);
+            hard.setFitWidth(136);
+            hard.setX(795);
+            hard.setY(527);
         });
         hard.setOnMouseExited(e->{
             hardDescription.setVisible(false);
@@ -384,6 +451,19 @@ public class MainMenu {
         MusicOn.setOnMouseClicked(e->{
             turnMusicOff();
         });
+        MusicOn.setOnMousePressed(e->{
+        	MusicOn.setFitHeight(31);
+        	MusicOn.setFitWidth(31);
+        	MusicOn.setX(16);
+        	MusicOn.setY(642);
+        });
+        MusicOn.setOnMouseReleased(e->{
+        	MusicOn.setFitHeight(35);
+        	MusicOn.setFitWidth(35);
+        	MusicOn.setX(14);
+        	MusicOn.setY(640);
+        });
+
 
 
         Moff = new Image("MusicOff.png");
@@ -395,6 +475,18 @@ public class MainMenu {
         MusicOff.setY(640);
         MusicOff.setOnMouseClicked(e->{
             turnMusicOn();
+        });
+        MusicOff.setOnMousePressed(e->{
+        	MusicOff.setFitHeight(31);
+        	MusicOff.setFitWidth(31);
+        	MusicOff.setX(16);
+        	MusicOff.setY(642);
+        });
+        MusicOff.setOnMouseReleased(e->{
+        	MusicOff.setFitHeight(35);
+        	MusicOff.setFitWidth(35);
+        	MusicOff.setX(14);
+        	MusicOff.setY(640);
         });
 
         slide = new Image("info.png");
@@ -422,10 +514,18 @@ public class MainMenu {
         Howto.setOnMouseEntered(e->{
             slider3.setVisible(true);
             description.setVisible(true);
+            Howto.setFitHeight(39);
+            Howto.setFitWidth(39);
+            Howto.setX(48);
+            Howto.setY(638);
         });
         Howto.setOnMouseExited(e->{
             slider3.setVisible(false);
             description.setVisible(false);
+            Howto.setFitHeight(35);
+            Howto.setFitWidth(35);
+            Howto.setX(50);
+            Howto.setY(640);
 
         });
 
@@ -539,7 +639,6 @@ public class MainMenu {
         transition.setCycleCount(1);
         transition.setNode(node);
         transition.play();
-
     }
     public void SlideIn1(){
         SliderTrans(slider1);
@@ -569,14 +668,10 @@ public class MainMenu {
         SliderTrans2(normalDescription);
         SliderTrans2(hardDescription);
         SliderTrans2(slider1);
-
     }
     public void SlideOut2(){
         SliderTrans2(slider2);
         SliderTrans2(back2);
         SliderTrans2(Credits);
-
     }
-
-
 }

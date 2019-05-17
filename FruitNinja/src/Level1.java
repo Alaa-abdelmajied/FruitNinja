@@ -1,4 +1,4 @@
-package view;
+package sample;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -21,7 +21,6 @@ import javafx.scene.shape.CubicCurve;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Element;
 
 import java.io.File;
 import java.util.Random;
@@ -269,7 +268,7 @@ public class Level1 {
 //        FatalBomb(root);
         
         
-        timeline= new Timeline(new KeyFrame(Duration.seconds(7),(event)->{
+        timeline= new Timeline(new KeyFrame(Duration.seconds(2),(event)->{
         	redApple(root);
         	Orange(root);
         	Strawberry(root);
@@ -645,14 +644,14 @@ public class Level1 {
     public void Throw(Node node, int X, int y, double speed, Boolean slice) {
         if (!slice) {
             Random d = new Random();
-            delay = d.nextDouble();
+            delay = d.nextInt(3);
         } else
             delay = delay;
 //        System.out.println(delay);
         timelinetest += 0;
         transition = new TranslateTransition();
         transition.setToY(-y);
-        transition.setDuration(Duration.seconds(0.75));
+        transition.setDuration(Duration.seconds(speed));
         transition.setAutoReverse(true);
         transition.setDelay(Duration.seconds(delay));
         transition.setCycleCount(2);
@@ -761,7 +760,7 @@ public class Level1 {
         time.playFromStart();
     }
 
-    public void convert(int fruitNo,Element element) {
+    public void convert(int fruitNo) {
         switch (fruitNo) {
             case 1:
                 redApple(root);
