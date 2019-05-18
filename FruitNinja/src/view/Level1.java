@@ -88,11 +88,9 @@ public class Level1 {
 
 	private int timelinetest = 0;
 	private int TIME = 0;
-	private int bestScore = 0;
-	//private int Lives = 3;
+	private int bestScore;
 	private ArrayList<Element> elements = new ArrayList<Element>();
 	private int elementCounter = 0;
-//	boolean isSliced;
 	private boolean isSlicedRedApple = false;
 	private boolean isSlicedStrawberry = false;
 	private boolean isSlicedOrange = false;
@@ -129,7 +127,6 @@ public class Level1 {
 		score.setLayoutX(180);
 		score.setLayoutY(14);
 		score.setTextFill(Color.WHITE);
-
 		best = new Label(String.valueOf(controller.getBestScore()));
 		bestScore = controller.getBestScore();
 		best.setFont(new Font("Impact", 19));
@@ -144,9 +141,11 @@ public class Level1 {
 		back.setX(1113);
 		back.setY(19);
 		back.setOnMouseClicked(e -> {
+			controller.undoBestScore(bestScore);
 			MainMenu main = new MainMenu(stage);
 			main.buildScene();
 			main.mediaPlayer.setMute(false);
+			timeline.stop();
 		});
 		back.setOnMouseEntered(e -> {
 			back.setFitHeight(72);
@@ -296,8 +295,8 @@ public class Level1 {
 
 			else if (elements.get(elementCounter) instanceof model.fruit.Orange)
 				Orange(root, elementCounter);
-////		else if (gameQueue.peek() instanceof Pear) 
-////		
+//		else if (gameQueue.peek() instanceof Pear) 
+//		
 			else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
 				Strawberry(root, elementCounter);
 

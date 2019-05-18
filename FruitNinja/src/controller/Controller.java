@@ -81,6 +81,10 @@ public class Controller {
 			gameEngine.setBestScore(score(),levelNumber);
 	}
 	
+	public void undoBestScore(int score) {
+		gameEngine.setBestScore(score,levelNumber);
+	}
+	
 
 
 	public void commandNewGame(LevelStrategy strategy) {
