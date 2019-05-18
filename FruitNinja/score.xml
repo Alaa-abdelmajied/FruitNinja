@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <score>
-	<Easy>
-		100
-	</Easy>
-	<Medium>
-		50
-	</Medium>
-	<Hard>
-		60
-	</Hard>
+<Easy>70</Easy>
+<Medium>90</Medium>
+<Hard>80</Hard>
+<Arcade>100</Arcade>
 </score>

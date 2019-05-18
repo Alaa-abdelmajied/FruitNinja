@@ -14,11 +14,11 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class FileReaderUtils {
-	
+
 	public static ArrayList<Integer> read() {
 
 		ArrayList<Integer> scores = new ArrayList<Integer>();
-
+		scores.add(0);
 		File fXmlFile = new File("score.xml");
 
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -37,14 +37,13 @@ public class FileReaderUtils {
 
 		doc.getDocumentElement().normalize();
 
-
 		NodeList nList = doc.getElementsByTagName("Easy");
 		Node nNode = nList.item(0);
 
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
 			Element eElement = (Element) nNode;
-			scores.add(Integer.parseInt(eElement.getTextContent()));
+			scores.add(1, Integer.parseInt(eElement.getTextContent()));
 
 		}
 
@@ -54,7 +53,7 @@ public class FileReaderUtils {
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
 			Element eElement = (Element) nNode;
-			scores.add(Integer.parseInt(eElement.getTextContent()));
+			scores.add(2, Integer.parseInt(eElement.getTextContent()));
 		}
 
 		nList = doc.getElementsByTagName("Hard");
@@ -63,7 +62,15 @@ public class FileReaderUtils {
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
 			Element eElement = (Element) nNode;
-			scores.add(Integer.parseInt(eElement.getTextContent()));
+			scores.add(3, Integer.parseInt(eElement.getTextContent()));
+		}
+		nList = doc.getElementsByTagName("Arcade");
+		nNode = nList.item(0);
+
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+			Element eElement = (Element) nNode;
+			scores.add(4, Integer.parseInt(eElement.getTextContent()));
 		}
 		return scores;
 	}

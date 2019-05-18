@@ -52,7 +52,6 @@ public class Controller {
 		if (this.levelNumber == 1) {
 			level = new Easy();
 			elements = level.elementThrow();
-			System.out.println("play test" + elements.get(0));
 		} else if (this.levelNumber == 2) {
 			level = new Normal();
 			elements = level.elementThrow();
@@ -66,7 +65,7 @@ public class Controller {
 		}
 //		gameEngine.newGame(level);
 		commandNewGame(level);
-		//elementThrower();
+
 	}
 	
 	public ArrayList<Element> updateElements(){
@@ -74,88 +73,17 @@ public class Controller {
 		return elements;
 	}
 	
-
-//	public void elementThrower() {
-//		int elementNumber;
-//		int z = 25;
-//
-//		while (z > 0) {
-//			z--;
-//			System.out.println("test element thrower "+gameQueue.poll());
-//			for (int i = 0; i < 20; i++) {
-//				if (gameQueue.peek() instanceof Fruit) {
-//					if (gameQueue.peek() instanceof Apple) {
-//						elementNumber = 1;
-//						if(this.levelNumber == 1)
-//							level1.convert(elementNumber, gameQueue.poll());
-////						else if(this.levelNumber == 2)
-////						else if(this.levelNumber == 3)
-////						else if(this.levelNumber == 4)
-//					}
-//					else if (gameQueue.peek() instanceof Orange) {
-//						elementNumber = 2;
-//						if(this.levelNumber == 1)
-//							level1.convert(elementNumber, gameQueue.poll());
-////						else if(this.levelNumber == 2)
-////						else if(this.levelNumber == 3)
-////						else if(this.levelNumber == 4)
-//					}
-//					else if (gameQueue.peek() instanceof Pear) {
-//						elementNumber = 3;
-//						if(this.levelNumber == 1)
-//							level1.convert(elementNumber, gameQueue.poll());
-////						else if(this.levelNumber == 2)
-////						else if(this.levelNumber == 3)
-////						else if(this.levelNumber == 4)
-//					}
-//					else if (gameQueue.peek() instanceof Strawberry) {
-//						elementNumber = 4;
-//						if(this.levelNumber == 1)
-//							level1.convert(elementNumber, gameQueue.poll());
-////						else if(this.levelNumber == 2)
-////						else if(this.levelNumber == 3)
-////						else if(this.levelNumber == 4)					
-//						}
-//					else if (gameQueue.peek() instanceof SpecialApple) {
-//						elementNumber = 5;
-//						if(this.levelNumber == 1)
-//							level1.convert(elementNumber, gameQueue.poll());
-////						else if(this.levelNumber == 2)
-////						else if(this.levelNumber == 3)
-////						else if(this.levelNumber == 4)
-//					}
-//					else if (gameQueue.peek() instanceof SpecialGrape) {
-//						elementNumber = 6;
-//						if(this.levelNumber == 1)
-//							level1.convert(elementNumber, gameQueue.poll());
-////						else if(this.levelNumber == 2)
-////						else if(this.levelNumber == 3)
-////						else if(this.levelNumber == 4)
-//					}
-//				}
-//
-//				else if (gameQueue.peek() instanceof Bombs) {
-//
-//					if (gameQueue.peek() instanceof Fatal) {
-//						elementNumber = 7;
-//						if(this.levelNumber == 1)
-//							level1.convert(elementNumber, gameQueue.poll());
-////						else if(this.levelNumber == 2)
-////						else if(this.levelNumber == 3)
-////						else if(this.levelNumber == 4)
-//					}
-//					else if (gameQueue.peek() instanceof Dangerous) {
-//						elementNumber = 8;
-//						if(this.levelNumber == 1)
-//							level1.convert(elementNumber, gameQueue.poll());
-////						else if(this.levelNumber == 2)
-////						else if(this.levelNumber == 3)
-////						else if(this.levelNumber == 4)
-//					}
-//
-//				}
-//			}
-//		}
+	public void slice(int elementNumber) {
+		gameEngine.slice​(elementNumber);
+	}
+	
+	public int score() {
+		return gameEngine.getGameScore();
+	}
+	
+//	public int bestScore() {
+//		commandBestScore(score(), levelNumber);
+//		return 0;
 //	}
 
 	public void commandNewGame(LevelStrategy strategy) {

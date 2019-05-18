@@ -17,8 +17,8 @@ public class GameEngine {
 	Level level;
 	LevelStrategy strategy;
 	private ArrayList<Element> elements = new ArrayList<Element>();
-	int gameScore;
-	int lives;
+	private int gameScore;
+	private int lives;
 	
 
 	public void newGame(LevelStrategy strategy) {
@@ -57,20 +57,22 @@ public class GameEngine {
 
 	}
 
-//	public void slice​() {
-//
-//		if (gameQueue.peek() instanceof Fruit) {
-//
-//			Fruit fruit = (Fruit) gameQueue.peek();
-//			score(fruit);
-//		} else if (gameQueue.peek() instanceof Bombs) {
-//
-//			Bombs bomb = (Bombs) gameQueue.peek();
-//			reduceLive(bomb);
-//
-//		}
-//
-//	}
+	public void slice​(int elementNumber) {
+
+		if (elements.get(elementNumber) instanceof Fruit) {
+
+			Fruit fruit = (Fruit) elements.get(elementNumber);
+			fruit.setSliced(true);
+			System.out.println(score(fruit));
+		} else if (elements.get(elementNumber) instanceof Bombs) {
+
+			Bombs bomb = (Bombs) elements.get(elementNumber);
+			bomb.setSliced(true);
+			reduceLive(bomb);
+
+		}
+
+	}
 
 	public void bestScore(int score, int level) {
 		ArrayList<Integer> scores = new ArrayList<Integer>();
@@ -84,6 +86,12 @@ public class GameEngine {
 	public int getLives() {
 		return lives;
 	}
+
+	public int getGameScore() {
+		return gameScore;
+	}
+	
+	
 
 
 }

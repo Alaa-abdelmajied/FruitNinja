@@ -30,16 +30,20 @@ public class FileWriterUtils {
 			document.appendChild(root);
 
 			Element easy = document.createElement("Easy");
-			easy.appendChild(document.createTextNode(String.valueOf(scores.get(0))));
+			easy.appendChild(document.createTextNode(String.valueOf(scores.get(1))));
 			root.appendChild(easy);
 
 			Element medium = document.createElement("Medium");
-			medium.appendChild(document.createTextNode(String.valueOf(scores.get(1))));
+			medium.appendChild(document.createTextNode(String.valueOf(scores.get(2))));
 			root.appendChild(medium);
 
 			Element hard = document.createElement("Hard");
-			hard.appendChild(document.createTextNode(String.valueOf(scores.get(2))));
+			hard.appendChild(document.createTextNode(String.valueOf(scores.get(3))));
 			root.appendChild(hard);
+
+			Element arcade = document.createElement("Arcade");
+			arcade.appendChild(document.createTextNode(String.valueOf(scores.get(4))));
+			root.appendChild(arcade);
 
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
@@ -58,5 +62,4 @@ public class FileWriterUtils {
 		}
 
 	}
-
 }

@@ -287,27 +287,26 @@ public class Level1 {
 				elementCounter = 0;
 				elements = controller.updateElements();
 			}
-			System.out.println(elements.get(elementCounter));
 			if (elements.get(elementCounter) instanceof Apple)
-				redApple(root); 
+				redApple(root,elementCounter); 
 
 			else if (elements.get(elementCounter) instanceof model.fruit.Orange)
-				Orange(root);
+				Orange(root,elementCounter);
 //		else if (gameQueue.peek() instanceof Pear) 
 //		
 			else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
-				Strawberry(root);
+				Strawberry(root,elementCounter);
 
 			else if (elements.get(elementCounter) instanceof SpecialApple)
-				greenApple(root);
+				greenApple(root,elementCounter);
 
 			else if (elements.get(elementCounter) instanceof SpecialGrape)
-				Grapes(root);
+				Grapes(root,elementCounter);
 
 			if (elements.get(elementCounter) instanceof Fatal)
-				FatalBomb();
+				FatalBomb(elementCounter);
 			else if (elements.get(elementCounter) instanceof Dangerous)
-				oneLiveBomb();
+				oneLiveBomb(elementCounter);
 		
 			elementCounter++;
 
@@ -357,7 +356,7 @@ public class Level1 {
 //        rotateTransition.play();
 //    }
 
-	public void redApple(AnchorPane root) {
+	public void redApple(AnchorPane root,int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
@@ -368,7 +367,7 @@ public class Level1 {
 		Image slicedredapple = new Image("SlicedRedApple.png");
 		ImageView SlicedRedApple = new ImageView(slicedredapple);
 		SlicedRedApple.setVisible(false);
-
+		
 		RedApple.setFitHeight(65);
 		RedApple.setFitWidth(65);
 		RedApple.setX(randomX);
@@ -379,7 +378,8 @@ public class Level1 {
 		SlicedRedApple.setY(721);
 
 		RedApple.setOnMouseMoved(e -> {
-			DisplayedScore++;
+			//DisplayedScore++;
+			controller.slice(elementNumber);
 			score.setText(Integer.toString(DisplayedScore));
 			RedApple.setVisible(false);
 			SlicedRedApple.setVisible(true);
@@ -405,7 +405,7 @@ public class Level1 {
 		root.getChildren().addAll(RedApple, SlicedRedApple);
 	}
 
-	public void greenApple(AnchorPane root) {
+	public void greenApple(AnchorPane root,int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
@@ -430,8 +430,9 @@ public class Level1 {
 		Throw(SlicedGreenApple1, randomX, randomY, 1, true);
 
 		GreenApple1.setOnMouseMoved(e -> {
-			DisplayedScore += 5;
-			score.setText(Integer.toString(DisplayedScore));
+			//DisplayedScore += 5;
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
 			GreenApple1.setVisible(false);
 			SlicedGreenApple1.setVisible(true);
 			Media sound = new Media((new File("src/Slice.mp3")).toURI().toString());
@@ -445,7 +446,7 @@ public class Level1 {
 		root.getChildren().addAll(GreenApple1, SlicedGreenApple1);
 	}
 
-	public void Strawberry(AnchorPane root) {
+	public void Strawberry(AnchorPane root,int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
@@ -470,8 +471,9 @@ public class Level1 {
 		Throw(SlicedStrawberry, randomX, randomY, 2, true);
 
 		Strawberry.setOnMouseMoved(e -> {
-			DisplayedScore++;
-			score.setText(Integer.toString(DisplayedScore));
+			//DisplayedScore++;
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
 			Strawberry.setVisible(false);
 			SlicedStrawberry.setVisible(true);
 			Media sound = new Media((new File("src/Slice.mp3")).toURI().toString());
@@ -486,7 +488,7 @@ public class Level1 {
 		root.getChildren().addAll(Strawberry, SlicedStrawberry);
 	}
 
-	public void Orange(AnchorPane root) {
+	public void Orange(AnchorPane root,int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
@@ -511,8 +513,9 @@ public class Level1 {
 		Throw(SlicedOrange, randomX, randomY, 2, true);
 
 		Orange.setOnMouseMoved(e -> {
-			DisplayedScore++;
-			score.setText(Integer.toString(DisplayedScore));
+			//DisplayedScore++;
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
 			Orange.setVisible(false);
 			SlicedOrange.setVisible(true);
 			Media sound = new Media((new File("src/Slice.mp3")).toURI().toString());
@@ -526,7 +529,7 @@ public class Level1 {
 		root.getChildren().addAll(Orange, SlicedOrange);
 	}
 
-	public void Grapes(AnchorPane root) {
+	public void Grapes(AnchorPane root,int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
@@ -551,8 +554,9 @@ public class Level1 {
 		Throw(SlicedGrapes, randomX, randomY, 1, true);
 
 		Grapes.setOnMouseMoved(e -> {
-			DisplayedScore += 5;
-			score.setText(Integer.toString(DisplayedScore));
+			//DisplayedScore += 10;
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
 			Grapes.setVisible(false);
 			SlicedGrapes.setVisible(true);
 			Media sound = new Media((new File("src/Slice.mp3")).toURI().toString());
@@ -566,7 +570,7 @@ public class Level1 {
 		root.getChildren().addAll(Grapes, SlicedGrapes);
 	}
 
-	public void oneLiveBomb() {
+	public void oneLiveBomb(int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
@@ -592,6 +596,7 @@ public class Level1 {
 
 		DBomb.setOnMouseMoved(e -> {
 			lossLife();
+			controller.slice(elementNumber);
 //            score.setText(Integer.toString(DisplayedScore));
 			DBomb.setVisible(false);
 			Boom.setVisible(true);
@@ -618,7 +623,7 @@ public class Level1 {
 //        root.getChildren().addAll(DBomb,SlicedGrapes);
 	}
 
-	public void FatalBomb() {
+	public void FatalBomb(int elementNumber) {
 //        Random X = new Random();
 //        int randomX = 100 + X.nextInt(1000);
 //        Image boom = new Image("FatalBomb.png");
@@ -655,6 +660,7 @@ public class Level1 {
 			lossLife();
 			lossLife();
 			lossLife();
+			controller.slice(elementNumber);
 //            score.setText(Integer.toString(DisplayedScore));
 			DBomb.setVisible(false);
 			Boom.setVisible(true);
@@ -758,16 +764,16 @@ public class Level1 {
 //
 //    }
 
-	public void push() {
-		greenApple(root);
-		redApple(root);
-		Strawberry(root);
-		Orange(root);
-		Grapes(root);
-		if (Lives != 0) {
-			push();
-		}
-	}
+//	public void push() {
+//		greenApple(root);
+//		redApple(root);
+//		Strawberry(root);
+//		Orange(root);
+//		Grapes(root);
+//		if (Lives != 0) {
+//			push();
+//		}
+//	}
 
 	private void doTime() {
 		Timeline time = new Timeline();
@@ -781,7 +787,7 @@ public class Level1 {
 				;
 				TIME++;
 				seconds++;
-				System.out.println(hours.toString() + " : " + minutes.toString() + " : " + seconds.toString());
+				//System.out.println(hours.toString() + " : " + minutes.toString() + " : " + seconds.toString());
 				timer.setText(hours.toString() + " : " + minutes.toString() + " : " + seconds.toString());
 				if (seconds == 59) {
 					minutes++;
