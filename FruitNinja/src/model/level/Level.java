@@ -1,5 +1,6 @@
 package model.level;
 
+import java.util.ArrayList;
 import java.util.Queue;
 
 import model.Element;
@@ -14,9 +15,9 @@ public class Level {
 		this.strategy = strategy;
 	}
 	
-	public Queue<Element> gameQueue() {
-		Queue<Element> queue= this.strategy.gameQueue();
-		return queue;
+	public ArrayList<Element> elementThrow() {
+		ArrayList<Element> elements = this.strategy.elementThrow();
+		return elements;
 	}
 
 }

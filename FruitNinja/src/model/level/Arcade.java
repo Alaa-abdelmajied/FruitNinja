@@ -1,5 +1,6 @@
 package model.level;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -9,33 +10,34 @@ import model.fruit.FruitFactory;
 public class Arcade implements LevelStrategy{
 
 	@Override
-	public Queue<Element> gameQueue() {
-		Queue<Element> queue = new LinkedList<Element>();
+	public ArrayList<Element> elementThrow(){
+		
+		ArrayList<Element> elements = new ArrayList<Element>();
 		FruitFactory fruitFactory = new FruitFactory();
 
-		queue.add(fruitFactory.getFruit("Apple"));
-		queue.add(fruitFactory.getFruit("Strawberry"));
-		queue.add(fruitFactory.getFruit("SpecialApple"));
-		queue.add(fruitFactory.getFruit("Orange"));
-		queue.add(fruitFactory.getFruit("Pear"));
-		queue.add(fruitFactory.getFruit("SpecialGrape"));
-		queue.add(fruitFactory.getFruit("Strawberry"));
-		queue.add(fruitFactory.getFruit("Orange"));
-		queue.add(fruitFactory.getFruit("SpecialApple"));
-		queue.add(fruitFactory.getFruit("Apple"));
-		queue.add(fruitFactory.getFruit("Strawberry"));
-		queue.add(fruitFactory.getFruit("Pear"));
-		queue.add(fruitFactory.getFruit("SpecialApple"));
-		queue.add(fruitFactory.getFruit("Orange"));
-		queue.add(fruitFactory.getFruit("Strawberry"));
-		queue.add(fruitFactory.getFruit("SpecialGrape"));
-		queue.add(fruitFactory.getFruit("Pear"));
-		queue.add(fruitFactory.getFruit("Orange"));
-		queue.add(fruitFactory.getFruit("SpecialApple"));
-		queue.add(fruitFactory.getFruit("Apple"));
-		queue.add(fruitFactory.getFruit("Strawberry"));
+		elements.add(fruitFactory.getFruit("Apple"));
+		elements.add(fruitFactory.getFruit("Strawberry"));
+		elements.add(fruitFactory.getFruit("SpecialApple"));
+		elements.add(fruitFactory.getFruit("Orange"));
+		elements.add(fruitFactory.getFruit("Pear"));
+		elements.add(fruitFactory.getFruit("SpecialGrape"));
+		elements.add(fruitFactory.getFruit("Strawberry"));
+		elements.add(fruitFactory.getFruit("Orange"));
+		elements.add(fruitFactory.getFruit("SpecialApple"));
+		elements.add(fruitFactory.getFruit("Apple"));
+		elements.add(fruitFactory.getFruit("Strawberry"));
+		elements.add(fruitFactory.getFruit("Pear"));
+		elements.add(fruitFactory.getFruit("SpecialApple"));
+		elements.add(fruitFactory.getFruit("Orange"));
+		elements.add(fruitFactory.getFruit("Strawberry"));
+		elements.add(fruitFactory.getFruit("SpecialGrape"));
+		elements.add(fruitFactory.getFruit("Pear"));
+		elements.add(fruitFactory.getFruit("Orange"));
+		elements.add(fruitFactory.getFruit("SpecialApple"));
+		elements.add(fruitFactory.getFruit("Apple"));
+		elements.add(fruitFactory.getFruit("Strawberry"));
 		
-		return queue;
+		return elements;
 	}
 	
 	

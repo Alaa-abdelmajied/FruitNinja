@@ -1,29 +1,13 @@
 package view;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	private static Stage st;
-	
-	
-
-
-    public static Stage getSt() {
-		return st;
-	}
-
 
 	@Override
     public void start(Stage stage) throws Exception {
-		st = stage;
         stage.setResizable(false);
         MainMenu main = new MainMenu(stage);
         main.buildScene();

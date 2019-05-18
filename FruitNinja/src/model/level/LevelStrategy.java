@@ -1,5 +1,6 @@
 package model.level;
 
+import java.util.ArrayList;
 import java.util.Queue;
 
 import model.Element;
@@ -15,6 +16,6 @@ import model.fruit.Strawberry;
 public interface LevelStrategy{
 	
 
-	public Queue<Element> gameQueue();
+	public ArrayList<Element> elementThrow();
 
 }

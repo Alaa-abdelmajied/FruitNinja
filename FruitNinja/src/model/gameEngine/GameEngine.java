@@ -16,7 +16,7 @@ public class GameEngine {
 
 	Level level;
 	LevelStrategy strategy;
-	Queue<Element> gameQueue = new LinkedList<>();
+	private ArrayList<Element> elements = new ArrayList<Element>();
 	int gameScore;
 	int lives;
 	
@@ -25,7 +25,7 @@ public class GameEngine {
 
 		this.strategy = strategy;
 		level = new Level(strategy);
-		gameQueue = level.gameQueue();
+		elements = level.elementThrow();
 		gameScore = 0;
 		lives = 3;
 
@@ -57,20 +57,20 @@ public class GameEngine {
 
 	}
 
-	public void slice​() {
-
-		if (gameQueue.peek() instanceof Fruit) {
-
-			Fruit fruit = (Fruit) gameQueue.peek();
-			score(fruit);
-		} else if (gameQueue.peek() instanceof Bombs) {
-
-			Bombs bomb = (Bombs) gameQueue.peek();
-			reduceLive(bomb);
-
-		}
-
-	}
+//	public void slice​() {
+//
+//		if (gameQueue.peek() instanceof Fruit) {
+//
+//			Fruit fruit = (Fruit) gameQueue.peek();
+//			score(fruit);
+//		} else if (gameQueue.peek() instanceof Bombs) {
+//
+//			Bombs bomb = (Bombs) gameQueue.peek();
+//			reduceLive(bomb);
+//
+//		}
+//
+//	}
 
 	public void bestScore(int score, int level) {
 		ArrayList<Integer> scores = new ArrayList<Integer>();

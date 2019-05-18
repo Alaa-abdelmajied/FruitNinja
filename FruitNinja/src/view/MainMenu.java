@@ -16,6 +16,8 @@ import javafx.util.Duration;
 
 import java.io.File;
 
+import controller.Controller;
+
 public class MainMenu {
     Stage stage;
     Scene scene;
@@ -68,7 +70,7 @@ public class MainMenu {
     AnchorPane StartSlider;
     AnchorPane CreditSlider;
 
-
+    Controller controller = new Controller();
     public MainMenu(Stage stage){
         this.stage = stage;
     }
@@ -326,7 +328,8 @@ public class MainMenu {
         easy.setX(795);
         easy.setY(420);
         easy.setOnMouseClicked(e->{
-            Level1 easyLevel = new Level1(stage);
+            Level1 easyLevel = new Level1(stage,controller);
+            controller.play(1);
             easyLevel.buildScene();
             mediaPlayer.setMute(true);
         });
