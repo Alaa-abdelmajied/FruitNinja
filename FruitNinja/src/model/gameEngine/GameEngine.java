@@ -19,6 +19,7 @@ public class GameEngine {
 	private ArrayList<Element> elements = new ArrayList<Element>();
 	private int gameScore;
 	private int lives;
+	private ArrayList<Integer> scores = new ArrayList<Integer>();
 	
 
 	public void newGame(LevelStrategy strategy) {
@@ -44,17 +45,21 @@ public class GameEngine {
 		return gameScore;
 	}
 
-	public void reduceLive(Bombs bomb) {
-
-		
-		lives -= bomb.loseLife();
-		if (lives <= 0) {
-
-			// toDofunction
-			// bestScore(score, level);
-
+	public void slicedBomb(Bombs bomb) {
+		int reduceLive = bomb.loseLife();
+		if(reduceLive == 1){
+			reduceLive();
 		}
+		else if(reduceLive == 3) {
+			reduceLive();
+			reduceLive();
+			reduceLive();
+		}
+	}
+	
+	public void reduceLive() {
 
+		lives -= 1;
 	}
 
 	public void slice​(int elementNumber) {
@@ -63,26 +68,27 @@ public class GameEngine {
 
 			Fruit fruit = (Fruit) elements.get(elementNumber);
 			fruit.setSliced(true);
-			System.out.println(score(fruit));
+			score(fruit);
 		} else if (elements.get(elementNumber) instanceof Bombs) {
 
 			Bombs bomb = (Bombs) elements.get(elementNumber);
 			bomb.setSliced(true);
-			reduceLive(bomb);
+			slicedBomb(bomb);
 
 		}
 
 	}
 
-	public void bestScore(int score, int level) {
-		ArrayList<Integer> scores = new ArrayList<Integer>();
+	public int getBestScore(int level) {
 		scores = FileReaderUtils.read();
-		if (score > scores.get(level)) {
-			scores.set(level, score);
-		}
+		return scores.get(level);
+	}
+	
+	public void setBestScore(int score,int level) {
+		scores.set(level, score);
 		FileWriterUtils.write(scores);
 	}
-
+	
 	public int getLives() {
 		return lives;
 	}

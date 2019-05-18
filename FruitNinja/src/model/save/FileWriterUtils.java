@@ -40,7 +40,7 @@ public class FileWriterUtils {
 			Element hard = document.createElement("Hard");
 			hard.appendChild(document.createTextNode(String.valueOf(scores.get(3))));
 			root.appendChild(hard);
-
+			
 			Element arcade = document.createElement("Arcade");
 			arcade.appendChild(document.createTextNode(String.valueOf(scores.get(4))));
 			root.appendChild(arcade);
@@ -62,4 +62,5 @@ public class FileWriterUtils {
 		}
 
 	}
+
 }
