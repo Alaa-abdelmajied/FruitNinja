@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class GameOver {
     Stage stage;
     MainMenu main = new MainMenu(stage);
-    public void Display(){
+    public void Display(){ 
         Stage GO = new Stage();
         GO.setTitle("Game Over");
         GO.setResizable(false);
