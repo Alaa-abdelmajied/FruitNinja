@@ -44,7 +44,6 @@ public class Controller {
 			elements = level.elementThrow();
 			System.out.println("Arcade");
 		}
-//		gameEngine.newGame(level);
 		commandNewGame(level);
 
 	}

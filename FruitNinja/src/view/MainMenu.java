@@ -328,8 +328,8 @@ public class MainMenu {
         easy.setX(795);
         easy.setY(420);
         easy.setOnMouseClicked(e->{
-            Level1 easyLevel = new Level1(stage,controller);
-            controller.play(1);
+        	controller.play(1);
+            Level1 easyLevel = new Level1(stage,controller);           
             easyLevel.buildScene();
             mediaPlayer.setMute(true);
         }); 
@@ -358,7 +358,8 @@ public class MainMenu {
         });
         
         normal.setOnMouseClicked(e->{
-            Level2 normalLevel = new Level2(stage);
+        	controller.play(2);
+            Level2 normalLevel = new Level2(stage,controller);
             normalLevel.buildScene();
             mediaPlayer.setMute(true);
         });
@@ -391,7 +392,8 @@ public class MainMenu {
             hard.setY(527);
         });
         hard.setOnMouseClicked(e->{
-            Level3 hardLevel = new Level3(stage);
+        	controller.play(3);
+            Level3 hardLevel = new Level3(stage,controller);
             hardLevel.buildScene();
             mediaPlayer.setMute(true);
         });

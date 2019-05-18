@@ -1,8 +1,7 @@
 package model.level;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+
 import model.Element;
 import model.bomb.BombFactory;
 import model.fruit.FruitFactory;
