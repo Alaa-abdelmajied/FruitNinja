@@ -29,7 +29,7 @@ public class Level2 {
     Stage stage;
     public Level2(Stage stage){
         this.stage = stage;
-    }
+    } 
     AnchorPane root;
     Scene scene;
     Image background;

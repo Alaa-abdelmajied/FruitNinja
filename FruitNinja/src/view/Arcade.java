@@ -29,7 +29,7 @@ public class Arcade {
     Label BEST;
     Label score;
     Label best;
-
+   
     Image ba;
     ImageView back;
 

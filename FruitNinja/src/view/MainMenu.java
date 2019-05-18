@@ -332,7 +332,7 @@ public class MainMenu {
             controller.play(1);
             easyLevel.buildScene();
             mediaPlayer.setMute(true);
-        });
+        }); 
 
         Dif2 = new Image("Normal.png");
         normal = new ImageView(Dif2);

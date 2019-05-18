@@ -609,7 +609,7 @@ public class Level1 {
 			MediaView mediaView = new MediaView(Slice);
 			transition.stop();
 			rotateTransition.stop();
-
+ 
 			Timer time = new Timer();
 			time.schedule(new TimerTask() {
 				@Override
