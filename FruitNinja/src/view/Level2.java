@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -84,6 +85,12 @@ public class Level2 {
 	TranslateTransition transition;
 	RotateTransition rotateTransition;
 
+	private Media fruitSound;
+	private Media bombSound;
+	private AudioClip sliceFruit;
+	private AudioClip sliceBomb;
+
+	private double delay;
 	private int timelinetest = 0;
 	private int TIME = 0;
 	private int bestScore;
@@ -92,9 +99,10 @@ public class Level2 {
 	private boolean isSlicedRedApple = false;
 	private boolean isSlicedStrawberry = false;
 	private boolean isSlicedOrange = false;
+	private int playMusic = 0;
 
 	public void buildScene() {
-		stage.setTitle("Easy");
+		stage.setTitle("Normal");
 		stage.setResizable(false);
 		root = new AnchorPane();
 		scene = new Scene(root, 1200, 671);
@@ -224,6 +232,7 @@ public class Level2 {
 		BACK.setX(567);
 		BACK.setY(392);
 		BACK.setOnMouseClicked(e -> {
+			endSound().stop();
 			MainMenu main = new MainMenu(stage);
 			main.buildScene();
 			main.mediaPlayer.setMute(false);
@@ -273,6 +282,11 @@ public class Level2 {
 		fscore.setTextFill(Color.WHITE);
 		root.getChildren().addAll(fSCOREVIEW, fscore);
 
+		fruitSound = new Media((new File("src/Slice.mp3")).toURI().toString());
+		sliceFruit = new AudioClip(fruitSound.getSource());
+
+		bombSound = new Media((new File("src/Bomb1.mp3")).toURI().toString());
+		sliceBomb = new AudioClip(bombSound.getSource());
 
 		timeline = new Timeline(new KeyFrame(Duration.millis(1000), (event) -> {
 
@@ -315,7 +329,6 @@ public class Level2 {
 		stage.setScene(scene);
 	}
 
-
 	public void redApple(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -338,17 +351,11 @@ public class Level2 {
 		SlicedRedApple.setY(721);
 
 		RedApple.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
 			RedApple.setVisible(false);
 			SlicedRedApple.setVisible(true);
-			Media sound = new Media((new File("src/Slice.mp3")).toURI().toString());
-			MediaPlayer Slice = new MediaPlayer(sound);
-			Slice.setVolume(200.0D);
-			Slice.setStopTime(Duration.seconds(2));
-			Slice.seek(Slice.getStartTime());
-			Slice.setAutoPlay(true);
-			MediaView mediaView = new MediaView(Slice);
 			isSlicedRedApple = true;
 		});
 		Throw(RedApple, randomX, randomY, 2, false);
@@ -397,19 +404,13 @@ public class Level2 {
 		Throw(SlicedGreenApple1, randomX, randomY, 1, true);
 
 		GreenApple1.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
 			GreenApple1.setVisible(false);
 			SlicedGreenApple1.setVisible(true);
-			Media sound = new Media((new File("src/Slice.mp3")).toURI().toString());
-			MediaPlayer Slice = new MediaPlayer(sound);
-			Slice.setVolume(200.0D);
-			Slice.seek(Slice.getStartTime());
-			Slice.setAutoPlay(true);
-			MediaView mediaView = new MediaView(Slice);
-		
 		});
-	
+
 		root.getChildren().addAll(GreenApple1, SlicedGreenApple1);
 	}
 
@@ -433,21 +434,16 @@ public class Level2 {
 		SlicedStrawberry.setFitWidth(85);
 		SlicedStrawberry.setX(randomX);
 		SlicedStrawberry.setY(721);
-		
+
 		Throw(Strawberry, randomX, randomY, 2, false);
 		Throw(SlicedStrawberry, randomX, randomY, 2, true);
 
 		Strawberry.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
 			Strawberry.setVisible(false);
 			SlicedStrawberry.setVisible(true);
-			Media sound = new Media((new File("src/Slice.mp3")).toURI().toString());
-			MediaPlayer Slice = new MediaPlayer(sound);
-			Slice.setVolume(200.0D);
-			Slice.seek(Slice.getStartTime());
-			Slice.setAutoPlay(true);
-			MediaView mediaView = new MediaView(Slice);
 			isSlicedStrawberry = true;
 		});
 		transition.setOnFinished(new EventHandler<ActionEvent>() {
@@ -487,21 +483,16 @@ public class Level2 {
 		SlicedOrange.setFitWidth(85);
 		SlicedOrange.setX(randomX);
 		SlicedOrange.setY(721);
-		
+
 		Throw(Orange, randomX, randomY, 2, false);
 		Throw(SlicedOrange, randomX, randomY, 2, true);
 
 		Orange.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
 			Orange.setVisible(false);
 			SlicedOrange.setVisible(true);
-			Media sound = new Media((new File("src/Slice.mp3")).toURI().toString());
-			MediaPlayer Slice = new MediaPlayer(sound);
-			Slice.setVolume(200.0D);
-			Slice.seek(Slice.getStartTime());
-			Slice.setAutoPlay(true);
-			MediaView mediaView = new MediaView(Slice);
 			isSlicedOrange = true;
 		});
 		transition.setOnFinished(new EventHandler<ActionEvent>() {
@@ -546,19 +537,14 @@ public class Level2 {
 		Throw(SlicedGrapes, randomX, randomY, 1, true);
 
 		Grapes.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
 			Grapes.setVisible(false);
 			SlicedGrapes.setVisible(true);
-			Media sound = new Media((new File("src/Slice.mp3")).toURI().toString());
-			MediaPlayer Slice = new MediaPlayer(sound);
-			Slice.setVolume(200.0D);
-			Slice.seek(Slice.getStartTime());
-			Slice.setAutoPlay(true);
-			MediaView mediaView = new MediaView(Slice);
-			
+
 		});
-		
+
 		root.getChildren().addAll(Grapes, SlicedGrapes);
 	}
 
@@ -587,19 +573,13 @@ public class Level2 {
 		Throw(Boom, randomX, randomY, 1, true);
 
 		DBomb.setOnMouseMoved(e -> {
+			sliceBombSound().play();
 			controller.slice(elementNumber);
 			lossLife();
 			DBomb.setVisible(false);
 			Boom.setVisible(true);
-			Media sound = new Media((new File("src/Bomb1.mp3")).toURI().toString());
-			MediaPlayer Slice = new MediaPlayer(sound);
-			Slice.setVolume(200.0D);
-			Slice.setStopTime(Duration.seconds(2));
-			Slice.seek(Slice.getStartTime());
-			Slice.setAutoPlay(true);
-			MediaView mediaView = new MediaView(Slice);
-			transition.stop();
-			rotateTransition.stop();
+//			transition.stop();
+//			rotateTransition.stop();
 
 			Timer time = new Timer();
 			time.schedule(new TimerTask() {
@@ -638,20 +618,14 @@ public class Level2 {
 		Throw(Boom, randomX, randomY, 1, true);
 
 		DBomb.setOnMouseMoved(e -> {
+			sliceBombSound().play();
 			controller.slice(elementNumber);
 			lossLife();
-			
+
 			DBomb.setVisible(false);
 			Boom.setVisible(true);
-			Media sound = new Media((new File("src/Bomb1.mp3")).toURI().toString());
-			MediaPlayer Slice = new MediaPlayer(sound);
-			Slice.setVolume(200.0D);
-			Slice.setStopTime(Duration.seconds(2));
-			Slice.seek(Slice.getStartTime());
-			Slice.setAutoPlay(true);
-			MediaView mediaView = new MediaView(Slice);
-			transition.stop();
-			rotateTransition.stop();
+//			transition.stop();
+//			rotateTransition.stop();
 
 			Timer time = new Timer();
 			time.schedule(new TimerTask() {
@@ -664,8 +638,6 @@ public class Level2 {
 
 		root.getChildren().addAll(DBomb, Boom);
 	}
-
-	double delay;
 
 	public void Throw(Node node, int X, int y, double speed, Boolean slice) {
 		if (!slice) {
@@ -683,7 +655,7 @@ public class Level2 {
 		transition.setNode(node);
 		transition.play();
 
-		rotateTransition = new RotateTransition(Duration.seconds(1));
+		rotateTransition = new RotateTransition(Duration.seconds(2));
 		rotateTransition.setByAngle(360 * 10);
 		rotateTransition.setRate(0.05);
 		rotateTransition.setCycleCount(RotateTransition.INDEFINITE);
@@ -693,7 +665,6 @@ public class Level2 {
 		CubicCurve cubicCurve = new CubicCurve();
 
 	}
-
 
 	private void doTime() {
 		Timeline time = new Timeline();
@@ -742,15 +713,30 @@ public class Level2 {
 			BACKGROUND.setVisible(true);
 			GAMEOVER.setVisible(true);
 			BACK.setVisible(true);
-	 		fSCOREVIEW.setVisible(true);
+			fSCOREVIEW.setVisible(true);
 			fscore.setVisible(true);
 			fscore.setText(Integer.toString(controller.score()));
 			timeline.stop();
-
+			playMusic += 1;
 		}
+		if(playMusic == 1)
+			endSound().play();
 	}
 
+	public AudioClip sliceFruitSound() {
+		sliceFruit.setVolume(200.0D);
+		return sliceFruit;
+	}
+
+	public AudioClip sliceBombSound() {
+		sliceBomb.setVolume(200.0D);
+		return sliceBomb;
+	}
+	
+    public AudioClip endSound() {
+		Media sound = new Media((new File("src/laylay.mp3")).toURI().toString());
+		AudioClip end = new AudioClip(sound.getSource());
+		end.setVolume(200.0D);
+		return end;
+    }
 }
-
-
-

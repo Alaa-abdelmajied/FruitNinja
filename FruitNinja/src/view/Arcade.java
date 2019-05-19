@@ -3,6 +3,8 @@ package view;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import controller.Controller;
 import javafx.animation.KeyFrame;
@@ -19,6 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -35,147 +38,190 @@ import model.fruit.SpecialApple;
 import model.fruit.SpecialGrape;
 import javafx.scene.media.MediaView;
 
-
-
 public class Arcade {
-    Stage stage;
-    public Arcade(Stage stage){
-        this.stage = stage;
-    }
-    AnchorPane root;
-    Scene scene;
-    Image background;
-    ImageView image;
-    Label SCORE;
-    Label BEST;
-    Label score;
-    Label best;
-    Label FScore;
+	Stage stage;
+	Controller controller;
 
-   
-    Image ba;
-    ImageView back;
+	public Arcade(Stage stage, Controller controller) {
+		this.stage = stage;
+		this.controller = controller;
+	}
 
-    Image backGround;
-    Image gameOver;
-    ImageView BACKGROUND;
-    ImageView BACK;
-    ImageView GAMEOVER;
-    ImageView fSCOREVIEW;
-    Image fscore;
+	AnchorPane root;
+	Scene scene;
+	Image background;
+	ImageView image;
+//	ImageView live1;
+//	ImageView loss1;
+//	ImageView live2;
+//	ImageView loss2;
+//	ImageView live3;
+//	ImageView loss3;
+//	Image heart;
+//	Image splash;
+	Label score;
+	Label best;
+	Image ba;
+	Image SCORE;
+	ImageView SCOREVIEW;
+	Image bestSCORE;
+	ImageView BESTSCOREView;
+	ImageView back;
+	Image backGround;
+	Image gameOver;
+	ImageView BACKGROUND;
+	ImageView BACK;
+	ImageView GAMEOVER;
+	Image fSCORE;
+	ImageView fSCOREVIEW;
+	Label fscore;
 
-
-    Integer startTime = 60;
-    Label timer;
-
-	Integer seconds = startTime;
+	Integer startTime = 0;
+	Integer seconds = 60;
 	Integer minutes = 0;
 	Integer hours = 0;
+	Label timer;
 
-    
-    
+	Timeline timeline;
+	Timeline time;
 
 	TranslateTransition transition;
 	RotateTransition rotateTransition;
+	
+	private Media fruitSound;
+	private AudioClip sliceFruit;
+
+	private double delay;
 	private int timelinetest = 0;
-
-
-    int TIMER =60 ;
-    int DisplayedScore = 0;
 	private int TIME = 0;
-
-    
-    private boolean isSlicedRedApple = false;
-	private boolean isSlicedStrawberry = false;
-	private boolean isSlicedOrange = false;
-	
-	
-	Controller controller;
-	
+	private int bestScore;
 	private ArrayList<Element> elements = new ArrayList<Element>();
 	private int elementCounter = 0;
-	
-	
-	ImageView live1;
-	ImageView loss1;
-	ImageView live2;
-	ImageView loss2;
-	ImageView live3;
-	ImageView loss3;
-	Timeline timeline;
+	private boolean isSlicedRedApple = false;
+	private boolean isSlicedStrawberry = false;
+	private boolean isSlicedOrange = false;
 
+	public void buildScene() {
+		stage.setTitle("Arcade");
+		stage.setResizable(false);
+		root = new AnchorPane();
+		scene = new Scene(root, 1200, 671);
 
+		background = new Image("WhatsApp Image 2019-05-08 at 4.23.16 AM.jpeg");
+		image = new ImageView(background);
+		image.setFitWidth(1200);
+		image.setFitHeight(671);
 
-    public void buildScene(){
-        stage.setTitle("Arcade");
-        stage.setResizable(false);
-        root = new AnchorPane();
-        scene = new Scene(root,1200,671);
+		SCORE = new Image("Score.png");
+		SCOREVIEW = new ImageView(SCORE);
+		SCOREVIEW.setX(14);
+		SCOREVIEW.setY(14);
+		SCOREVIEW.setFitHeight(50);
+		SCOREVIEW.setFitWidth(156);
 
-        background = new Image("WhatsApp Image 2019-05-08 at 4.23.16 AM.jpeg");
-        image = new ImageView(background);
-        image.setFitWidth(1200);
-        image.setFitHeight(671);
+		bestSCORE = new Image("BestScore.png");
 
-        Image SCORE =new Image("Score.png");
-        ImageView SCOREVIEW = new ImageView(SCORE);
-        SCOREVIEW.setX(14);
-        SCOREVIEW.setY(14);
-        SCOREVIEW.setFitHeight(50);
-        SCOREVIEW.setFitWidth(156);
+		bestSCORE = new Image("BestScore.png");
+		BESTSCOREView = new ImageView(bestSCORE);
+		BESTSCOREView.setFitHeight(23);
+		BESTSCOREView.setFitWidth(150);
+		BESTSCOREView.setX(14);
+		BESTSCOREView.setY(76);
 
-        Image bestSCORE = new Image("BestScore.png");
-        ImageView BESTSCOREView = new ImageView(bestSCORE);
-        BESTSCOREView.setFitHeight(23);
-        BESTSCOREView.setFitWidth(150);
-        BESTSCOREView.setX(14);
-        BESTSCOREView.setY(76);
+		score = new Label("0");
+		score.setFont(new Font("Impact", 45));
+		score.setLayoutX(180);
+		score.setLayoutY(14);
+		score.setTextFill(Color.WHITE);
+		best = new Label(String.valueOf(controller.getBestScore()));
+		bestScore = controller.getBestScore();
+		best.setFont(new Font("Impact", 19));
+		best.setLayoutX(166);
+		best.setLayoutY(75);
+		best.setTextFill(Color.WHITE);
 
-        score = new Label("0");
-        score.setFont(new Font("Impact",45));
-        score.setLayoutX(180);
-        score.setLayoutY(14);
-        score.setTextFill(Color.WHITE);
+		ba = new Image("back-icon-10.jpg");
+		back = new ImageView(ba);
+		back.setFitHeight(66);
+		back.setFitWidth(66);
+		back.setX(1113);
+		back.setY(19);
+		back.setOnMouseClicked(e -> {
+			timeline.stop();
+			time.stop();
+			alertSound().stop();
+			endAlertSound().stop();
+			controller.undoBestScore(bestScore);
+			MainMenu main = new MainMenu(stage);
+			main.buildScene();
+			main.mediaPlayer.setMute(false);
 
-        best = new Label("10000");
-        best.setFont(new Font("Impact",19));
-        best.setLayoutX(166);
-        best.setLayoutY(75);
-        best.setTextFill(Color.WHITE);
+		});
+		back.setOnMouseEntered(e -> {
+			back.setFitHeight(72);
+			back.setFitWidth(72);
+			back.setX(1110);
+			back.setY(16);
+		});
+		back.setOnMouseExited(e -> {
+			back.setFitHeight(66);
+			back.setFitWidth(66);
+			back.setX(1113);
+			back.setY(19);
 
-        ba = new Image("back-icon-10.jpg");
-        back = new ImageView(ba);
-        back.setFitHeight(66);
-        back.setFitWidth(66);
-        back.setX(1113);
-        back.setY(19);
-        back.setOnMouseClicked(e->{
-            MainMenu main = new MainMenu(stage);
-            main.buildScene();
-            main.mediaPlayer.setMute(false);
-        });
-        back.setOnMouseEntered(e->{
-            back.setFitHeight(72);
-            back.setFitWidth(72);
-            back.setX(1110);
-            back.setY(16);
-        });
-        back.setOnMouseExited(e->{
-            back.setFitHeight(66);
-            back.setFitWidth(66);
-            back.setX(1113);
-            back.setY(19);
+		});
 
-        });
-        
-        
+		root.getChildren().addAll(image, SCOREVIEW, BESTSCOREView, score, best, back);
+
+		backGround = new Image("Slider.png");
+		BACKGROUND = new ImageView(backGround);
+		BACKGROUND.setVisible(false);
+		BACKGROUND.setFitWidth(1240);
+		BACKGROUND.setFitHeight(711);
+		BACKGROUND.setX(-20);
+		BACKGROUND.setY(-20);
+
+		gameOver = new Image("Game Over.png");
+		GAMEOVER = new ImageView(gameOver);
+		GAMEOVER.setVisible(false);
+		GAMEOVER.setFitWidth(288);
+		GAMEOVER.setFitHeight(66);
+		GAMEOVER.setX(456);
+		GAMEOVER.setY(237);
+
+		BACK = new ImageView(ba);
+		BACK.setVisible(false);
+		BACK.setFitWidth(66);
+		BACK.setFitHeight(66);
+		BACK.setX(567);
+		BACK.setY(392);
+		BACK.setOnMouseClicked(e -> {
+			endAlertSound().stop();
+			MainMenu main = new MainMenu(stage);
+			main.buildScene();
+			main.mediaPlayer.setMute(false);
+		});
+		BACK.setOnMouseEntered(e -> {
+			BACK.setFitHeight(72);
+			BACK.setFitWidth(72);
+			BACK.setX(564);
+			BACK.setY(389);
+		});
+		BACK.setOnMouseExited(e -> {
+			BACK.setFitHeight(66);
+			BACK.setFitWidth(66);
+			BACK.setX(567);
+			BACK.setY(392);
+
+		});
+
 		Image Timer = new Image("Timer.png");
 		ImageView t = new ImageView(Timer);
 		t.setFitWidth(85);
 		t.setFitHeight(23);
 		t.setX(14);
 		t.setY(110);
-		timer = new Label("0 : 0 : 0");
+		timer = new Label("60");
 		timer.setFont(new Font("Impact", 19));
 		timer.setLayoutX(100);
 		timer.setLayoutY(110);
@@ -184,22 +230,24 @@ public class Arcade {
 
 		root.getChildren().addAll(t, timer, BACKGROUND, GAMEOVER, BACK);
 
-		fscore = new Image("Score.png");
-		fSCOREVIEW = new ImageView();
+		fSCORE = new Image("Score.png");
+		fSCOREVIEW = new ImageView(fSCORE);
 		fSCOREVIEW.setVisible(false);
 		fSCOREVIEW.setX(465);
 		fSCOREVIEW.setY(319);
 		fSCOREVIEW.setFitHeight(50);
 		fSCOREVIEW.setFitWidth(156);
 
-		FScore = new Label();
-		FScore.setFont(new Font("Impact", 45));
-		FScore.setVisible(false);
-		FScore.setLayoutX(633);
-		FScore.setLayoutY(319);
-		FScore.setTextFill(Color.WHITE);
-		root.getChildren().addAll(fSCOREVIEW, FScore);
-
+		fscore = new Label();
+		fscore.setFont(new Font("Impact", 45));
+		fscore.setVisible(false);
+		fscore.setLayoutX(633);
+		fscore.setLayoutY(319);
+		fscore.setTextFill(Color.WHITE);
+		root.getChildren().addAll(fSCOREVIEW, fscore);
+		
+		fruitSound = new Media((new File("src/Slice.mp3")).toURI().toString());
+		sliceFruit = new AudioClip(fruitSound.getSource());
 
 		timeline = new Timeline(new KeyFrame(Duration.millis(1000), (event) -> {
 
@@ -213,7 +261,7 @@ public class Arcade {
 
 			else if (elements.get(elementCounter) instanceof model.fruit.Orange)
 				Orange(root, elementCounter);
-				else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
+			else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
 				Strawberry(root, elementCounter);
 
 			else if (elements.get(elementCounter) instanceof SpecialApple)
@@ -226,93 +274,12 @@ public class Arcade {
 			controller.setBestScore();
 			best.setText(String.valueOf(controller.getBestScore()));
 
-			if (controller.remaingLives() <= 0) {
-				timeline.stop();
-
-			}
 		}));
 		timeline.setCycleCount(-1);
 		timeline.play();
 
 		stage.setScene(scene);
-	
-
-
-        backGround = new Image("Slider.png");
-        BACKGROUND = new ImageView(backGround);
-        BACKGROUND.setVisible(false);
-        BACKGROUND.setFitWidth(1240);
-        BACKGROUND.setFitHeight(711);
-//        BACKGROUND.setFitWidth(522);
-//        BACKGROUND.setFitHeight(319);
-        BACKGROUND.setX(-20);
-        BACKGROUND.setY(-20);
-//        BACKGROUND.setX(339);
-//        BACKGROUND.setY(176);
-
-        gameOver = new Image("Game Over.png");
-        GAMEOVER = new ImageView(gameOver);
-        GAMEOVER.setVisible(false);
-        GAMEOVER.setFitWidth(288);
-        GAMEOVER.setFitHeight(66);
-        GAMEOVER.setX(456);
-        GAMEOVER.setY(237);
-
-        BACK = new ImageView(ba);
-        BACK.setVisible(false);
-        BACK.setFitWidth(66);
-        BACK.setFitHeight(66);
-        BACK.setX(567);
-        BACK.setY(392);
-        BACK.setOnMouseClicked(e->{
-            MainMenu main = new MainMenu(stage);
-            main.buildScene();
-            main.mediaPlayer.setMute(false);
-        });
-        BACK.setOnMouseEntered(e->{
-            BACK.setFitHeight(72);
-            BACK.setFitWidth(72);
-            BACK.setX(564);
-            BACK.setY(389);
-        });
-        BACK.setOnMouseExited(e->{
-            BACK.setFitHeight(66);
-            BACK.setFitWidth(66);
-            BACK.setX(567);
-            BACK.setY(392);
-
-        });
-
-        Image fSCORE =new Image("Score.png");
-        fSCOREVIEW = new ImageView(fSCORE);
-        fSCOREVIEW.setVisible(false);
-        fSCOREVIEW.setX(465);
-        fSCOREVIEW.setY(319);
-        fSCOREVIEW.setFitHeight(50);
-        fSCOREVIEW.setFitWidth(156);
-
-
-        FScore = new Label();
-        FScore.setFont(new Font("Impact",45));
-        FScore.setVisible(false);
-        FScore.setLayoutX(633);
-        FScore.setLayoutY(319);
-        FScore.setTextFill(Color.WHITE);
-
-        timer = new Label(seconds.toString());
-        timer.setFont(new Font("Impact", 64));
-        timer.setLayoutX(566);
-        timer.setLayoutY(10);
-        timer.setTextFill(Color.WHITE);
-
-        doTime();
-
-        root.getChildren().addAll(image,BESTSCOREView,SCOREVIEW,best,score,back,timer,BACKGROUND,GAMEOVER,BACK);
-        root.getChildren().addAll(fSCOREVIEW,FScore);
-        stage.setScene(scene);
-    }
-    
-    
+	}
 
 	public void redApple(AnchorPane root, int elementNumber) {
 		Random X = new Random();
@@ -336,37 +303,15 @@ public class Arcade {
 		SlicedRedApple.setY(721);
 
 		RedApple.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
 			RedApple.setVisible(false);
 			SlicedRedApple.setVisible(true);
-//			Media sound = new Media((new File("src/Slice.mp3")).toURI().toString());
-//			MediaPlayer Slice = new MediaPlayer(sound);
-//			Slice.setVolume(200.0D);
-//			Slice.setStopTime(Duration.seconds(2));
-//			Slice.seek(Slice.getStartTime());
-//			Slice.setAutoPlay(true);
-//			MediaView mediaView = new MediaView(Slice);
-			sliceFruitSound();
 			isSlicedRedApple = true;
 		});
 		Throw(RedApple, randomX, randomY, 2, false);
 		Throw(SlicedRedApple, randomX, randomY, 2, true);
-
-		transition.setOnFinished(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent actionEvent) {
-				if (!isSlicedRedApple) {
-					controller.fallenFruit();
-					lossLife();
-					isSlicedRedApple = false;
-				}
-				if (isSlicedRedApple) {
-					isSlicedRedApple = false;
-				}
-			}
-		});
 
 		root.getChildren().addAll(RedApple, SlicedRedApple);
 	}
@@ -396,18 +341,11 @@ public class Arcade {
 		Throw(SlicedGreenApple1, randomX, randomY, 1, true);
 
 		GreenApple1.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
 			GreenApple1.setVisible(false);
 			SlicedGreenApple1.setVisible(true);
-//			Media sound = new Media((new File("src/Slice.mp3")).toURI().toString());
-//			MediaPlayer Slice = new MediaPlayer(sound);
-//			Slice.setVolume(200.0D);
-//			Slice.seek(Slice.getStartTime());
-//			Slice.setAutoPlay(true);
-//			MediaView mediaView = new MediaView(Slice);
-			sliceFruitSound();
-		
 		});
 	
 		root.getChildren().addAll(GreenApple1, SlicedGreenApple1);
@@ -438,33 +376,14 @@ public class Arcade {
 		Throw(SlicedStrawberry, randomX, randomY, 2, true);
 
 		Strawberry.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
 			Strawberry.setVisible(false);
 			SlicedStrawberry.setVisible(true);
-//			Media sound = new Media((new File("src/Slice.mp3")).toURI().toString());
-//			MediaPlayer Slice = new MediaPlayer(sound);
-//			Slice.setVolume(200.0D);
-//			Slice.seek(Slice.getStartTime());
-//			Slice.setAutoPlay(true);
-//			MediaView mediaView = new MediaView(Slice);
-			sliceFruitSound();
 			isSlicedStrawberry = true;
 		});
-		transition.setOnFinished(new EventHandler<ActionEvent>() {
 
-			@Override
-			public void handle(ActionEvent actionEvent) {
-				if (!isSlicedStrawberry) {
-					controller.fallenFruit();
-					lossLife();
-					isSlicedStrawberry = false;
-				}
-				if (isSlicedStrawberry) {
-					isSlicedStrawberry = false;
-				}
-			}
-		});
 		root.getChildren().addAll(Strawberry, SlicedStrawberry);
 	}
 
@@ -493,33 +412,14 @@ public class Arcade {
 		Throw(SlicedOrange, randomX, randomY, 2, true);
 
 		Orange.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
 			Orange.setVisible(false);
-			SlicedOrange.setVisible(true);
-//			Media sound = new Media((new File("src/Slice.mp3")).toURI().toString());
-//			MediaPlayer Slice = new MediaPlayer(sound);
-//			Slice.setVolume(200.0D);
-//			Slice.seek(Slice.getStartTime());
-//			Slice.setAutoPlay(true);
-//			MediaView mediaView = new MediaView(Slice);
-			sliceFruitSound();
+			SlicedOrange.setVisible(true);			
 			isSlicedOrange = true;
 		});
-		transition.setOnFinished(new EventHandler<ActionEvent>() {
 
-			@Override
-			public void handle(ActionEvent actionEvent) {
-				if (!isSlicedOrange) {
-					controller.fallenFruit();
-					lossLife();
-					isSlicedOrange = false;
-				}
-				if (isSlicedOrange) {
-					isSlicedOrange = false;
-				}
-			}
-		});
 		root.getChildren().addAll(Orange, SlicedOrange);
 	}
 
@@ -548,26 +448,21 @@ public class Arcade {
 		Throw(SlicedGrapes, randomX, randomY, 1, true);
 
 		Grapes.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
 			Grapes.setVisible(false);
 			SlicedGrapes.setVisible(true);
-//			Media sound = new Media((new File("src/Slice.mp3")).toURI().toString());
-//			MediaPlayer Slice = new MediaPlayer(sound);
-//			Slice.setVolume(200.0D);
-//			Slice.seek(Slice.getStartTime());
-//			Slice.setAutoPlay(true);
-//			MediaView mediaView = new MediaView(Slice);
-			sliceFruitSound();
+			
 		});
 		
 		root.getChildren().addAll(Grapes, SlicedGrapes);
 	}
 
-    
-	double delay;
-
+	
+	
 	public void Throw(Node node, int X, int y, double speed, Boolean slice) {
+		
 		if (!slice) {
 			Random d = new Random();
 			delay = d.nextDouble();
@@ -583,7 +478,7 @@ public class Arcade {
 		transition.setNode(node);
 		transition.play();
 
-		rotateTransition = new RotateTransition(Duration.seconds(2));
+		rotateTransition = new RotateTransition(Duration.seconds(1));
 		rotateTransition.setByAngle(360 * 10);
 		rotateTransition.setRate(0.05);
 		rotateTransition.setCycleCount(RotateTransition.INDEFINITE);
@@ -593,92 +488,66 @@ public class Arcade {
 		CubicCurve cubicCurve = new CubicCurve();
 
 	}
-	
-    public void gameOver(){
-        MainMenu main = new MainMenu(stage);
-        Stage stg = new Stage();
-        VBox v = new VBox();
-        Label GameOver = new Label("GameOver");
-        GameOver.setTextFill(Color.WHITE);
-        GameOver.setFont(new Font("Impact" , 20));
-        Button close = new Button("CLOSE");
-        close.setOnAction(e->{
-            main.buildScene();
-            stg.close();
+
+    private void doTime() {
+        time = new Timeline();
+        time.setCycleCount(Timeline.INDEFINITE);
+        if (time != null) {
+            time.stop();
+        }
+        KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ;
+                seconds--;
+                if (seconds == 0) {
+                    time.stop();
+                    BACKGROUND.setVisible(true);
+                    GAMEOVER.setVisible(true);
+                    BACK.setVisible(true);
+                    fSCOREVIEW.setVisible(true);
+                    fscore.setVisible(true);
+                    fscore.setText(Integer.toString(controller.score()));
+                    time.stop();
+                    timeline.stop();
+                    alertSound().stop();
+                    endAlertSound().play();
+
+                }
+                if(seconds == 3) {
+                	alertSound().play();
+            		
+                }
+                if (seconds <= 3) {
+                    timer.setTextFill(Color.RED);
+
+                }
+                timer.setText(seconds.toString());
+
+            }
         });
-        v.getChildren().addAll(GameOver,close);
-        Scene sc = new Scene(v);
-        stg.show();
+        time.getKeyFrames().add(frame);
+        time.playFromStart();
 
     }
-
-	private void doTime() {
-		Timeline time = new Timeline();
-		time.setCycleCount(Timeline.INDEFINITE);
-		KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				;
-				TIME++;
-				seconds++;
-				timer.setText(hours.toString() + " : " + minutes.toString() + " : " + seconds.toString());
-				if (seconds == 59) {
-					minutes++;
-					seconds = -1;
-				}
-				if (minutes == 60) {
-					hours++;
-					minutes = 0;
-					seconds = -1;
-				}
-				if (controller.remaingLives() <= 0) {
-					time.stop();
-				}
-			}
-		});
-		time.getKeyFrames().add(frame);
-		time.playFromStart();
+    
+	public AudioClip sliceFruitSound() {
+		sliceFruit.setVolume(200.0D);
+		return sliceFruit;
 	}
-
     
+    public AudioClip endAlertSound() {
+		Media sound = new Media((new File("src/end.mp3")).toURI().toString());
+		AudioClip alert = new AudioClip(sound.getSource());
+		alert.setVolume(200.0D);
+		return alert;
+    }
     
-    public void lossLife() {
-    		 
-        	if (controller.remaingLives() == 2) {
-    			live1.setVisible(false);
-    			loss1.setVisible(true);
-    		} else if (controller.remaingLives() == 1) {
-    			live1.setVisible(false);
-    			loss1.setVisible(true);
-    			live2.setVisible(false);
-    			loss2.setVisible(true);
-    		} else if (controller.remaingLives() <= 0) {
-    			live1.setVisible(false);
-    			loss1.setVisible(true);
-    			live2.setVisible(false);
-    			loss2.setVisible(true);
-    			live3.setVisible(false);
-    			loss3.setVisible(true);
-    			BACKGROUND.setVisible(true);
-    			GAMEOVER.setVisible(true);
-    			BACK.setVisible(true);
-    	 		fSCOREVIEW.setVisible(true);
-    			FScore.setVisible(true);
-    			FScore.setText(Integer.toString(controller.score()));
-    			timeline.stop();
-
-    		}
-    	}
-
-        public void sliceFruitSound() {
-    		Media sound = new Media((new File("src/Slice.mp3")).toURI().toString());
-    		MediaPlayer Slice = new MediaPlayer(sound);
-    		Slice.setVolume(200.0D);
-    		Slice.setStopTime(Duration.seconds(2));
-    		Slice.seek(Slice.getStartTime());
-    		Slice.setAutoPlay(true);
-    		MediaView mediaView = new MediaView(Slice);
-    	
-        
+    public AudioClip alertSound() {
+		Media sound = new Media((new File("src/3seconds.mp3")).toURI().toString());
+		AudioClip alert = new AudioClip(sound.getSource());
+		alert.setVolume(200.0D);
+		return alert;
     }
-    }
+
+}

@@ -195,7 +195,8 @@ public class MainMenu {
         btn4 = new Image("Arcade.png");
         Arcade = new ImageView(btn4);
         Arcade.setOnMouseClicked(e->{
-            Arcade arcade = new Arcade(stage);
+        	controller.play(4);
+            Arcade arcade = new Arcade(stage,controller);
             arcade.buildScene();
             mediaPlayer.setMute(true);
         });
