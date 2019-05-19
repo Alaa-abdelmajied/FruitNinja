@@ -152,6 +152,7 @@ public class Level3 {
 			main.buildScene();
 			main.mediaPlayer.setMute(false);
 			timeline.stop();
+			playMusic = 2;
 		});
 		back.setOnMouseEntered(e -> {
 			back.setFitHeight(72);
@@ -368,8 +369,8 @@ public class Level3 {
 			public void handle(ActionEvent actionEvent) {
 				if (!isSlicedRedApple) {
 					controller.fallenFruit();
-					lossLife();
 					isSlicedRedApple = false;
+					lossLife();
 				}
 				if (isSlicedRedApple) {
 					isSlicedRedApple = false;
@@ -453,8 +454,9 @@ public class Level3 {
 			public void handle(ActionEvent actionEvent) {
 				if (!isSlicedStrawberry) {
 					controller.fallenFruit();
-					lossLife();
 					isSlicedStrawberry = false;
+					lossLife();
+
 				}
 				if (isSlicedStrawberry) {
 					isSlicedStrawberry = false;
@@ -502,8 +504,9 @@ public class Level3 {
 			public void handle(ActionEvent actionEvent) {
 				if (!isSlicedOrange) {
 					controller.fallenFruit();
-					lossLife();
 					isSlicedOrange = false;
+					lossLife();
+
 				}
 				if (isSlicedOrange) {
 					isSlicedOrange = false;
