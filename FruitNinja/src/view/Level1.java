@@ -642,14 +642,17 @@ public class Level1 {
 		Image pinapple = new Image("Pinapple.png");
 		ImageView Pinapple = new ImageView(pinapple);
 		Pinapple.setVisible(true);
+		Pinapple.setFitHeight(80);
+		Pinapple.setFitWidth(80);
+		Pinapple.setX(randomX);
+		Pinapple.setY(721);
+
 		Image slicedPinapple = new Image("SlicedPinapple.png");
 		ImageView SlicedPinapple = new ImageView(slicedPinapple);
 		SlicedPinapple.setVisible(false);
 
 		SlicedPinapple.setFitHeight(65);
 		SlicedPinapple.setFitWidth(65);
-		SlicedPinapple.setX(randomX);
-		SlicedPinapple.setY(721);
 		SlicedPinapple.setFitHeight(85);
 		SlicedPinapple.setFitWidth(85);
 		SlicedPinapple.setX(randomX);
