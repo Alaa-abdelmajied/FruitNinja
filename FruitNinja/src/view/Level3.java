@@ -676,7 +676,7 @@ public class Level3 {
 			delay = delay;
 
 		Random randY = new Random();
-		int y = 2500+randY.nextInt(100);
+		int y = 500+randY.nextInt(100);
 
 		timelinetest += 0;
 		transition = new TranslateTransition();
