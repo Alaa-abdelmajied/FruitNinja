@@ -102,6 +102,7 @@ public class Level1 {
 	private boolean isSlicedRedApple = false;
 	private boolean isSlicedStrawberry = false;
 	private boolean isSlicedOrange = false;
+	private boolean isSlicedPear = false;
 	private int playMusic = 0;
 
 	public void buildScene() {
@@ -327,8 +328,12 @@ public class Level1 {
 
 			else if (elements.get(elementCounter) instanceof model.fruit.Orange)
 				Orange(root, elementCounter);
-				else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
+			
+			else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
 				Strawberry(root, elementCounter);
+			
+			else if(elements.get(elementCounter) instanceof Pear)
+				Pear(root, elementCounter);
 
 			else if (elements.get(elementCounter) instanceof SpecialApple)
 				greenApple(root, elementCounter);
@@ -492,7 +497,57 @@ public class Level1 {
 		});
 		root.getChildren().addAll(Strawberry, SlicedStrawberry);
 	}
+	
+	public void Pear(AnchorPane root, int elementNumber) {
+		Random X = new Random();
+		int randomX = 100 + X.nextInt(1000);
+		Random Y = new Random();
+		int randomY = 300 + Y.nextInt(300);
+		Image pear = new Image("Pear.png");
+		ImageView Pear = new ImageView(pear);
+		Pear.setVisible(true);
+		Image slicedpear = new Image("SlicedPear.png");
+		ImageView SlicedPear = new ImageView(slicedpear);
+		SlicedPear.setVisible(false);
 
+		Pear.setFitHeight(80);
+		Pear.setFitWidth(80);
+		Pear.setX(randomX);
+		Pear.setY(721);
+		SlicedPear.setFitHeight(85);
+		SlicedPear.setFitWidth(85);
+		SlicedPear.setX(randomX);
+		SlicedPear.setY(721);
+		
+		Throw(Pear, randomX, randomY, 2, false);
+		Throw(SlicedPear, randomX, randomY, 2, true);
+
+		Pear.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
+			Pear.setVisible(false);
+			SlicedPear.setVisible(true);			
+			isSlicedPear = true;
+		});
+		transition.setOnFinished(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent actionEvent) {
+				if (!isSlicedPear) {
+					controller.fallenFruit();
+					isSlicedPear = false;
+					lossLife();
+
+				}
+				if (isSlicedPear) {
+					isSlicedPear = false;
+				}
+			}
+		});
+		root.getChildren().addAll(Pear, SlicedPear);
+	}
+	
 	public void Orange(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);

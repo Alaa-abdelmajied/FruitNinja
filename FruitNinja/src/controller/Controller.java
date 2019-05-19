@@ -42,7 +42,6 @@ public class Controller {
 		} else if (this.levelNumber == 4) {
 			level = new Arcade();
 			elements = level.elementThrow();
-			System.out.println("Arcade");
 		}
 		commandNewGame(level);
 

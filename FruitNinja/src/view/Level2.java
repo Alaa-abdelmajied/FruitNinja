@@ -25,6 +25,7 @@ import model.Element;
 import model.bomb.Dangerous;
 import model.bomb.Fatal;
 import model.fruit.Apple;
+import model.fruit.Pear;
 import model.fruit.SpecialApple;
 import model.fruit.SpecialGrape;
 
@@ -99,6 +100,7 @@ public class Level2 {
 	private boolean isSlicedRedApple = false;
 	private boolean isSlicedStrawberry = false;
 	private boolean isSlicedOrange = false;
+	private boolean isSlicedPear = false;
 	private int playMusic = 0;
 
 	public void buildScene() {
@@ -166,19 +168,18 @@ public class Level2 {
 			back.setX(1113);
 			back.setY(19);
 		});
-		back.setOnMousePressed(e->{
+		back.setOnMousePressed(e -> {
 			back.setFitHeight(66);
 			back.setFitWidth(66);
 			back.setX(1113);
 			back.setY(19);
 		});
-		back.setOnMouseReleased(e->{
+		back.setOnMouseReleased(e -> {
 			back.setFitHeight(72);
 			back.setFitWidth(72);
 			back.setX(1110);
 			back.setY(16);
 		});
-
 
 		heart = new Image("live.png");
 		splash = new Image("redSplash.png");
@@ -262,19 +263,18 @@ public class Level2 {
 			BACK.setX(567);
 			BACK.setY(392);
 		});
-		BACK.setOnMousePressed(e->{
+		BACK.setOnMousePressed(e -> {
 			BACK.setFitHeight(66);
 			BACK.setFitWidth(66);
 			BACK.setX(1113);
 			BACK.setY(19);
 		});
-		BACK.setOnMouseReleased(e->{
+		BACK.setOnMouseReleased(e -> {
 			BACK.setFitHeight(72);
 			BACK.setFitWidth(72);
 			BACK.setX(1110);
 			BACK.setY(16);
 		});
-
 
 		Image Timer = new Image("Timer.png");
 		ImageView t = new ImageView(Timer);
@@ -325,8 +325,12 @@ public class Level2 {
 
 			else if (elements.get(elementCounter) instanceof model.fruit.Orange)
 				Orange(root, elementCounter);
+
 			else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
 				Strawberry(root, elementCounter);
+
+			else if (elements.get(elementCounter) instanceof Pear)
+				Pear(root, elementCounter);
 
 			else if (elements.get(elementCounter) instanceof SpecialApple)
 				greenApple(root, elementCounter);
@@ -540,6 +544,56 @@ public class Level2 {
 		root.getChildren().addAll(Orange, SlicedOrange);
 	}
 
+	public void Pear(AnchorPane root, int elementNumber) {
+		Random X = new Random();
+		int randomX = 100 + X.nextInt(1000);
+		Random Y = new Random();
+		int randomY = 300 + Y.nextInt(300);
+		Image pear = new Image("Pear.png");
+		ImageView Pear = new ImageView(pear);
+		Pear.setVisible(true);
+		Image slicedpear = new Image("SlicedPear.png");
+		ImageView SlicedPear = new ImageView(slicedpear);
+		SlicedPear.setVisible(false);
+
+		Pear.setFitHeight(80);
+		Pear.setFitWidth(80);
+		Pear.setX(randomX);
+		Pear.setY(721);
+		SlicedPear.setFitHeight(85);
+		SlicedPear.setFitWidth(85);
+		SlicedPear.setX(randomX);
+		SlicedPear.setY(721);
+
+		Throw(Pear, randomX, randomY, 2, false);
+		Throw(SlicedPear, randomX, randomY, 2, true);
+
+		Pear.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
+			Pear.setVisible(false);
+			SlicedPear.setVisible(true);
+			isSlicedPear = true;
+		});
+		transition.setOnFinished(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent actionEvent) {
+				if (!isSlicedPear) {
+					controller.fallenFruit();
+					isSlicedPear = false;
+					lossLife();
+
+				}
+				if (isSlicedPear) {
+					isSlicedPear = false;
+				}
+			}
+		});
+		root.getChildren().addAll(Pear, SlicedPear);
+	}
+
 	public void Grapes(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -675,7 +729,7 @@ public class Level2 {
 			delay = delay;
 
 		Random randY = new Random();
-		int y = 400+randY.nextInt(100);
+		int y = 400 + randY.nextInt(100);
 
 		timelinetest += 0;
 		transition = new TranslateTransition();
@@ -726,8 +780,8 @@ public class Level2 {
 		time.playFromStart();
 	}
 
-public void lossLife() {
-		
+	public void lossLife() {
+
 		if (controller.remaingLives() == 2) {
 			live1.setVisible(false);
 			loss1.setVisible(true);
@@ -746,13 +800,13 @@ public void lossLife() {
 			BACKGROUND.setVisible(true);
 			GAMEOVER.setVisible(true);
 			BACK.setVisible(true);
-	 		fSCOREVIEW.setVisible(true);
+			fSCOREVIEW.setVisible(true);
 			fscore.setVisible(true);
 			fscore.setText(Integer.toString(controller.score()));
 			timeline.stop();
 			playMusic += 1;
 		}
-		if(playMusic == 1)
+		if (playMusic == 1)
 			endSound().play();
 	}
 
@@ -765,11 +819,11 @@ public void lossLife() {
 		sliceBomb.setVolume(200.0D);
 		return sliceBomb;
 	}
-	
-    public AudioClip endSound() {
+
+	public AudioClip endSound() {
 		Media sound = new Media((new File("src/laylay.mp3")).toURI().toString());
 		AudioClip end = new AudioClip(sound.getSource());
 		end.setVolume(200.0D);
 		return end;
-    }
+	}
 }

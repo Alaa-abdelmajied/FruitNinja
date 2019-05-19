@@ -34,6 +34,7 @@ import model.Element;
 import model.bomb.Dangerous;
 import model.bomb.Fatal;
 import model.fruit.Apple;
+import model.fruit.Pear;
 import model.fruit.SpecialApple;
 import model.fruit.SpecialGrape;
 import javafx.scene.media.MediaView;
@@ -97,9 +98,6 @@ public class Arcade {
 	private int bestScore;
 	private ArrayList<Element> elements = new ArrayList<Element>();
 	private int elementCounter = 0;
-	private boolean isSlicedRedApple = false;
-	private boolean isSlicedStrawberry = false;
-	private boolean isSlicedOrange = false;
 
 	public void buildScene() {
 		stage.setTitle("Arcade");
@@ -285,8 +283,12 @@ public class Arcade {
 
 			else if (elements.get(elementCounter) instanceof model.fruit.Orange)
 				Orange(root, elementCounter);
+			
 			else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
 				Strawberry(root, elementCounter);
+
+			else if (elements.get(elementCounter) instanceof Pear)
+				Pear(root, elementCounter);
 
 			else if (elements.get(elementCounter) instanceof SpecialApple)
 				greenApple(root, elementCounter);
@@ -332,7 +334,6 @@ public class Arcade {
 			score.setText(Integer.toString(controller.score()));
 			RedApple.setVisible(false);
 			SlicedRedApple.setVisible(true);
-			isSlicedRedApple = true;
 		});
 		Throw(RedApple, randomX, randomY, 2, false);
 		Throw(SlicedRedApple, randomX, randomY, 2, true);
@@ -405,10 +406,43 @@ public class Arcade {
 			score.setText(Integer.toString(controller.score()));
 			Strawberry.setVisible(false);
 			SlicedStrawberry.setVisible(true);
-			isSlicedStrawberry = true;
 		});
 
 		root.getChildren().addAll(Strawberry, SlicedStrawberry);
+	}
+	
+	public void Pear(AnchorPane root, int elementNumber) {
+		Random X = new Random();
+		int randomX = 100 + X.nextInt(1000);
+		Random Y = new Random();
+		int randomY = 300 + Y.nextInt(300);
+		Image pear = new Image("Pear.png");
+		ImageView Pear = new ImageView(pear);
+		Pear.setVisible(true);
+		Image slicedpear = new Image("SlicedPear.png");
+		ImageView SlicedPear = new ImageView(slicedpear);
+		SlicedPear.setVisible(false);
+
+		Pear.setFitHeight(80);
+		Pear.setFitWidth(80);
+		Pear.setX(randomX);
+		Pear.setY(721);
+		SlicedPear.setFitHeight(85);
+		SlicedPear.setFitWidth(85);
+		SlicedPear.setX(randomX);
+		SlicedPear.setY(721);
+
+		Throw(Pear, randomX, randomY, 2, false);
+		Throw(SlicedPear, randomX, randomY, 2, true);
+
+		Pear.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
+			Pear.setVisible(false);
+			SlicedPear.setVisible(true);
+		});
+		root.getChildren().addAll(Pear, SlicedPear);
 	}
 
 	public void Orange(AnchorPane root, int elementNumber) {
@@ -441,7 +475,6 @@ public class Arcade {
 			score.setText(Integer.toString(controller.score()));
 			Orange.setVisible(false);
 			SlicedOrange.setVisible(true);			
-			isSlicedOrange = true;
 		});
 
 		root.getChildren().addAll(Orange, SlicedOrange);
