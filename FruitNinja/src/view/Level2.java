@@ -897,6 +897,11 @@ public class Level2 {
 	
 	public void gainLife() {
 
+		Media sound = new Media((new File("src/LiveUp.mp3")).toURI().toString());
+		AudioClip gainLife = new AudioClip(sound.getSource());
+		gainLife.setVolume(200.0D);
+		gainLife.play();
+		
 		if (controller.remaingLives() == 3) {
 			live1.setVisible(true);
 			live2.setVisible(true);
