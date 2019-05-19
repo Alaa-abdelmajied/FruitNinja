@@ -36,6 +36,7 @@ import model.bomb.Dangerous;
 import model.bomb.Fatal;
 import model.fruit.Apple;
 import model.fruit.Pear;
+import model.fruit.Pineapple;
 import model.fruit.SpecialApple;
 import model.fruit.SpecialGrape;
 
@@ -336,9 +337,13 @@ public class Level1 {
 
 			else if (elements.get(elementCounter) instanceof SpecialGrape)
 				Grapes(root, elementCounter);
+			
+			else if (elements.get(elementCounter) instanceof Pineapple)
+				pinapple(root, elementCounter);
 
 			else if (elements.get(elementCounter) instanceof Fatal)
 				FatalBomb(elementCounter);
+			
 			else if (elements.get(elementCounter) instanceof Dangerous)
 				oneLiveBomb(elementCounter);
 
@@ -628,6 +633,42 @@ public class Level1 {
 		
 		root.getChildren().addAll(Grapes, SlicedGrapes);
 	}
+	
+	public void pinapple(AnchorPane root, int elementNumber) {
+		Random X = new Random();
+		int randomX = 100 + X.nextInt(1000);
+		Random Y = new Random();
+		int randomY = 300 + Y.nextInt(300);
+		Image pinapple = new Image("Pinapple.png");
+		ImageView Pinapple = new ImageView(pinapple);
+		Pinapple.setVisible(true);
+		Image slicedPinapple = new Image("SlicedPinapple.png");
+		ImageView SlicedPinapple = new ImageView(slicedPinapple);
+		SlicedPinapple.setVisible(false);
+
+		SlicedPinapple.setFitHeight(65);
+		SlicedPinapple.setFitWidth(65);
+		SlicedPinapple.setX(randomX);
+		SlicedPinapple.setY(721);
+		SlicedPinapple.setFitHeight(85);
+		SlicedPinapple.setFitWidth(85);
+		SlicedPinapple.setX(randomX);
+		SlicedPinapple.setY(721);
+
+		Throw(Pinapple, randomX, randomY, 1, false);
+		Throw(SlicedPinapple, randomX, randomY, 1, true);
+
+		Pinapple.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
+			Pinapple.setVisible(false);
+			SlicedPinapple.setVisible(true);
+		});
+	
+		root.getChildren().addAll(Pinapple, SlicedPinapple);
+	}
+
 
 	public void oneLiveBomb(int elementNumber) {
 		Random X = new Random();

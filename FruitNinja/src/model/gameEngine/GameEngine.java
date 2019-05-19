@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.Element;
 import model.bomb.Bombs;
 import model.fruit.Fruit;
+import model.fruit.Pineapple;
 import model.level.Level;
 import model.level.LevelStrategy;
 import model.save.FileReaderUtils;
@@ -34,11 +35,14 @@ public class GameEngine {
 		newGame(strategy);
 	}
 
-	public int score(Fruit fruit) {
+	public void score(Fruit fruit) {
 
 		gameScore += fruit.increase();
 
-		return gameScore;
+	}
+	
+	public void scorePowrUp(Fruit fruit) {
+		gameScore *= fruit.increase();
 	}
 
 	public void slicedBomb(Bombs bomb) {
@@ -62,7 +66,10 @@ public class GameEngine {
 		if (elements.get(elementNumber) instanceof Fruit) {
 
 			Fruit fruit = (Fruit) elements.get(elementNumber);
-			score(fruit);
+			if(fruit instanceof Pineapple)
+				scorePowrUp(fruit);
+			else
+				score(fruit);
 		} else if (elements.get(elementNumber) instanceof Bombs) {
 
 			Bombs bomb = (Bombs) elements.get(elementNumber);
