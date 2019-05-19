@@ -222,13 +222,13 @@ public class Arcade {
 		t.setX(14);
 		t.setY(110);
 		timer = new Label("60");
-		timer.setFont(new Font("Impact", 19));
-		timer.setLayoutX(100);
-		timer.setLayoutY(110);
+		timer.setFont(new Font("Impact", 55));
+		timer.setLayoutX(600);
+		timer.setLayoutY(16);
 		timer.setTextFill(Color.WHITE);
 		doTime();
 
-		root.getChildren().addAll(t, timer, BACKGROUND, GAMEOVER, BACK);
+		root.getChildren().addAll(timer, BACKGROUND, GAMEOVER, BACK);
 
 		fSCORE = new Image("Score.png");
 		fSCOREVIEW = new ImageView(fSCORE);
@@ -249,7 +249,7 @@ public class Arcade {
 		fruitSound = new Media((new File("src/Slice.mp3")).toURI().toString());
 		sliceFruit = new AudioClip(fruitSound.getSource());
 
-		timeline = new Timeline(new KeyFrame(Duration.millis(1000), (event) -> {
+		timeline = new Timeline(new KeyFrame(Duration.millis(400), (event) -> {
 
 			elements = controller.getElements();
 			if (elementCounter > 19) {
