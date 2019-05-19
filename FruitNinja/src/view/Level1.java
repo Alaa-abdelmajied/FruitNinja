@@ -288,7 +288,7 @@ public class Level1 {
 
 			else if (elements.get(elementCounter) instanceof model.fruit.Orange)
 				Orange(root, elementCounter);
-			else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
+				else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
 				Strawberry(root, elementCounter);
 
 			else if (elements.get(elementCounter) instanceof SpecialApple)

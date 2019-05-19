@@ -62,7 +62,7 @@ public class GameEngine {
 		lives -= 1;
 	}
 
-	public void slice​(int elementNumber) {
+	public void slice(int elementNumber) {
 
 		if (elements.get(elementNumber) instanceof Fruit) {
 

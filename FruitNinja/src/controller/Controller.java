@@ -54,7 +54,7 @@ public class Controller {
 	}
 
 	public void slice(int elementNumber) {
-		gameEngine.slice​(elementNumber);
+		gameEngine.slice(elementNumber);
 		
 	}
 	
