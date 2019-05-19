@@ -645,12 +645,16 @@ public class Level1 {
 
 
 
-	public void Throw(Node node, int X, int y, double speed, Boolean slice) {
+	public void Throw(Node node, int X, int oldy, double speed, Boolean slice) {
 		if (!slice) {
 			Random d = new Random();
 			delay = d.nextDouble();
 		} else
 			delay = delay;
+		Random randY = new Random();
+		int y = 550+randY.nextInt(100);
+
+
 		timelinetest += 0;
 		transition = new TranslateTransition();
 		transition.setToY(-y);

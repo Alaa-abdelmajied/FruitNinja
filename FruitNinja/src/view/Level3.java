@@ -288,7 +288,7 @@ public class Level3 {
 		bombSound = new Media((new File("src/Bomb1.mp3")).toURI().toString());
 		sliceBomb = new AudioClip(bombSound.getSource());
 
-		timeline = new Timeline(new KeyFrame(Duration.millis(1000), (event) -> {
+		timeline = new Timeline(new KeyFrame(Duration.millis(800), (event) -> {
 
 			elements = controller.getElements();
 			if (elementCounter > 19) {
@@ -642,16 +642,20 @@ public class Level3 {
 
 
 
-	public void Throw(Node node, int X, int y, double speed, Boolean slice) {
+	public void Throw(Node node, int X, int oldy, double speed, Boolean slice) {
 		if (!slice) {
 			Random d = new Random();
 			delay = d.nextDouble();
 		} else
 			delay = delay;
+
+		Random randY = new Random();
+		int y = 250+randY.nextInt(100);
+
 		timelinetest += 0;
 		transition = new TranslateTransition();
 		transition.setToY(-y);
-		transition.setDuration(Duration.seconds(1));
+		transition.setDuration(Duration.seconds(0.75));
 		transition.setAutoReverse(true);
 		transition.setDelay(Duration.seconds(delay));
 		transition.setCycleCount(2);
