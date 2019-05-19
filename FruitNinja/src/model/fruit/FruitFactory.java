@@ -22,6 +22,8 @@ public class FruitFactory {
 			return new Pineapple();
 		if(fruitName.equals("Banana"))
 			return new Banana();
+		if(fruitName.equals("Mango"))
+			return new Mango();
 	
 		return null;
 

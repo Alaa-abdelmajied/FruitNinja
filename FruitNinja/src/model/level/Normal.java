@@ -24,7 +24,7 @@ public class Normal implements LevelStrategy {
 		elements.add(fruitFactory.getFruit("Apple"));
 		elements.add(fruitFactory.getFruit("Orange"));
 		elements.add(bombFactory.getBomb("Fatal"));
-		elements.add(fruitFactory.getFruit("Banana"));
+		elements.add(fruitFactory.getFruit("Pear"));
 		elements.add(fruitFactory.getFruit("SpecialGrape"));
 		elements.add(fruitFactory.getFruit("Apple"));
 		elements.add(bombFactory.getBomb("Dangerous"));
@@ -39,7 +39,7 @@ public class Normal implements LevelStrategy {
 		elements.add(bombFactory.getBomb("Fatal"));
 		elements.add(fruitFactory.getFruit("Pineapple"));
 		elements.add(fruitFactory.getFruit("Orange"));
-		elements.add(fruitFactory.getFruit("Pear"));
+		elements.add(fruitFactory.getFruit("Banana"));
 		elements.add(fruitFactory.getFruit("Orange"));
 		elements.add(bombFactory.getBomb("Dangerous"));
 		elements.add(heart);
