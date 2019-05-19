@@ -168,10 +168,22 @@ public class Arcade {
 			back.setFitWidth(66);
 			back.setX(1113);
 			back.setY(19);
-
 		});
+        back.setOnMousePressed(e->{
+            back.setFitHeight(66);
+            back.setFitWidth(66);
+            back.setX(1113);
+            back.setY(19);
+        });
+        back.setOnMouseReleased(e->{
+            back.setFitHeight(72);
+            back.setFitWidth(72);
+            back.setX(1110);
+            back.setY(16);
+        });
 
-		root.getChildren().addAll(image, SCOREVIEW, BESTSCOREView, score, best, back);
+
+        root.getChildren().addAll(image, SCOREVIEW, BESTSCOREView, score, best, back);
 
 		backGround = new Image("Slider.png");
 		BACKGROUND = new ImageView(backGround);
@@ -212,23 +224,35 @@ public class Arcade {
 			BACK.setFitWidth(66);
 			BACK.setX(567);
 			BACK.setY(392);
-
 		});
+        BACK.setOnMousePressed(e->{
+            BACK.setFitHeight(66);
+            BACK.setFitWidth(66);
+            BACK.setX(1113);
+            BACK.setY(19);
+        });
+        BACK.setOnMouseReleased(e->{
+            BACK.setFitHeight(72);
+            BACK.setFitWidth(72);
+            BACK.setX(1110);
+            BACK.setY(16);
+        });
 
-		Image Timer = new Image("Timer.png");
+
+        Image Timer = new Image("Timer.png");
 		ImageView t = new ImageView(Timer);
 		t.setFitWidth(85);
 		t.setFitHeight(23);
 		t.setX(14);
 		t.setY(110);
 		timer = new Label("60");
-		timer.setFont(new Font("Impact", 19));
-		timer.setLayoutX(100);
-		timer.setLayoutY(110);
+		timer.setFont(new Font("Impact", 55));
+		timer.setLayoutX(600);
+		timer.setLayoutY(16);
 		timer.setTextFill(Color.WHITE);
 		doTime();
 
-		root.getChildren().addAll(t, timer, BACKGROUND, GAMEOVER, BACK);
+		root.getChildren().addAll(timer, BACKGROUND, GAMEOVER, BACK);
 
 		fSCORE = new Image("Score.png");
 		fSCOREVIEW = new ImageView(fSCORE);
@@ -249,7 +273,7 @@ public class Arcade {
 		fruitSound = new Media((new File("src/Slice.mp3")).toURI().toString());
 		sliceFruit = new AudioClip(fruitSound.getSource());
 
-		timeline = new Timeline(new KeyFrame(Duration.millis(1000), (event) -> {
+		timeline = new Timeline(new KeyFrame(Duration.millis(400), (event) -> {
 
 			elements = controller.getElements();
 			if (elementCounter > 19) {

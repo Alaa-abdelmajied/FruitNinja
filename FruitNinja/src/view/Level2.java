@@ -165,8 +165,20 @@ public class Level2 {
 			back.setFitWidth(66);
 			back.setX(1113);
 			back.setY(19);
-
 		});
+		back.setOnMousePressed(e->{
+			back.setFitHeight(66);
+			back.setFitWidth(66);
+			back.setX(1113);
+			back.setY(19);
+		});
+		back.setOnMouseReleased(e->{
+			back.setFitHeight(72);
+			back.setFitWidth(72);
+			back.setX(1110);
+			back.setY(16);
+		});
+
 
 		heart = new Image("live.png");
 		splash = new Image("redSplash.png");
@@ -249,8 +261,20 @@ public class Level2 {
 			BACK.setFitWidth(66);
 			BACK.setX(567);
 			BACK.setY(392);
-
 		});
+		BACK.setOnMousePressed(e->{
+			BACK.setFitHeight(66);
+			BACK.setFitWidth(66);
+			BACK.setX(1113);
+			BACK.setY(19);
+		});
+		BACK.setOnMouseReleased(e->{
+			BACK.setFitHeight(72);
+			BACK.setFitWidth(72);
+			BACK.setX(1110);
+			BACK.setY(16);
+		});
+
 
 		Image Timer = new Image("Timer.png");
 		ImageView t = new ImageView(Timer);
@@ -289,7 +313,7 @@ public class Level2 {
 		bombSound = new Media((new File("src/Bomb1.mp3")).toURI().toString());
 		sliceBomb = new AudioClip(bombSound.getSource());
 
-		timeline = new Timeline(new KeyFrame(Duration.millis(1000), (event) -> {
+		timeline = new Timeline(new KeyFrame(Duration.millis(600), (event) -> {
 
 			elements = controller.getElements();
 			if (elementCounter > 19) {
@@ -643,12 +667,16 @@ public class Level2 {
 		root.getChildren().addAll(DBomb, Boom);
 	}
 
-	public void Throw(Node node, int X, int y, double speed, Boolean slice) {
+	public void Throw(Node node, int X, int oldy, double speed, Boolean slice) {
 		if (!slice) {
 			Random d = new Random();
 			delay = d.nextDouble();
 		} else
 			delay = delay;
+
+		Random randY = new Random();
+		int y = 400+randY.nextInt(100);
+
 		timelinetest += 0;
 		transition = new TranslateTransition();
 		transition.setToY(-y);

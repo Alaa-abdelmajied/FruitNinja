@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <score>
 <Easy>76</Easy>
+<<<<<<< HEAD
 <Medium>148</Medium>
+=======
+<Medium>91</Medium>
+>>>>>>> branch 'master' of https://github.com/Alaa-abdelmajied/FruitNinja.git
 <Hard>80</Hard>
+<<<<<<< HEAD
 <Arcade>127</Arcade>
+=======
+<Arcade>144</Arcade>
+>>>>>>> branch 'master' of https://github.com/Alaa-abdelmajied/FruitNinja.git
 </score>
