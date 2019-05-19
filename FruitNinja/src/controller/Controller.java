@@ -75,7 +75,7 @@ public class Controller {
 		return gameEngine.getGameScore();
 	}
 	
-	
+
 	public int getBestScore() {
 		return gameEngine.getBestScore(levelNumber);
 	}

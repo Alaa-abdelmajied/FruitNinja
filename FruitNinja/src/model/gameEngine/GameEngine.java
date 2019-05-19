@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.Element.Element;
 import model.Element.Heart;
 import model.bomb.Bombs;
+import model.fruit.Banana;
 import model.fruit.Fruit;
 import model.fruit.Pineapple;
 import model.level.Level;
@@ -42,6 +43,13 @@ public class GameEngine {
 
 	}
 
+	public void reduceScore (Fruit fruit) {
+		gameScore -=fruit.increase();
+		if (gameScore < 0)
+		gameScore = 0;
+	}
+	
+	
 	public void scorePowrUp(Fruit fruit) {
 		gameScore *= fruit.increase();
 	}
@@ -75,6 +83,8 @@ public class GameEngine {
 			Fruit fruit = (Fruit) elements.get(elementNumber);
 			if(fruit instanceof Pineapple)
 				scorePowrUp(fruit);
+			else if (fruit instanceof Banana)
+				reduceScore(fruit);
 			else
 				score(fruit);
 		} else if (elements.get(elementNumber) instanceof Bombs) {

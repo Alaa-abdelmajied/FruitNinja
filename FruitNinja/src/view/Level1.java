@@ -104,6 +104,7 @@ public class Level1 {
 	private boolean isSlicedStrawberry = false;
 	private boolean isSlicedOrange = false;
 	private boolean isSlicedPear = false;
+	private boolean isSlicedBanana = false;
 	private int playMusic = 0;
 
 	public void buildScene() {
@@ -340,6 +341,10 @@ public class Level1 {
 			else if (elements.get(elementCounter) instanceof Pineapple)
 				pinapple(root, elementCounter);
 
+
+			else if (elements.get(elementCounter) instanceof model.fruit.Banana)
+			    Banana(root, elementCounter);
+			
 			else if (elements.get(elementCounter) instanceof Fatal)
 				FatalBomb(elementCounter);
 
@@ -414,7 +419,45 @@ public class Level1 {
 
 		root.getChildren().addAll(RedApple, SlicedRedApple);
 	}
+	
+	
+	public void Banana(AnchorPane root, int elementNumber) {
+		Random X = new Random();
+		int randomX = 100 + X.nextInt(1000);
+		Random Y = new Random();
+		int randomY = 300 + Y.nextInt(300);
+		Image banana = new Image("Banana.png");
+		ImageView Banana = new ImageView(banana);
+		Banana.setVisible(true);
+		Image slicedbanana = new Image("SlicedBanana.png");
+		ImageView SlicedBanana = new ImageView(slicedbanana);
+		SlicedBanana.setVisible(false);
 
+		Banana.setFitHeight(65);
+		Banana.setFitWidth(65);
+		Banana.setX(randomX);
+		Banana.setY(721);
+		SlicedBanana.setFitHeight(85);
+		SlicedBanana.setFitWidth(85);
+		SlicedBanana.setX(randomX);
+		SlicedBanana.setY(721);
+
+		Banana.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
+			Banana.setVisible(false);
+			SlicedBanana.setVisible(true);
+			isSlicedBanana = true;
+		});
+		Throw(Banana, randomX, randomY, 2, false);
+		Throw(SlicedBanana, randomX, randomY, 2, true);
+
+		
+		root.getChildren().addAll(Banana, SlicedBanana);
+		
+	}
+	
 	public void greenApple(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
