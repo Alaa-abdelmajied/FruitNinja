@@ -3,7 +3,6 @@ package model.bomb;
 
 public class Fatal implements Bombs {
 
-	private boolean sliced = false;
 	private static Fatal instance;
 
 	private Fatal() {
@@ -26,16 +25,6 @@ public class Fatal implements Bombs {
 	public int loseLife() {
 		return 3;
 
-	}
-
-	@Override
-	public boolean isSliced() {
-		return sliced;
-	}
-	
-	@Override
-	public void setSliced(boolean sliced) {
-		this.sliced = sliced;
 	}
 
 }

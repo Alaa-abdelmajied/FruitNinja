@@ -328,12 +328,8 @@ public class Level1 {
 
 			else if (elements.get(elementCounter) instanceof model.fruit.Orange)
 				Orange(root, elementCounter);
-			
-			else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
+				else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
 				Strawberry(root, elementCounter);
-			
-			else if(elements.get(elementCounter) instanceof Pear)
-				Pear(root, elementCounter);
 
 			else if (elements.get(elementCounter) instanceof SpecialApple)
 				greenApple(root, elementCounter);
@@ -418,7 +414,7 @@ public class Level1 {
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
 		int randomY = 300 + Y.nextInt(300);
-		Image greenapple1 = new Image("greenApple.png");
+		Image greenapple1 = new Image("SgreenApple.png");
 		ImageView GreenApple1 = new ImageView(greenapple1);
 		GreenApple1.setVisible(true);
 		Image slicedgreenapple1 = new Image("SlicedGreenApple.png");
@@ -503,10 +499,10 @@ public class Level1 {
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
 		int randomY = 300 + Y.nextInt(300);
-		Image pear = new Image("Pear.png");
+		Image pear = new Image("Orange.png");
 		ImageView Pear = new ImageView(pear);
 		Pear.setVisible(true);
-		Image slicedpear = new Image("SlicedPear.png");
+		Image slicedpear = new Image("SlicedOrange.png");
 		ImageView SlicedPear = new ImageView(slicedpear);
 		SlicedPear.setVisible(false);
 
@@ -528,7 +524,7 @@ public class Level1 {
 			score.setText(Integer.toString(controller.score()));
 			Pear.setVisible(false);
 			SlicedPear.setVisible(true);			
-			isSlicedPear = true;
+			isSlicedOrange = true;
 		});
 		transition.setOnFinished(new EventHandler<ActionEvent>() {
 
@@ -547,7 +543,6 @@ public class Level1 {
 		});
 		root.getChildren().addAll(Pear, SlicedPear);
 	}
-	
 	public void Orange(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -603,7 +598,7 @@ public class Level1 {
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
 		int randomY = 300 + Y.nextInt(300);
-		Image grapes = new Image("Grapes.png");
+		Image grapes = new Image("SGrapes.png");
 		ImageView Grapes = new ImageView(grapes);
 		Grapes.setVisible(true);
 		Image slicedgrapes = new Image("SlicedGrapes.png");

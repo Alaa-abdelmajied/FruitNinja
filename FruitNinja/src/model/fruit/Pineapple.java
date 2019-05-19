@@ -1,11 +1,10 @@
 package model.fruit;
 
-
-public class SpecialGrape implements Fruit{
+public class Pineapple implements Fruit {
 
 	@Override
 	public int increase() {
-		return 10;
+		return 2;
 	}
 
 }

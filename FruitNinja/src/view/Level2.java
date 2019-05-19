@@ -313,7 +313,7 @@ public class Level2 {
 		bombSound = new Media((new File("src/Bomb1.mp3")).toURI().toString());
 		sliceBomb = new AudioClip(bombSound.getSource());
 
-		timeline = new Timeline(new KeyFrame(Duration.millis(600), (event) -> {
+		timeline = new Timeline(new KeyFrame(Duration.millis(1000), (event) -> {
 
 			elements = controller.getElements();
 			if (elementCounter > 19) {
@@ -414,7 +414,7 @@ public class Level2 {
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
 		int randomY = 300 + Y.nextInt(300);
-		Image greenapple1 = new Image("greenApple.png");
+		Image greenapple1 = new Image("SgreenApple.png");
 		ImageView GreenApple1 = new ImageView(greenapple1);
 		GreenApple1.setVisible(true);
 		Image slicedgreenapple1 = new Image("SlicedGreenApple.png");
@@ -599,7 +599,7 @@ public class Level2 {
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
 		int randomY = 300 + Y.nextInt(300);
-		Image grapes = new Image("Grapes.png");
+		Image grapes = new Image("SGrapes.png");
 		ImageView Grapes = new ImageView(grapes);
 		Grapes.setVisible(true);
 		Image slicedgrapes = new Image("SlicedGrapes.png");

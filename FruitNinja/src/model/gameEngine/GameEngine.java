@@ -1,16 +1,14 @@
 package model.gameEngine;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 
 import model.Element;
+import model.bomb.Bombs;
+import model.fruit.Fruit;
 import model.level.Level;
 import model.level.LevelStrategy;
 import model.save.FileReaderUtils;
 import model.save.FileWriterUtils;
-import model.fruit.*;
-import model.bomb.*;
 
 public class GameEngine {
 
@@ -20,7 +18,6 @@ public class GameEngine {
 	private int gameScore;
 	private int lives;
 	private ArrayList<Integer> scores = new ArrayList<Integer>();
-	
 
 	public void newGame(LevelStrategy strategy) {
 
@@ -33,30 +30,28 @@ public class GameEngine {
 	}
 
 	public void resetGame() {
-		
+
 		newGame(strategy);
 	}
 
 	public int score(Fruit fruit) {
 
-		
-		gameScore += fruit.increaseScore();
+		gameScore += fruit.increase();
 
 		return gameScore;
 	}
 
 	public void slicedBomb(Bombs bomb) {
 		int reduceLive = bomb.loseLife();
-		if(reduceLive == 1){
+		if (reduceLive == 1) {
 			reduceLive();
-		}
-		else if(reduceLive == 3) {
+		} else if (reduceLive == 3) {
 			reduceLive();
 			reduceLive();
 			reduceLive();
 		}
 	}
-	
+
 	public void reduceLive() {
 
 		lives -= 1;
@@ -67,12 +62,10 @@ public class GameEngine {
 		if (elements.get(elementNumber) instanceof Fruit) {
 
 			Fruit fruit = (Fruit) elements.get(elementNumber);
-			fruit.setSliced(true);
 			score(fruit);
 		} else if (elements.get(elementNumber) instanceof Bombs) {
 
 			Bombs bomb = (Bombs) elements.get(elementNumber);
-			bomb.setSliced(true);
 			slicedBomb(bomb);
 
 		}
@@ -83,12 +76,12 @@ public class GameEngine {
 		scores = FileReaderUtils.read();
 		return scores.get(level);
 	}
-	
-	public void setBestScore(int score,int level) {
+
+	public void setBestScore(int score, int level) {
 		scores.set(level, score);
 		FileWriterUtils.write(scores);
 	}
-	
+
 	public int getLives() {
 		return lives;
 	}
@@ -96,8 +89,5 @@ public class GameEngine {
 	public int getGameScore() {
 		return gameScore;
 	}
-	
-	
-
 
 }

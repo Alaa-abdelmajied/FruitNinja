@@ -4,12 +4,7 @@ import model.Element;
 
 public interface Fruit extends Element {
 
-	//public boolean isSliced();
+	public int increase();
 
-	public int increaseScore();
-	
-	//boolean isSpecial ();
-	
-	//public void setSliced(boolean sliced);
 	
 }

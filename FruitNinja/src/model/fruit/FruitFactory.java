@@ -18,6 +18,8 @@ public class FruitFactory {
 			return new Strawberry();
 		if (fruitName.equals("Apple"))
 			return new Apple();
+		if(fruitName.equals("Pineapple"))
+			return new Pineapple();
 
 		return null;
 
