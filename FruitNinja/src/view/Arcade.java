@@ -236,7 +236,7 @@ public class Arcade {
             BACK.setY(16);
         });
 
-
+        
         Image Timer = new Image("Timer.png");
 		ImageView t = new ImageView(Timer);
 		t.setFitWidth(85);
@@ -273,6 +273,7 @@ public class Arcade {
 
 		timeline = new Timeline(new KeyFrame(Duration.millis(400), (event) -> {
 
+			Banana(root, 1);
 			elements = controller.getElements();
 			if (elementCounter > 19) {
 				elementCounter = 0;
@@ -295,6 +296,9 @@ public class Arcade {
 
 			else if (elements.get(elementCounter) instanceof SpecialGrape)
 				Grapes(root, elementCounter);
+			
+			else if (elements.get(elementCounter) instanceof model.fruit.Banana)
+				Banana(root, elementCounter);
 
 			elementCounter++;
 			controller.setBestScore();
@@ -515,6 +519,42 @@ public class Arcade {
 		
 		root.getChildren().addAll(Grapes, SlicedGrapes);
 	}
+	
+	
+	public void Banana(AnchorPane root, int elementNumber) {
+		Random X = new Random();
+		int randomX = 100 + X.nextInt(1000);
+		Random Y = new Random();
+		int randomY = 300 + Y.nextInt(300);
+		Image banana = new Image("Banana.png");
+		ImageView Banana = new ImageView(banana);
+		Banana.setVisible(true);
+		Image slicedbanana = new Image("SlicedBanana.png");
+		ImageView SlicedBanana = new ImageView(slicedbanana);
+		SlicedBanana.setVisible(false);
+
+		Banana.setFitHeight(65);
+		Banana.setFitWidth(65);
+		Banana.setX(randomX);
+		Banana.setY(721);
+		SlicedBanana.setFitHeight(85);
+		SlicedBanana.setFitWidth(85);
+		SlicedBanana.setX(randomX);
+		SlicedBanana.setY(721);
+
+		Banana.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
+			Banana.setVisible(false);
+			SlicedBanana.setVisible(true);
+		});
+		Throw(Banana, randomX, randomY, 2, false);
+		Throw(SlicedBanana, randomX, randomY, 2, true);
+
+		root.getChildren().addAll(Banana, SlicedBanana);
+	}
+
 
 	
 	

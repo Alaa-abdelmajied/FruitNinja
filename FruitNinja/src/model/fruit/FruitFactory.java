@@ -20,7 +20,9 @@ public class FruitFactory {
 			return new Apple();
 		if(fruitName.equals("Pineapple"))
 			return new Pineapple();
-
+		if(fruitName.equals("Banana"))
+			return new Banana();
+	
 		return null;
 
 	}
