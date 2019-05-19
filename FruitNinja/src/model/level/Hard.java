@@ -2,7 +2,7 @@ package model.level;
 
 import java.util.ArrayList;
 
-import model.Element;
+import model.Element.Element;
 import model.bomb.BombFactory;
 import model.fruit.FruitFactory;
 
@@ -25,6 +25,7 @@ public class Hard implements LevelStrategy {
 		elements.add(bombFactory.getBomb("Dangerous"));
 		elements.add(fruitFactory.getFruit("Orange"));
 		elements.add(bombFactory.getBomb("Dangerous"));
+		elements.add(fruitFactory.getFruit("Pineapple"));
 		elements.add(fruitFactory.getFruit("Strawberry"));
 		elements.add(bombFactory.getBomb("Dangerous"));
 		elements.add(fruitFactory.getFruit("SpecialGrape"));

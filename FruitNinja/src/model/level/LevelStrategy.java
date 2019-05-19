@@ -3,7 +3,7 @@ package model.level;
 import java.util.ArrayList;
 import java.util.Queue;
 
-import model.Element;
+import model.Element.Element;
 import model.bomb.Bombs;
 import model.bomb.Dangerous;
 import model.bomb.Fatal;

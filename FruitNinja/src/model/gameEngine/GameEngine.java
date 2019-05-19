@@ -2,7 +2,8 @@ package model.gameEngine;
 
 import java.util.ArrayList;
 
-import model.Element;
+import model.Element.Element;
+import model.Element.Heart;
 import model.bomb.Bombs;
 import model.fruit.Fruit;
 import model.fruit.Pineapple;
@@ -40,9 +41,15 @@ public class GameEngine {
 		gameScore += fruit.increase();
 
 	}
-	
+
 	public void scorePowrUp(Fruit fruit) {
 		gameScore *= fruit.increase();
+	}
+
+	public void lifePowerUp(Heart heart) {
+		if (lives < 3) {
+			lives += heart.increase();
+		}
 	}
 
 	public void slicedBomb(Bombs bomb) {
@@ -75,6 +82,10 @@ public class GameEngine {
 			Bombs bomb = (Bombs) elements.get(elementNumber);
 			slicedBomb(bomb);
 
+		}
+		else if(elements.get(elementNumber) instanceof Heart) {
+			Heart heart = (Heart) elements.get(elementNumber);
+			lifePowerUp(heart);	
 		}
 
 	}

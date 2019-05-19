@@ -21,11 +21,12 @@ import javafx.scene.shape.CubicCurve;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Element;
+import model.Element.Element;
 import model.bomb.Dangerous;
 import model.bomb.Fatal;
 import model.fruit.Apple;
 import model.fruit.Pear;
+import model.fruit.Pineapple;
 import model.fruit.SpecialApple;
 import model.fruit.SpecialGrape;
 
@@ -337,11 +338,18 @@ public class Level2 {
 
 			else if (elements.get(elementCounter) instanceof SpecialGrape)
 				Grapes(root, elementCounter);
+			
+			else if (elements.get(elementCounter) instanceof Pineapple)
+				pinapple(root, elementCounter);
 
 			else if (elements.get(elementCounter) instanceof Fatal)
 				FatalBomb(elementCounter);
+			
 			else if (elements.get(elementCounter) instanceof Dangerous)
 				oneLiveBomb(elementCounter);
+			
+			if (seconds == 58)
+				heart(root, 21);
 
 			elementCounter++;
 			controller.setBestScore();
@@ -629,6 +637,83 @@ public class Level2 {
 
 		root.getChildren().addAll(Grapes, SlicedGrapes);
 	}
+	
+	public void pinapple(AnchorPane root, int elementNumber) {
+		Random X = new Random();
+		int randomX = 100 + X.nextInt(1000);
+		Random Y = new Random();
+		int randomY = 300 + Y.nextInt(300);
+		Image pinapple = new Image("Pinapple.png");
+		ImageView Pinapple = new ImageView(pinapple);
+		Pinapple.setVisible(true);
+		Pinapple.setFitHeight(80);
+		Pinapple.setFitWidth(80);
+		Pinapple.setX(randomX);
+		Pinapple.setY(721);
+
+		Image slicedPinapple = new Image("SlicedPinapple.png");
+		ImageView SlicedPinapple = new ImageView(slicedPinapple);
+		SlicedPinapple.setVisible(false);
+
+		SlicedPinapple.setFitHeight(65);
+		SlicedPinapple.setFitWidth(65);
+		SlicedPinapple.setFitHeight(85);
+		SlicedPinapple.setFitWidth(85);
+		SlicedPinapple.setX(randomX);
+		SlicedPinapple.setY(721);
+
+		Throw(Pinapple, randomX, randomY, 1, false);
+		Throw(SlicedPinapple, randomX, randomY, 1, true);
+
+		Pinapple.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
+			Pinapple.setVisible(false);
+			SlicedPinapple.setVisible(true);
+		});
+	
+		root.getChildren().addAll(Pinapple, SlicedPinapple);
+	}
+
+	public void heart(AnchorPane root, int elementNumber) {
+		Random X = new Random();
+		int randomX = 100 + X.nextInt(1000);
+		Random Y = new Random();
+		int randomY = 300 + Y.nextInt(300);
+		Image heart = new Image("live.png");
+		ImageView Heart = new ImageView(heart);
+		Heart.setVisible(true);
+		Heart.setFitHeight(80);
+		Heart.setFitWidth(80);
+		Heart.setX(randomX);
+		Heart.setY(721);
+
+		Image slicedHeart = new Image("SlicedHeart.png");
+		ImageView SlicedHeart = new ImageView(slicedHeart);
+		SlicedHeart.setVisible(false);
+
+		SlicedHeart.setFitHeight(65);
+		SlicedHeart.setFitWidth(65);
+		SlicedHeart.setFitHeight(85);
+		SlicedHeart.setFitWidth(85);
+		SlicedHeart.setX(randomX);
+		SlicedHeart.setY(721);
+
+		Throw(Heart, randomX, randomY, 1, false);
+		Throw(SlicedHeart, randomX, randomY, 1, true);
+
+		Heart.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
+			controller.slice(elementNumber);
+			gainLife();
+			score.setText(Integer.toString(controller.score()));
+			Heart.setVisible(false);
+			SlicedHeart.setVisible(true);
+		});
+
+		root.getChildren().addAll(Heart, SlicedHeart);
+	}
 
 	public void oneLiveBomb(int elementNumber) {
 		Random X = new Random();
@@ -720,6 +805,7 @@ public class Level2 {
 
 		root.getChildren().addAll(DBomb, Boom);
 	}
+	
 
 	public void Throw(Node node, int X, int oldy, double speed, Boolean slice) {
 		if (!slice) {
@@ -748,7 +834,6 @@ public class Level2 {
 		rotateTransition.setNode(node);
 		rotateTransition.play();
 
-		CubicCurve cubicCurve = new CubicCurve();
 
 	}
 
@@ -809,7 +894,26 @@ public class Level2 {
 		if (playMusic == 1)
 			endSound().play();
 	}
+	
+	public void gainLife() {
 
+		if (controller.remaingLives() == 3) {
+			live1.setVisible(true);
+			live2.setVisible(true);
+			live3.setVisible(true);
+			loss1.setVisible(false);
+			loss2.setVisible(false);
+			loss3.setVisible(false);
+		} else if (controller.remaingLives() == 2) {
+			live1.setVisible(false);
+			live2.setVisible(true);
+			live3.setVisible(true);
+			loss1.setVisible(true);
+			loss2.setVisible(false);
+			loss3.setVisible(false);
+		}
+	}
+	
 	public AudioClip sliceFruitSound() {
 		sliceFruit.setVolume(200.0D);
 		return sliceFruit;

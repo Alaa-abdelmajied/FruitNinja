@@ -21,11 +21,12 @@ import javafx.scene.shape.CubicCurve;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Element;
+import model.Element.Element;
 import model.bomb.Dangerous;
 import model.bomb.Fatal;
 import model.fruit.Apple;
 import model.fruit.Pear;
+import model.fruit.Pineapple;
 import model.fruit.SpecialApple;
 import model.fruit.SpecialGrape;
 
@@ -338,6 +339,9 @@ public class Level3 {
 
 			else if (elements.get(elementCounter) instanceof SpecialGrape)
 				Grapes(root, elementCounter);
+			
+			else if (elements.get(elementCounter) instanceof Pineapple)
+				pinapple(root, elementCounter);
 
 			else if (elements.get(elementCounter) instanceof Fatal)
 				FatalBomb(elementCounter);
@@ -630,6 +634,45 @@ public class Level3 {
 		
 		root.getChildren().addAll(Grapes, SlicedGrapes);
 	}
+	
+	public void pinapple(AnchorPane root, int elementNumber) {
+		Random X = new Random();
+		int randomX = 100 + X.nextInt(1000);
+		Random Y = new Random();
+		int randomY = 300 + Y.nextInt(300);
+		Image pinapple = new Image("Pinapple.png");
+		ImageView Pinapple = new ImageView(pinapple);
+		Pinapple.setVisible(true);
+		Pinapple.setFitHeight(80);
+		Pinapple.setFitWidth(80);
+		Pinapple.setX(randomX);
+		Pinapple.setY(721);
+
+		Image slicedPinapple = new Image("SlicedPinapple.png");
+		ImageView SlicedPinapple = new ImageView(slicedPinapple);
+		SlicedPinapple.setVisible(false);
+
+		SlicedPinapple.setFitHeight(65);
+		SlicedPinapple.setFitWidth(65);
+		SlicedPinapple.setFitHeight(85);
+		SlicedPinapple.setFitWidth(85);
+		SlicedPinapple.setX(randomX);
+		SlicedPinapple.setY(721);
+
+		Throw(Pinapple, randomX, randomY, 1, false);
+		Throw(SlicedPinapple, randomX, randomY, 1, true);
+
+		Pinapple.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
+			Pinapple.setVisible(false);
+			SlicedPinapple.setVisible(true);
+		});
+	
+		root.getChildren().addAll(Pinapple, SlicedPinapple);
+	}
+
 
 	public void oneLiveBomb(int elementNumber) {
 		Random X = new Random();
@@ -732,7 +775,7 @@ public class Level3 {
 			delay = delay;
 
 		Random randY = new Random();
-		int y = 500+randY.nextInt(100);
+		int y = 350+randY.nextInt(300);
 
 		timelinetest += 0;
 		transition = new TranslateTransition();
@@ -751,7 +794,6 @@ public class Level3 {
 		rotateTransition.setNode(node);
 		rotateTransition.play();
 
-		CubicCurve cubicCurve = new CubicCurve();
 
 	}
 

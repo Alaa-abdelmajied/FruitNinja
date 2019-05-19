@@ -3,8 +3,6 @@ package view;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import controller.Controller;
 import javafx.animation.KeyFrame;
@@ -15,29 +13,22 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.CubicCurve;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Element;
-import model.bomb.Dangerous;
-import model.bomb.Fatal;
+import model.Element.Element;
 import model.fruit.Apple;
 import model.fruit.Pear;
+import model.fruit.Pineapple;
 import model.fruit.SpecialApple;
 import model.fruit.SpecialGrape;
-import javafx.scene.media.MediaView;
 
 public class Arcade {
 	Stage stage;
@@ -52,14 +43,6 @@ public class Arcade {
 	Scene scene;
 	Image background;
 	ImageView image;
-//	ImageView live1;
-//	ImageView loss1;
-//	ImageView live2;
-//	ImageView loss2;
-//	ImageView live3;
-//	ImageView loss3;
-//	Image heart;
-//	Image splash;
 	Label score;
 	Label best;
 	Image ba;
@@ -273,9 +256,9 @@ public class Arcade {
 
 		timeline = new Timeline(new KeyFrame(Duration.millis(400), (event) -> {
 
-			Banana(root, 1);
+			
 			elements = controller.getElements();
-			if (elementCounter > 19) {
+			if (elementCounter > 24) {
 				elementCounter = 0;
 				elements = controller.updateElements();
 			}
@@ -299,6 +282,9 @@ public class Arcade {
 			
 			else if (elements.get(elementCounter) instanceof model.fruit.Banana)
 				Banana(root, elementCounter);
+			
+			else if (elements.get(elementCounter) instanceof Pineapple)
+				pinapple(root, elementCounter);
 
 			elementCounter++;
 			controller.setBestScore();
@@ -520,6 +506,43 @@ public class Arcade {
 		root.getChildren().addAll(Grapes, SlicedGrapes);
 	}
 	
+	public void pinapple(AnchorPane root, int elementNumber) {
+		Random X = new Random();
+		int randomX = 100 + X.nextInt(1000);
+		Random Y = new Random();
+		int randomY = 300 + Y.nextInt(300);
+		Image pinapple = new Image("Pinapple.png");
+		ImageView Pinapple = new ImageView(pinapple);
+		Pinapple.setVisible(true);
+		Pinapple.setFitHeight(80);
+		Pinapple.setFitWidth(80);
+		Pinapple.setX(randomX);
+		Pinapple.setY(721);
+
+		Image slicedPinapple = new Image("SlicedPinapple.png");
+		ImageView SlicedPinapple = new ImageView(slicedPinapple);
+		SlicedPinapple.setVisible(false);
+
+		SlicedPinapple.setFitHeight(65);
+		SlicedPinapple.setFitWidth(65);
+		SlicedPinapple.setFitHeight(85);
+		SlicedPinapple.setFitWidth(85);
+		SlicedPinapple.setX(randomX);
+		SlicedPinapple.setY(721);
+
+		Throw(Pinapple, randomX, randomY, 1, false);
+		Throw(SlicedPinapple, randomX, randomY, 1, true);
+
+		Pinapple.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
+			Pinapple.setVisible(false);
+			SlicedPinapple.setVisible(true);
+		});
+	
+		root.getChildren().addAll(Pinapple, SlicedPinapple);
+	}
 	
 	public void Banana(AnchorPane root, int elementNumber) {
 		Random X = new Random();
@@ -555,34 +578,32 @@ public class Arcade {
 		root.getChildren().addAll(Banana, SlicedBanana);
 	}
 
-
-	
-	
-	public void Throw(Node node, int X, int y, double speed, Boolean slice) {
-		
+	public void Throw(Node node, int X, int oldy, double speed, Boolean slice) {
 		if (!slice) {
 			Random d = new Random();
 			delay = d.nextDouble();
 		} else
 			delay = delay;
+		Random randY = new Random();
+		int y = 550 + randY.nextInt(100);
+
 		timelinetest += 0;
 		transition = new TranslateTransition();
 		transition.setToY(-y);
-		transition.setDuration(Duration.seconds(1.5));
+		transition.setDuration(Duration.seconds(2));
 		transition.setAutoReverse(true);
 		transition.setDelay(Duration.seconds(delay));
 		transition.setCycleCount(2);
 		transition.setNode(node);
 		transition.play();
 
-		rotateTransition = new RotateTransition(Duration.seconds(1));
+		rotateTransition = new RotateTransition(Duration.seconds(2));
 		rotateTransition.setByAngle(360 * 10);
 		rotateTransition.setRate(0.05);
 		rotateTransition.setCycleCount(RotateTransition.INDEFINITE);
 		rotateTransition.setNode(node);
 		rotateTransition.play();
 
-		CubicCurve cubicCurve = new CubicCurve();
 
 	}
 

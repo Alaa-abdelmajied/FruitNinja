@@ -217,8 +217,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="25" language="java" name="model.Element" project="FruitNinja" file="/FruitNinja/src/model/Element.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="25" language="java" name="model.Element.Element" project="FruitNinja" 
+    file="/FruitNinja/src/model/Element/Element.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1032" y="1681"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

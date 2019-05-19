@@ -3,7 +3,9 @@ package model.level;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
-import model.Element;
+
+import model.Element.Element;
+import model.Element.Heart;
 import model.bomb.BombFactory;
 import model.fruit.FruitFactory;
 
@@ -16,6 +18,8 @@ public class Normal implements LevelStrategy {
 		ArrayList<Element> elements = new ArrayList<Element>();
 		FruitFactory fruitFactory = new FruitFactory();
 		BombFactory bombFactory = new BombFactory();
+		Heart heart = new Heart();
+
 		
 		elements.add(fruitFactory.getFruit("Apple"));
 		elements.add(fruitFactory.getFruit("Orange"));
@@ -33,11 +37,12 @@ public class Normal implements LevelStrategy {
 		elements.add(fruitFactory.getFruit("SpecialApple"));
 		elements.add(fruitFactory.getFruit("Apple"));
 		elements.add(bombFactory.getBomb("Fatal"));
+		elements.add(fruitFactory.getFruit("Pineapple"));
 		elements.add(fruitFactory.getFruit("Orange"));
 		elements.add(fruitFactory.getFruit("Pear"));
 		elements.add(fruitFactory.getFruit("Orange"));
 		elements.add(bombFactory.getBomb("Dangerous"));
-		elements.add(fruitFactory.getFruit("Apple"));
+		elements.add(heart);
 
 		return elements;
 	}

@@ -2,7 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 
-import model.Element;
+import model.Element.Element;
+import model.Element.Heart;
 import model.gameEngine.Command;
 import model.gameEngine.GameEngine;
 import model.gameEngine.Invoker;
@@ -55,6 +56,11 @@ public class Controller {
 	public void slice(int elementNumber) {
 		gameEngine.slice(elementNumber);
 		
+	}
+	
+	public Heart sliceLifePowerUp() {
+		Heart heart = new Heart();
+		return heart;
 	}
 	
 	public void fallenFruit() {

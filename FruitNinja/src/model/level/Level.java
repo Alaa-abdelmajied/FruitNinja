@@ -3,7 +3,7 @@ package model.level;
 import java.util.ArrayList;
 import java.util.Queue;
 
-import model.Element;
+import model.Element.Element;
 
 public class Level {
 	

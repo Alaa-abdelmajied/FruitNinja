@@ -1,6 +1,6 @@
 package model.fruit;
 
-import model.Element;
+import model.Element.Element;
 
 public interface Fruit extends Element {
 

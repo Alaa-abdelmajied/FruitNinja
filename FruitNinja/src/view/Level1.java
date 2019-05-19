@@ -31,7 +31,7 @@ import javafx.scene.shape.CubicCurve;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Element;
+import model.Element.Element;
 import model.bomb.Dangerous;
 import model.bomb.Fatal;
 import model.fruit.Apple;
@@ -88,7 +88,7 @@ public class Level1 {
 
 	TranslateTransition transition;
 	RotateTransition rotateTransition;
-	
+
 	private Media fruitSound;
 	private Media bombSound;
 	private AudioClip sliceFruit;
@@ -171,13 +171,13 @@ public class Level1 {
 			back.setX(1113);
 			back.setY(19);
 		});
-		back.setOnMousePressed(e->{
+		back.setOnMousePressed(e -> {
 			back.setFitHeight(66);
 			back.setFitWidth(66);
 			back.setX(1113);
 			back.setY(19);
 		});
-		back.setOnMouseReleased(e->{
+		back.setOnMouseReleased(e -> {
 			back.setFitHeight(72);
 			back.setFitWidth(72);
 			back.setX(1110);
@@ -266,19 +266,18 @@ public class Level1 {
 			BACK.setX(567);
 			BACK.setY(392);
 		});
-		BACK.setOnMousePressed(e->{
+		BACK.setOnMousePressed(e -> {
 			BACK.setFitHeight(66);
 			BACK.setFitWidth(66);
 			BACK.setX(1113);
 			BACK.setY(19);
 		});
-		BACK.setOnMouseReleased(e->{
+		BACK.setOnMouseReleased(e -> {
 			BACK.setFitHeight(72);
 			BACK.setFitWidth(72);
 			BACK.setX(1110);
 			BACK.setY(16);
 		});
-
 
 		Image Timer = new Image("Timer.png");
 		ImageView t = new ImageView(Timer);
@@ -313,7 +312,7 @@ public class Level1 {
 
 		fruitSound = new Media((new File("src/Slice.mp3")).toURI().toString());
 		sliceFruit = new AudioClip(fruitSound.getSource());
-		
+
 		bombSound = new Media((new File("src/Bomb1.mp3")).toURI().toString());
 		sliceBomb = new AudioClip(bombSound.getSource());
 
@@ -329,7 +328,7 @@ public class Level1 {
 
 			else if (elements.get(elementCounter) instanceof model.fruit.Orange)
 				Orange(root, elementCounter);
-				else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
+			else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
 				Strawberry(root, elementCounter);
 
 			else if (elements.get(elementCounter) instanceof SpecialApple)
@@ -337,15 +336,18 @@ public class Level1 {
 
 			else if (elements.get(elementCounter) instanceof SpecialGrape)
 				Grapes(root, elementCounter);
-			
+
 			else if (elements.get(elementCounter) instanceof Pineapple)
 				pinapple(root, elementCounter);
 
 			else if (elements.get(elementCounter) instanceof Fatal)
 				FatalBomb(elementCounter);
-			
+
 			else if (elements.get(elementCounter) instanceof Dangerous)
 				oneLiveBomb(elementCounter);
+
+			if (seconds == 58)
+				heart(root, 21);
 
 			elementCounter++;
 			controller.setBestScore();
@@ -361,7 +363,6 @@ public class Level1 {
 
 		stage.setScene(scene);
 	}
-
 
 	public void redApple(AnchorPane root, int elementNumber) {
 		Random X = new Random();
@@ -445,7 +446,7 @@ public class Level1 {
 			GreenApple1.setVisible(false);
 			SlicedGreenApple1.setVisible(true);
 		});
-	
+
 		root.getChildren().addAll(GreenApple1, SlicedGreenApple1);
 	}
 
@@ -469,7 +470,7 @@ public class Level1 {
 		SlicedStrawberry.setFitWidth(85);
 		SlicedStrawberry.setX(randomX);
 		SlicedStrawberry.setY(721);
-		
+
 		Throw(Strawberry, randomX, randomY, 2, false);
 		Throw(SlicedStrawberry, randomX, randomY, 2, true);
 
@@ -498,7 +499,7 @@ public class Level1 {
 		});
 		root.getChildren().addAll(Strawberry, SlicedStrawberry);
 	}
-	
+
 	public void Pear(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -519,7 +520,7 @@ public class Level1 {
 		SlicedPear.setFitWidth(85);
 		SlicedPear.setX(randomX);
 		SlicedPear.setY(721);
-		
+
 		Throw(Pear, randomX, randomY, 2, false);
 		Throw(SlicedPear, randomX, randomY, 2, true);
 
@@ -528,7 +529,7 @@ public class Level1 {
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
 			Pear.setVisible(false);
-			SlicedPear.setVisible(true);			
+			SlicedPear.setVisible(true);
 			isSlicedOrange = true;
 		});
 		transition.setOnFinished(new EventHandler<ActionEvent>() {
@@ -548,6 +549,7 @@ public class Level1 {
 		});
 		root.getChildren().addAll(Pear, SlicedPear);
 	}
+
 	public void Orange(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -568,7 +570,7 @@ public class Level1 {
 		SlicedOrange.setFitWidth(85);
 		SlicedOrange.setX(randomX);
 		SlicedOrange.setY(721);
-		
+
 		Throw(Orange, randomX, randomY, 2, false);
 		Throw(SlicedOrange, randomX, randomY, 2, true);
 
@@ -577,7 +579,7 @@ public class Level1 {
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
 			Orange.setVisible(false);
-			SlicedOrange.setVisible(true);			
+			SlicedOrange.setVisible(true);
 			isSlicedOrange = true;
 		});
 		transition.setOnFinished(new EventHandler<ActionEvent>() {
@@ -628,12 +630,12 @@ public class Level1 {
 			score.setText(Integer.toString(controller.score()));
 			Grapes.setVisible(false);
 			SlicedGrapes.setVisible(true);
-			
+
 		});
-		
+
 		root.getChildren().addAll(Grapes, SlicedGrapes);
 	}
-	
+
 	public void pinapple(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -668,10 +670,48 @@ public class Level1 {
 			Pinapple.setVisible(false);
 			SlicedPinapple.setVisible(true);
 		});
-	
+
 		root.getChildren().addAll(Pinapple, SlicedPinapple);
 	}
 
+	public void heart(AnchorPane root, int elementNumber) {
+		Random X = new Random();
+		int randomX = 100 + X.nextInt(1000);
+		Random Y = new Random();
+		int randomY = 300 + Y.nextInt(300);
+		Image heart = new Image("live.png");
+		ImageView Heart = new ImageView(heart);
+		Heart.setVisible(true);
+		Heart.setFitHeight(80);
+		Heart.setFitWidth(80);
+		Heart.setX(randomX);
+		Heart.setY(721);
+
+		Image slicedHeart = new Image("SlicedHeart.png");
+		ImageView SlicedHeart = new ImageView(slicedHeart);
+		SlicedHeart.setVisible(false);
+
+		SlicedHeart.setFitHeight(65);
+		SlicedHeart.setFitWidth(65);
+		SlicedHeart.setFitHeight(85);
+		SlicedHeart.setFitWidth(85);
+		SlicedHeart.setX(randomX);
+		SlicedHeart.setY(721);
+
+		Throw(Heart, randomX, randomY, 1, false);
+		Throw(SlicedHeart, randomX, randomY, 1, true);
+
+		Heart.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
+			controller.slice(elementNumber);
+			gainLife();
+			score.setText(Integer.toString(controller.score()));
+			Heart.setVisible(false);
+			SlicedHeart.setVisible(true);
+		});
+
+		root.getChildren().addAll(Heart, SlicedHeart);
+	}
 
 	public void oneLiveBomb(int elementNumber) {
 		Random X = new Random();
@@ -746,7 +786,7 @@ public class Level1 {
 			sliceBombSound().play();
 			controller.slice(elementNumber);
 			lossLife();
-			
+
 			DBomb.setVisible(false);
 			Boom.setVisible(true);
 //			transition.stop();
@@ -764,8 +804,6 @@ public class Level1 {
 		root.getChildren().addAll(DBomb, Boom);
 	}
 
-
-
 	public void Throw(Node node, int X, int oldy, double speed, Boolean slice) {
 		if (!slice) {
 			Random d = new Random();
@@ -773,8 +811,7 @@ public class Level1 {
 		} else
 			delay = delay;
 		Random randY = new Random();
-		int y = 550+randY.nextInt(100);
-
+		int y = 550 + randY.nextInt(100);
 
 		timelinetest += 0;
 		transition = new TranslateTransition();
@@ -793,10 +830,8 @@ public class Level1 {
 		rotateTransition.setNode(node);
 		rotateTransition.play();
 
-		CubicCurve cubicCurve = new CubicCurve();
 
 	}
-
 
 	private void doTime() {
 		Timeline time = new Timeline();
@@ -827,7 +862,7 @@ public class Level1 {
 	}
 
 	public void lossLife() {
-		
+
 		if (controller.remaingLives() == 2) {
 			live1.setVisible(false);
 			loss1.setVisible(true);
@@ -846,30 +881,49 @@ public class Level1 {
 			BACKGROUND.setVisible(true);
 			GAMEOVER.setVisible(true);
 			BACK.setVisible(true);
-	 		fSCOREVIEW.setVisible(true);
+			fSCOREVIEW.setVisible(true);
 			fscore.setVisible(true);
 			fscore.setText(Integer.toString(controller.score()));
 			timeline.stop();
 			playMusic += 1;
 		}
-		if(playMusic == 1)
+		if (playMusic == 1)
 			endSound().play();
 	}
-	
+
+	public void gainLife() {
+
+		if (controller.remaingLives() == 3) {
+			live1.setVisible(true);
+			live2.setVisible(true);
+			live3.setVisible(true);
+			loss1.setVisible(false);
+			loss2.setVisible(false);
+			loss3.setVisible(false);
+		} else if (controller.remaingLives() == 2) {
+			live1.setVisible(false);
+			live2.setVisible(true);
+			live3.setVisible(true);
+			loss1.setVisible(true);
+			loss2.setVisible(false);
+			loss3.setVisible(false);
+		}
+	}
+
 	public AudioClip sliceFruitSound() {
 		sliceFruit.setVolume(200.0D);
 		return sliceFruit;
 	}
-	
+
 	public AudioClip sliceBombSound() {
 		sliceBomb.setVolume(200.0D);
 		return sliceBomb;
 	}
-	
-    public AudioClip endSound() {
+
+	public AudioClip endSound() {
 		Media sound = new Media((new File("src/laylay.mp3")).toURI().toString());
 		AudioClip end = new AudioClip(sound.getSource());
 		end.setVolume(200.0D);
 		return end;
-    }
+	}
 }
