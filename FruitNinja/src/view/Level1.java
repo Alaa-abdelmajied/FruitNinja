@@ -167,7 +167,18 @@ public class Level1 {
 			back.setFitWidth(66);
 			back.setX(1113);
 			back.setY(19);
-
+		});
+		back.setOnMousePressed(e->{
+			back.setFitHeight(66);
+			back.setFitWidth(66);
+			back.setX(1113);
+			back.setY(19);
+		});
+		back.setOnMouseReleased(e->{
+			back.setFitHeight(72);
+			back.setFitWidth(72);
+			back.setX(1110);
+			back.setY(16);
 		});
 
 		heart = new Image("live.png");
@@ -251,8 +262,20 @@ public class Level1 {
 			BACK.setFitWidth(66);
 			BACK.setX(567);
 			BACK.setY(392);
-
 		});
+		BACK.setOnMousePressed(e->{
+			BACK.setFitHeight(66);
+			BACK.setFitWidth(66);
+			BACK.setX(1113);
+			BACK.setY(19);
+		});
+		BACK.setOnMouseReleased(e->{
+			BACK.setFitHeight(72);
+			BACK.setFitWidth(72);
+			BACK.setX(1110);
+			BACK.setY(16);
+		});
+
 
 		Image Timer = new Image("Timer.png");
 		ImageView t = new ImageView(Timer);
