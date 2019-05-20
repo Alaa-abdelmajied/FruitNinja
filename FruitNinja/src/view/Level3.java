@@ -86,6 +86,7 @@ public class Level3 {
 	Label timer;
 
 	Timeline timeline;
+	Timeline time;
 
 	TranslateTransition transition;
 	RotateTransition rotateTransition;
@@ -114,7 +115,7 @@ public class Level3 {
 		root = new AnchorPane();
 		scene = new Scene(root, 1200, 671);
 
-		background = new Image("WhatsApp Image 2019-05-08 at 4.23.16 AM.jpeg");
+		background = new Image("levelbackground.jpeg");
 		image = new ImageView(background);
 		image.setFitWidth(1200);
 		image.setFitHeight(671);
@@ -193,7 +194,15 @@ public class Level3 {
 		reset.setX(1113);
 		reset.setY(85);
 		reset.setOnMouseClicked(e -> {
-
+			timeline.stop();			
+			time.stop();
+            transition.stop();
+            rotateTransition.stop();
+            clean();
+            playMusic = 0;
+			MainMenu mainMenu = new MainMenu(stage);
+				mainMenu.startHard();
+			elements = controller.reset();
 		});
 		reset.setOnMouseEntered(e -> {
 			reset.setFitHeight(72);
@@ -869,7 +878,7 @@ public class Level3 {
 	}
 
 	private void doTime() {
-		Timeline time = new Timeline();
+		time = new Timeline();
 		time.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 			@Override
@@ -941,4 +950,8 @@ public class Level3 {
 		end.setVolume(200.0D);
 		return end;
 	}
+	
+	public void clean(){
+        root.getChildren().removeAll(image,live1,loss1,live2,loss2,live3,loss3,SCOREVIEW,BESTSCOREView,back,BACKGROUND,BACK,reset,GAMEOVER,fSCOREVIEW);
+    }
 }

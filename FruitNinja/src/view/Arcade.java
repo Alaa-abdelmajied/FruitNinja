@@ -90,7 +90,7 @@ public class Arcade {
 		root = new AnchorPane();
 		scene = new Scene(root, 1200, 671);
 
-		background = new Image("WhatsApp Image 2019-05-08 at 4.23.16 AM.jpeg");
+		background = new Image("levelbackground.jpeg");
 		image = new ImageView(background);
 		image.setFitWidth(1200);
 		image.setFitHeight(671);
@@ -172,8 +172,14 @@ public class Arcade {
 		reset.setX(1113);
 		reset.setY(85);
 		reset.setOnMouseClicked(e -> {
-	
-			
+			timeline.stop();			
+			time.stop();
+            transition.stop();
+            rotateTransition.stop();
+            clean();
+			MainMenu mainMenu = new MainMenu(stage);
+				mainMenu.startArcade();
+			elements = controller.reset();
 		});
 		reset.setOnMouseEntered(e -> {
 			reset.setFitHeight(72);
@@ -702,6 +708,10 @@ public class Arcade {
 		AudioClip alert = new AudioClip(sound.getSource());
 		alert.setVolume(200.0D);
 		return alert;
+    }
+    
+    public void clean(){
+        root.getChildren().removeAll(image,SCOREVIEW,BESTSCOREView,back,BACKGROUND,BACK,reset,GAMEOVER,fSCOREVIEW);
     }
 
 }

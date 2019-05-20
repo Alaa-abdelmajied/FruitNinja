@@ -82,13 +82,14 @@ public class Level1 {
 	ImageView fSCOREVIEW;
 	Label fscore;
 
-	Integer startTime = 0;
-	Integer seconds = startTime;
+//	Integer startTime = 0;
+	Integer seconds = 0;
 	Integer minutes = 0;
 	Integer hours = 0;
 	Label timer;
 
 	Timeline timeline;
+	Timeline time;
 
 	TranslateTransition transition;
 	RotateTransition rotateTransition;
@@ -97,7 +98,7 @@ public class Level1 {
 	private Media bombSound;
 	private AudioClip sliceFruit;
 	private AudioClip sliceBomb;
-	private Media throwFruitSound;
+
 	private AudioClip throwFruit;
 
 	private double delay;
@@ -110,7 +111,6 @@ public class Level1 {
 	private boolean isSlicedStrawberry = false;
 	private boolean isSlicedOrange = false;
 	private boolean isSlicedPear = false;
-	private boolean isSlicedBanana = false;
 	private int playMusic = 0;
 
 	public void buildScene() {
@@ -119,7 +119,7 @@ public class Level1 {
 		root = new AnchorPane();
 		scene = new Scene(root, 1200, 671);
 
-		background = new Image("WhatsApp Image 2019-05-08 at 4.23.16 AM.jpeg");
+		background = new Image("levelbackground.jpeg");
 		image = new ImageView(background);
 		image.setFitWidth(1200);
 		image.setFitHeight(671);
@@ -198,13 +198,15 @@ public class Level1 {
 		reset.setX(1113);
 		reset.setY(85);
 		reset.setOnMouseClicked(e -> {
-
-			mainMenu.easy.setOnMouseClicked(e2 -> {
-				controller.play(1);
-				Level1 easyLevel = new Level1(stage, controller);
-				easyLevel.buildScene();
-
-			});
+			timeline.stop();			
+			time.stop();
+            transition.stop();
+            rotateTransition.stop();
+            clean();
+            playMusic = 0;
+			MainMenu mainMenu = new MainMenu(stage);
+				mainMenu.startEasy();
+			elements = controller.reset();
 		});
 		reset.setOnMouseEntered(e -> {
 			reset.setFitHeight(72);
@@ -498,7 +500,6 @@ public class Level1 {
 			score.setText(Integer.toString(controller.score()));
 			Banana.setVisible(false);
 			SlicedBanana.setVisible(true);
-			isSlicedBanana = true;
 		});
 		Throw(Banana, randomX, randomY, 2, false);
 		Throw(SlicedBanana, randomX, randomY, 2, true);
@@ -774,8 +775,8 @@ public class Level1 {
 		Image heart = new Image("live.png");
 		ImageView Heart = new ImageView(heart);
 		Heart.setVisible(true);
-		Heart.setFitHeight(80);
-		Heart.setFitWidth(80);
+		Heart.setFitHeight(55);
+		Heart.setFitWidth(55);
 		Heart.setX(randomX);
 		Heart.setY(721);
 
@@ -785,8 +786,6 @@ public class Level1 {
 
 		SlicedHeart.setFitHeight(65);
 		SlicedHeart.setFitWidth(65);
-		SlicedHeart.setFitHeight(85);
-		SlicedHeart.setFitWidth(85);
 		SlicedHeart.setX(randomX);
 		SlicedHeart.setY(721);
 
@@ -928,7 +927,7 @@ public class Level1 {
 	}
 
 	private void doTime() {
-		Timeline time = new Timeline();
+		time = new Timeline();
 		time.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 			@Override
@@ -1027,10 +1026,13 @@ public class Level1 {
 	}
 	
 	public AudioClip throwSound() {
-		throwFruitSound = new Media((new File("src/throwFruit.mpeg")).toURI().toString());
+		Media throwFruitSound = new Media((new File("src/throwFruit.mpeg")).toURI().toString());
 		throwFruit = new AudioClip(fruitSound.getSource());
 		throwFruit.setVolume(200.0D);
 		return throwFruit;
 	}
 	
+	public void clean(){
+        root.getChildren().removeAll(image,live1,loss1,live2,loss2,live3,loss3,SCOREVIEW,BESTSCOREView,back,BACKGROUND,BACK,reset,GAMEOVER,fSCOREVIEW);
+    }
 }

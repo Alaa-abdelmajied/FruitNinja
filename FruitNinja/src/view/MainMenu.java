@@ -195,9 +195,7 @@ public class MainMenu {
         btn4 = new Image("Arcade.png");
         Arcade = new ImageView(btn4);
         Arcade.setOnMouseClicked(e->{
-        	controller.play(4);
-            Arcade arcade = new Arcade(stage,controller);
-            arcade.buildScene();
+        	startArcade();
             mediaPlayer.setMute(true);
         });
         Arcade.setFitHeight(70);
@@ -329,9 +327,7 @@ public class MainMenu {
         easy.setX(795);
         easy.setY(420);
         easy.setOnMouseClicked(e->{
-        	controller.play(1);
-            Level1 easyLevel = new Level1(stage,controller);           
-            easyLevel.buildScene();
+        	startEasy();
             mediaPlayer.setMute(true);
         }); 
 
@@ -359,9 +355,7 @@ public class MainMenu {
         });
         
         normal.setOnMouseClicked(e->{
-        	controller.play(2);
-            Level2 normalLevel = new Level2(stage,controller);
-            normalLevel.buildScene();
+        	startMedium();
             mediaPlayer.setMute(true);
         });
         normal.setVisible(false);
@@ -393,9 +387,7 @@ public class MainMenu {
             hard.setY(527);
         });
         hard.setOnMouseClicked(e->{
-        	controller.play(3);
-            Level3 hardLevel = new Level3(stage,controller);
-            hardLevel.buildScene();
+        	startHard();
             mediaPlayer.setMute(true);
         });
         hard.setVisible(false);
@@ -681,4 +673,27 @@ public class MainMenu {
         SliderTrans2(Credits);
     }
     
+    public void startEasy() {
+    	controller.play(1);
+        Level1 easyLevel = new Level1(stage,controller);           
+        easyLevel.buildScene();
+    }
+    
+    public void startMedium() {
+    	controller.play(2);
+        Level2 normalLevel = new Level2(stage,controller);
+        normalLevel.buildScene();
+    }
+    
+    public void startHard() {
+    	controller.play(3);
+        Level3 hardLevel = new Level3(stage,controller);
+        hardLevel.buildScene();
+    }
+    
+    public void startArcade() {
+    	controller.play(4);
+        Arcade arcade = new Arcade(stage,controller);
+        arcade.buildScene();
+    }
 }

@@ -47,6 +47,13 @@ public class Controller {
 		commandNewGame(level);
 
 	}
+	
+	public ArrayList<Element> reset(){
+		commandResetGame();
+		elements = updateElements();
+		return elements;
+	}
+	
 
 	public ArrayList<Element> updateElements() {
 		elements = level.elementThrow();

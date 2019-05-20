@@ -39,6 +39,8 @@ public class Easy implements LevelStrategy {
 		elements.add(fruitFactory.getFruit("Strawberry"));
 		elements.add(fruitFactory.getFruit("Pear"));
 		elements.add(fruitFactory.getFruit("SpecialApple"));
+		elements.add(fruitFactory.getFruit("Orange"));
+		elements.add(bombFactory.getBomb("Dangerous"));
 		elements.add(heart);
 
 		return elements;

@@ -85,6 +85,7 @@ public class Level2 {
 	Label timer;
 
 	Timeline timeline;
+	Timeline time;
 
 	TranslateTransition transition;
 	RotateTransition rotateTransition;
@@ -113,7 +114,7 @@ public class Level2 {
 		root = new AnchorPane();
 		scene = new Scene(root, 1200, 671);
 
-		background = new Image("WhatsApp Image 2019-05-08 at 4.23.16 AM.jpeg");
+		background = new Image("levelbackground.jpeg");
 		image = new ImageView(background);
 		image.setFitWidth(1200);
 		image.setFitHeight(671);
@@ -192,7 +193,15 @@ public class Level2 {
 		reset.setX(1113);
 		reset.setY(85);
 		reset.setOnMouseClicked(e -> {
-
+			timeline.stop();			
+			time.stop();
+            transition.stop();
+            rotateTransition.stop();
+            clean();
+            playMusic = 0;
+			MainMenu mainMenu = new MainMenu(stage);
+				mainMenu.startMedium();
+			elements = controller.reset();
 		});
 		reset.setOnMouseEntered(e -> {
 			reset.setFitHeight(72);
@@ -760,8 +769,8 @@ public class Level2 {
 		Image heart = new Image("live.png");
 		ImageView Heart = new ImageView(heart);
 		Heart.setVisible(true);
-		Heart.setFitHeight(80);
-		Heart.setFitWidth(80);
+		Heart.setFitHeight(55);
+		Heart.setFitWidth(55);
 		Heart.setX(randomX);
 		Heart.setY(721);
 
@@ -771,8 +780,6 @@ public class Level2 {
 
 		SlicedHeart.setFitHeight(65);
 		SlicedHeart.setFitWidth(65);
-		SlicedHeart.setFitHeight(85);
-		SlicedHeart.setFitWidth(85);
 		SlicedHeart.setX(randomX);
 		SlicedHeart.setY(721);
 
@@ -790,7 +797,7 @@ public class Level2 {
 
 		root.getChildren().addAll(Heart, SlicedHeart);
 	}
-
+	
 	public void oneLiveBomb(int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -912,7 +919,7 @@ public class Level2 {
 	}
 
 	private void doTime() {
-		Timeline time = new Timeline();
+		time = new Timeline();
 		time.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 			@Override
@@ -1009,4 +1016,8 @@ public class Level2 {
 		end.setVolume(200.0D);
 		return end;
 	}
+	
+	public void clean(){
+        root.getChildren().removeAll(image,live1,loss1,live2,loss2,live3,loss3,SCOREVIEW,BESTSCOREView,back,BACKGROUND,BACK,reset,GAMEOVER,fSCOREVIEW);
+    }
 }
