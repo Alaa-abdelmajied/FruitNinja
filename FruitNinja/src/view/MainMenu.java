@@ -1,7 +1,9 @@
 package view;
 
+import java.io.File;
+
+import controller.Controller;
 import javafx.animation.TranslateTransition;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -11,12 +13,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
-import javafx.*;
 import javafx.util.Duration;
-
-import java.io.File;
-
-import controller.Controller;
 
 public class MainMenu {
     Stage stage;
