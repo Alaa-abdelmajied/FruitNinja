@@ -59,6 +59,11 @@ public class GameEngine {
 			lives += heart.increase();
 		}
 	}
+	
+	public int increaseTime(int elementNumber) {
+		Fruit fruit = (Fruit) elements.get(elementNumber);
+		return fruit.increase();
+	}
 
 	public void slicedBomb(Bombs bomb) {
 		int reduceLive = bomb.loseLife();

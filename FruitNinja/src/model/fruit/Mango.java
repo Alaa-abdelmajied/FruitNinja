@@ -4,7 +4,7 @@ public class Mango implements Fruit{
 
 	@Override
 	public int increase() {
-		return 15;
+		return 10;
 	}
 
 }

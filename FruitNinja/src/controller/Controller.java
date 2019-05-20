@@ -65,6 +65,10 @@ public class Controller {
 		
 	}
 	
+	public int increaseTime(int elementNumber) {
+		return gameEngine.increaseTime(elementNumber);
+	}
+	
 	public Heart sliceLifePowerUp() {
 		Heart heart = new Heart();
 		return heart;

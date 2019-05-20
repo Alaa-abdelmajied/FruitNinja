@@ -83,6 +83,7 @@ public class Arcade {
 	private int bestScore;
 	private ArrayList<Element> elements = new ArrayList<Element>();
 	private int elementCounter = 0;
+	private boolean produceMango = true;
 
 	public void buildScene() {
 		stage.setTitle("Arcade");
@@ -295,6 +296,7 @@ public class Arcade {
 		
 		fruitSound = new Media((new File("src/Slice.mp3")).toURI().toString());
 		sliceFruit = new AudioClip(fruitSound.getSource());
+		
 
 		timeline = new Timeline(new KeyFrame(Duration.millis(400), (event) -> {
 
@@ -326,7 +328,12 @@ public class Arcade {
 				Banana(root, elementCounter);
 			
 			else if (elements.get(elementCounter) instanceof Pineapple)
-				pinapple(root, elementCounter);
+				pinapple(root, elementCounter);		
+			
+			if(seconds == 15 && produceMango) {
+				Mango(root, 25);
+				produceMango = false;
+			}
 
 			elementCounter++;
 			controller.setBestScore();
@@ -618,6 +625,41 @@ public class Arcade {
 		Throw(SlicedBanana, randomX, randomY, 2, true);
 
 		root.getChildren().addAll(Banana, SlicedBanana);
+	}
+	
+	public void Mango(AnchorPane root, int elementNumber) {
+		Random X = new Random();
+		int randomX = 100 + X.nextInt(1000);
+		Random Y = new Random();
+		int randomY = 300 + Y.nextInt(300);
+		Image mango = new Image("Mango.png");
+		ImageView Mango = new ImageView(mango);
+		Mango.setVisible(true);
+		Image slicedmango = new Image("SlicedMango.png");
+		ImageView SlicedMango = new ImageView(slicedmango);
+		SlicedMango.setVisible(false);
+
+		Mango.setFitHeight(65);
+		Mango.setFitWidth(65);
+		Mango.setX(randomX);
+		Mango.setY(721);
+		SlicedMango.setFitHeight(85);
+		SlicedMango.setFitWidth(85);
+		SlicedMango.setX(randomX);
+		SlicedMango.setY(721);
+
+		Mango.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
+			produceMango = true;
+			seconds += controller.increaseTime(elementNumber);
+			score.setText(Integer.toString(controller.score()));
+			Mango.setVisible(false);
+			SlicedMango.setVisible(true);
+		});
+		Throw(Mango, randomX, randomY, 2, false);
+		Throw(SlicedMango, randomX, randomY, 2, true);
+
+		root.getChildren().addAll(Mango, SlicedMango);
 	}
 
 	public void Throw(Node node, int X, int oldy, double speed, Boolean slice) {

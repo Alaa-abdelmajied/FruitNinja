@@ -40,6 +40,7 @@ public class Arcade implements LevelStrategy{
 		elements.add(fruitFactory.getFruit("SpecialApple"));
 		elements.add(fruitFactory.getFruit("Apple"));
 		elements.add(fruitFactory.getFruit("Strawberry"));
+		elements.add(fruitFactory.getFruit("Mango"));
 		
 		return elements;
 	}
