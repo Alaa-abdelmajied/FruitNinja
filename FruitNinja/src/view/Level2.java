@@ -62,6 +62,7 @@ public class Level2 {
 	Label score;
 	Label best;
 	Image ba;
+	Image RESET;
 	Image SCORE;
 	ImageView SCOREVIEW;
 	Image bestSCORE;
@@ -71,6 +72,7 @@ public class Level2 {
 	Image gameOver;
 	ImageView BACKGROUND;
 	ImageView BACK;
+	ImageView reset;
 	ImageView GAMEOVER;
 	Image fSCORE;
 	ImageView fSCOREVIEW;
@@ -102,7 +104,7 @@ public class Level2 {
 	private boolean isSlicedStrawberry = false;
 	private boolean isSlicedOrange = false;
 	private boolean isSlicedPear = false;
-	private boolean isSlicedBanana= false;
+	private boolean isSlicedBanana = false;
 	private int playMusic = 0;
 
 	public void buildScene() {
@@ -183,6 +185,40 @@ public class Level2 {
 			back.setY(16);
 		});
 
+		RESET = new Image("reset.png");
+		reset = new ImageView(RESET);
+		reset.setFitHeight(66);
+		reset.setFitWidth(66);
+		reset.setX(1113);
+		reset.setY(85);
+		reset.setOnMouseClicked(e -> {
+
+		});
+		reset.setOnMouseEntered(e -> {
+			reset.setFitHeight(72);
+			reset.setFitWidth(72);
+			reset.setX(1110);
+			reset.setY(82);
+		});
+		reset.setOnMouseExited(e -> {
+			reset.setFitHeight(66);
+			reset.setFitWidth(66);
+			reset.setX(1113);
+			reset.setY(85);
+		});
+		reset.setOnMousePressed(e -> {
+			reset.setFitHeight(66);
+			reset.setFitWidth(66);
+			reset.setX(1113);
+			reset.setY(85);
+		});
+		reset.setOnMouseReleased(e -> {
+			reset.setFitHeight(72);
+			reset.setFitWidth(72);
+			reset.setX(1110);
+			reset.setY(82);
+		});
+
 		heart = new Image("live.png");
 		splash = new Image("redSplash.png");
 
@@ -222,8 +258,8 @@ public class Level2 {
 		loss3.setX(955);
 		loss3.setY(12);
 
-		root.getChildren().addAll(image, SCOREVIEW, BESTSCOREView, score, best, back, live1, live2, live3, loss1, loss2,
-				loss3);
+		root.getChildren().addAll(image, SCOREVIEW, BESTSCOREView, score, best, back, reset, live1, live2, live3, loss1,
+				loss2, loss3);
 
 		backGround = new Image("Slider.png");
 		BACKGROUND = new ImageView(backGround);
@@ -339,19 +375,19 @@ public class Level2 {
 
 			else if (elements.get(elementCounter) instanceof SpecialGrape)
 				Grapes(root, elementCounter);
-			
+
 			else if (elements.get(elementCounter) instanceof Pineapple)
 				pinapple(root, elementCounter);
-			
+
 			else if (elements.get(elementCounter) instanceof model.fruit.Banana)
 				Banana(root, elementCounter);
 
 			else if (elements.get(elementCounter) instanceof Fatal)
 				FatalBomb(elementCounter);
-			
+
 			else if (elements.get(elementCounter) instanceof Dangerous)
 				oneLiveBomb(elementCounter);
-			
+
 			if (seconds == 58)
 				heart(root, 21);
 
@@ -456,7 +492,6 @@ public class Level2 {
 		root.getChildren().addAll(GreenApple1, SlicedGreenApple1);
 	}
 
-	
 	public void Banana(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -489,9 +524,8 @@ public class Level2 {
 		Throw(Banana, randomX, randomY, 2, false);
 		Throw(SlicedBanana, randomX, randomY, 2, true);
 
-		
 		root.getChildren().addAll(Banana, SlicedBanana);
-		
+
 	}
 
 	public void Strawberry(AnchorPane root, int elementNumber) {
@@ -679,7 +713,7 @@ public class Level2 {
 
 		root.getChildren().addAll(Grapes, SlicedGrapes);
 	}
-	
+
 	public void pinapple(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -714,7 +748,7 @@ public class Level2 {
 			Pinapple.setVisible(false);
 			SlicedPinapple.setVisible(true);
 		});
-	
+
 		root.getChildren().addAll(Pinapple, SlicedPinapple);
 	}
 
@@ -847,7 +881,6 @@ public class Level2 {
 
 		root.getChildren().addAll(DBomb, Boom);
 	}
-	
 
 	public void Throw(Node node, int X, int oldy, double speed, Boolean slice) {
 		if (!slice) {
@@ -875,7 +908,6 @@ public class Level2 {
 		rotateTransition.setCycleCount(RotateTransition.INDEFINITE);
 		rotateTransition.setNode(node);
 		rotateTransition.play();
-
 
 	}
 
@@ -936,14 +968,14 @@ public class Level2 {
 		if (playMusic == 1)
 			endSound().play();
 	}
-	
+
 	public void gainLife() {
 
 		Media sound = new Media((new File("src/LiveUp.mp3")).toURI().toString());
 		AudioClip gainLife = new AudioClip(sound.getSource());
 		gainLife.setVolume(200.0D);
 		gainLife.play();
-		
+
 		if (controller.remaingLives() == 3) {
 			live1.setVisible(true);
 			live2.setVisible(true);
@@ -960,7 +992,7 @@ public class Level2 {
 			loss3.setVisible(false);
 		}
 	}
-	
+
 	public AudioClip sliceFruitSound() {
 		sliceFruit.setVolume(200.0D);
 		return sliceFruit;

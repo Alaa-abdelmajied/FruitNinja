@@ -46,6 +46,7 @@ public class Arcade {
 	Label score;
 	Label best;
 	Image ba;
+	Image RESET;
 	Image SCORE;
 	ImageView SCOREVIEW;
 	Image bestSCORE;
@@ -55,6 +56,7 @@ public class Arcade {
 	Image gameOver;
 	ImageView BACKGROUND;
 	ImageView BACK;
+	ImageView reset;
 	ImageView GAMEOVER;
 	Image fSCORE;
 	ImageView fSCOREVIEW;
@@ -163,8 +165,42 @@ public class Arcade {
             back.setY(16);
         });
 
-
-        root.getChildren().addAll(image, SCOREVIEW, BESTSCOREView, score, best, back);
+        RESET = new Image("reset.png");
+		reset = new ImageView(RESET);
+		reset.setFitHeight(66);
+		reset.setFitWidth(66);
+		reset.setX(1113);
+		reset.setY(85);
+		reset.setOnMouseClicked(e -> {
+	
+			
+		});
+		reset.setOnMouseEntered(e -> {
+			reset.setFitHeight(72);
+			reset.setFitWidth(72);
+			reset.setX(1110);
+			reset.setY(82);
+		});
+		reset.setOnMouseExited(e -> {
+			reset.setFitHeight(66);
+			reset.setFitWidth(66);
+			reset.setX(1113);
+			reset.setY(85);
+		});
+		reset.setOnMousePressed(e -> {
+			reset.setFitHeight(66);
+			reset.setFitWidth(66);
+			reset.setX(1113);
+			reset.setY(85);
+		});
+		reset.setOnMouseReleased(e -> {
+			reset.setFitHeight(72);
+			reset.setFitWidth(72);
+			reset.setX(1110);
+			reset.setY(82);
+		});
+		
+        root.getChildren().addAll(image, SCOREVIEW, BESTSCOREView, score, best, back,reset);
 
 		backGround = new Image("Slider.png");
 		BACKGROUND = new ImageView(backGround);

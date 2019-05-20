@@ -680,4 +680,5 @@ public class MainMenu {
         SliderTrans2(back2);
         SliderTrans2(Credits);
     }
+    
 }

@@ -63,6 +63,7 @@ public class Level3 {
 	Label score;
 	Label best;
 	Image ba;
+	Image RESET;
 	Image SCORE;
 	ImageView SCOREVIEW;
 	Image bestSCORE;
@@ -72,6 +73,7 @@ public class Level3 {
 	Image gameOver;
 	ImageView BACKGROUND;
 	ImageView BACK;
+	ImageView reset;
 	ImageView GAMEOVER;
 	Image fSCORE;
 	ImageView fSCOREVIEW;
@@ -87,7 +89,7 @@ public class Level3 {
 
 	TranslateTransition transition;
 	RotateTransition rotateTransition;
-	
+
 	private Media fruitSound;
 	private Media bombSound;
 	private AudioClip sliceFruit;
@@ -171,19 +173,52 @@ public class Level3 {
 			back.setX(1113);
 			back.setY(19);
 		});
-		back.setOnMousePressed(e->{
+		back.setOnMousePressed(e -> {
 			back.setFitHeight(66);
 			back.setFitWidth(66);
 			back.setX(1113);
 			back.setY(19);
 		});
-		back.setOnMouseReleased(e->{
+		back.setOnMouseReleased(e -> {
 			back.setFitHeight(72);
 			back.setFitWidth(72);
 			back.setX(1110);
 			back.setY(16);
 		});
 
+		RESET = new Image("reset.png");
+		reset = new ImageView(RESET);
+		reset.setFitHeight(66);
+		reset.setFitWidth(66);
+		reset.setX(1113);
+		reset.setY(85);
+		reset.setOnMouseClicked(e -> {
+
+		});
+		reset.setOnMouseEntered(e -> {
+			reset.setFitHeight(72);
+			reset.setFitWidth(72);
+			reset.setX(1110);
+			reset.setY(82);
+		});
+		reset.setOnMouseExited(e -> {
+			reset.setFitHeight(66);
+			reset.setFitWidth(66);
+			reset.setX(1113);
+			reset.setY(85);
+		});
+		reset.setOnMousePressed(e -> {
+			reset.setFitHeight(66);
+			reset.setFitWidth(66);
+			reset.setX(1113);
+			reset.setY(85);
+		});
+		reset.setOnMouseReleased(e -> {
+			reset.setFitHeight(72);
+			reset.setFitWidth(72);
+			reset.setX(1110);
+			reset.setY(82);
+		});
 
 		heart = new Image("live.png");
 		splash = new Image("redSplash.png");
@@ -224,8 +259,8 @@ public class Level3 {
 		loss3.setX(955);
 		loss3.setY(12);
 
-		root.getChildren().addAll(image, SCOREVIEW, BESTSCOREView, score, best, back, live1, live2, live3, loss1, loss2,
-				loss3);
+		root.getChildren().addAll(image, SCOREVIEW, BESTSCOREView, score, best, back, reset, live1, live2, live3, loss1,
+				loss2, loss3);
 
 		backGround = new Image("Slider.png");
 		BACKGROUND = new ImageView(backGround);
@@ -267,13 +302,13 @@ public class Level3 {
 			BACK.setX(567);
 			BACK.setY(392);
 		});
-		BACK.setOnMousePressed(e->{
+		BACK.setOnMousePressed(e -> {
 			BACK.setFitHeight(66);
 			BACK.setFitWidth(66);
 			BACK.setX(1113);
 			BACK.setY(19);
 		});
-		BACK.setOnMouseReleased(e->{
+		BACK.setOnMouseReleased(e -> {
 			BACK.setFitHeight(72);
 			BACK.setFitWidth(72);
 			BACK.setX(1110);
@@ -313,7 +348,7 @@ public class Level3 {
 
 		fruitSound = new Media((new File("src/Slice.mp3")).toURI().toString());
 		sliceFruit = new AudioClip(fruitSound.getSource());
-		
+
 		bombSound = new Media((new File("src/Bomb1.mp3")).toURI().toString());
 		sliceBomb = new AudioClip(bombSound.getSource());
 
@@ -329,25 +364,25 @@ public class Level3 {
 
 			else if (elements.get(elementCounter) instanceof model.fruit.Orange)
 				Orange(root, elementCounter);
-			
-				else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
+
+			else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
 				Strawberry(root, elementCounter);
-			
-				else if (elements.get(elementCounter) instanceof Pear)
-					Pear(root, elementCounter);
+
+			else if (elements.get(elementCounter) instanceof Pear)
+				Pear(root, elementCounter);
 
 			else if (elements.get(elementCounter) instanceof SpecialApple)
 				greenApple(root, elementCounter);
 
 			else if (elements.get(elementCounter) instanceof SpecialGrape)
 				Grapes(root, elementCounter);
-			
+
 			else if (elements.get(elementCounter) instanceof Pineapple)
 				pinapple(root, elementCounter);
-			
+
 			else if (elements.get(elementCounter) instanceof model.fruit.Banana)
 				Banana(root, elementCounter);
-			
+
 			else if (elements.get(elementCounter) instanceof Fatal)
 				FatalBomb(elementCounter);
 			else if (elements.get(elementCounter) instanceof Dangerous)
@@ -367,7 +402,6 @@ public class Level3 {
 
 		stage.setScene(scene);
 	}
-
 
 	public void redApple(AnchorPane root, int elementNumber) {
 		Random X = new Random();
@@ -417,7 +451,7 @@ public class Level3 {
 		});
 
 		root.getChildren().addAll(RedApple, SlicedRedApple);
-	}	
+	}
 
 	public void greenApple(AnchorPane root, int elementNumber) {
 		Random X = new Random();
@@ -450,7 +484,7 @@ public class Level3 {
 			GreenApple1.setVisible(false);
 			SlicedGreenApple1.setVisible(true);
 		});
-	
+
 		root.getChildren().addAll(GreenApple1, SlicedGreenApple1);
 	}
 
@@ -474,7 +508,7 @@ public class Level3 {
 		SlicedStrawberry.setFitWidth(85);
 		SlicedStrawberry.setX(randomX);
 		SlicedStrawberry.setY(721);
-		
+
 		Throw(Strawberry, randomX, randomY, 2, false);
 		Throw(SlicedStrawberry, randomX, randomY, 2, true);
 
@@ -503,8 +537,7 @@ public class Level3 {
 		});
 		root.getChildren().addAll(Strawberry, SlicedStrawberry);
 	}
-	
-	
+
 	public void Banana(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -537,9 +570,8 @@ public class Level3 {
 		Throw(Banana, randomX, randomY, 2, false);
 		Throw(SlicedBanana, randomX, randomY, 2, true);
 
-		
 		root.getChildren().addAll(Banana, SlicedBanana);
-		
+
 	}
 
 	public void Pear(AnchorPane root, int elementNumber) {
@@ -591,7 +623,7 @@ public class Level3 {
 		});
 		root.getChildren().addAll(Pear, SlicedPear);
 	}
-	
+
 	public void Orange(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -612,7 +644,7 @@ public class Level3 {
 		SlicedOrange.setFitWidth(85);
 		SlicedOrange.setX(randomX);
 		SlicedOrange.setY(721);
-		
+
 		Throw(Orange, randomX, randomY, 2, false);
 		Throw(SlicedOrange, randomX, randomY, 2, true);
 
@@ -621,7 +653,7 @@ public class Level3 {
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
 			Orange.setVisible(false);
-			SlicedOrange.setVisible(true);			
+			SlicedOrange.setVisible(true);
 			isSlicedOrange = true;
 		});
 		transition.setOnFinished(new EventHandler<ActionEvent>() {
@@ -672,12 +704,12 @@ public class Level3 {
 			score.setText(Integer.toString(controller.score()));
 			Grapes.setVisible(false);
 			SlicedGrapes.setVisible(true);
-			
+
 		});
-		
+
 		root.getChildren().addAll(Grapes, SlicedGrapes);
 	}
-	
+
 	public void pinapple(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -712,10 +744,9 @@ public class Level3 {
 			Pinapple.setVisible(false);
 			SlicedPinapple.setVisible(true);
 		});
-	
+
 		root.getChildren().addAll(Pinapple, SlicedPinapple);
 	}
-
 
 	public void oneLiveBomb(int elementNumber) {
 		Random X = new Random();
@@ -790,7 +821,7 @@ public class Level3 {
 			sliceBombSound().play();
 			controller.slice(elementNumber);
 			lossLife();
-			
+
 			DBomb.setVisible(false);
 			Boom.setVisible(true);
 //			transition.stop();
@@ -808,8 +839,6 @@ public class Level3 {
 		root.getChildren().addAll(DBomb, Boom);
 	}
 
-
-
 	public void Throw(Node node, int X, int oldy, double speed, Boolean slice) {
 		if (!slice) {
 			Random d = new Random();
@@ -818,7 +847,7 @@ public class Level3 {
 			delay = delay;
 
 		Random randY = new Random();
-		int y = 350+randY.nextInt(300);
+		int y = 350 + randY.nextInt(300);
 
 		timelinetest += 0;
 		transition = new TranslateTransition();
@@ -837,9 +866,7 @@ public class Level3 {
 		rotateTransition.setNode(node);
 		rotateTransition.play();
 
-
 	}
-
 
 	private void doTime() {
 		Timeline time = new Timeline();
@@ -888,33 +915,30 @@ public class Level3 {
 			BACKGROUND.setVisible(true);
 			GAMEOVER.setVisible(true);
 			BACK.setVisible(true);
-	 		fSCOREVIEW.setVisible(true);
+			fSCOREVIEW.setVisible(true);
 			fscore.setVisible(true);
 			fscore.setText(Integer.toString(controller.score()));
 			timeline.stop();
 			playMusic += 1;
 		}
-		if(playMusic == 1)
+		if (playMusic == 1)
 			endSound().play();
 	}
-	
+
 	public AudioClip sliceFruitSound() {
 		sliceFruit.setVolume(200.0D);
 		return sliceFruit;
 	}
-	
+
 	public AudioClip sliceBombSound() {
 		sliceBomb.setVolume(200.0D);
 		return sliceBomb;
 	}
-	
-    public AudioClip endSound() {
+
+	public AudioClip endSound() {
 		Media sound = new Media((new File("src/laylay.mp3")).toURI().toString());
 		AudioClip end = new AudioClip(sound.getSource());
 		end.setVolume(200.0D);
 		return end;
-    }
+	}
 }
-
-
-
