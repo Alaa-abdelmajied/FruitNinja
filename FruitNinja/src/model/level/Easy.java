@@ -1,8 +1,6 @@
 package model.level;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 
 import model.Element.Element;
 import model.Element.Heart;
