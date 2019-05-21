@@ -2,14 +2,11 @@ package view;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import controller.Controller;
-import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
@@ -24,10 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.CubicCurve;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -35,11 +29,9 @@ import model.Element.Element;
 import model.bomb.Dangerous;
 import model.bomb.Fatal;
 import model.fruit.Apple;
-import model.fruit.Pear;
 import model.fruit.Pineapple;
 import model.fruit.SpecialApple;
 import model.fruit.SpecialGrape;
-import model.level.Easy;
 
 public class Level1 {
 	Stage stage;
@@ -82,7 +74,7 @@ public class Level1 {
 	ImageView fSCOREVIEW;
 	Label fscore;
 
-//	Integer startTime = 0;
+	Integer startTime = 0;
 	Integer seconds = 0;
 	Integer minutes = 0;
 	Integer hours = 0;
