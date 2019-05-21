@@ -361,7 +361,7 @@ public class Level2 {
 		bombSound = new Media((new File("src/Bomb1.mp3")).toURI().toString());
 		sliceBomb = new AudioClip(bombSound.getSource());
 
-		timeline = new Timeline(new KeyFrame(Duration.millis(1100), (event) -> {
+		timeline = new Timeline(new KeyFrame(Duration.millis(1060), (event) -> {
 
 			elements = controller.getElements();
 			if (elementCounter > 19) {
