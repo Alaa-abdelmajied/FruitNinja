@@ -399,8 +399,6 @@ public class Level3 {
 			else if (elements.get(elementCounter) instanceof Dangerous)
 				oneLiveBomb(elementCounter);
 
-			if (seconds == 58)
-				heart(root, 21);
 
 			elementCounter++;
 			controller.setBestScore();
@@ -498,6 +496,7 @@ public void redApple(AnchorPane root, int elementNumber) {
 			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
+			controller.undoBestScore(controller.score(),bestScore);
 			Banana.setVisible(false);
 			SlicedBanana.setVisible(true);
 		});
@@ -763,43 +762,6 @@ public void redApple(AnchorPane root, int elementNumber) {
 		});
 
 		root.getChildren().addAll(Pinapple, SlicedPinapple);
-	}
-
-	public void heart(AnchorPane root, int elementNumber) {
-		Random X = new Random();
-		int randomX = 100 + X.nextInt(1000);
-		Random Y = new Random();
-		int randomY = 300 + Y.nextInt(300);
-		Image heart = new Image("live.png");
-		ImageView Heart = new ImageView(heart);
-		Heart.setVisible(true);
-		Heart.setFitHeight(55);
-		Heart.setFitWidth(55);
-		Heart.setX(randomX);
-		Heart.setY(721);
-
-		Image slicedHeart = new Image("SlicedHeart.png");
-		ImageView SlicedHeart = new ImageView(slicedHeart);
-		SlicedHeart.setVisible(false);
-
-		SlicedHeart.setFitHeight(65);
-		SlicedHeart.setFitWidth(65);
-		SlicedHeart.setX(randomX);
-		SlicedHeart.setY(721);
-
-		Throw(Heart, randomX, randomY, 1, false);
-		Throw(SlicedHeart, randomX, randomY, 1, true);
-
-		Heart.setOnMouseMoved(e -> {
-			sliceFruitSound().play();
-			controller.slice(elementNumber);
-			gainLife();
-			score.setText(Integer.toString(controller.score()));
-			Heart.setVisible(false);
-			SlicedHeart.setVisible(true);
-		});
-
-		root.getChildren().addAll(Heart, SlicedHeart);
 	}
 
 	public void oneLiveBomb(int elementNumber) {

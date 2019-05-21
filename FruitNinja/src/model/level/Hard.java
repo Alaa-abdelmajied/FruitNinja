@@ -51,7 +51,7 @@ public class Hard implements LevelStrategy {
 		BombFactory bombFactory = new BombFactory();
 
 		elements.add(fruitFactory.getFruit("Apple"));
-		elements.add(fruitFactory.getFruit("Strawberry"));
+		elements.add(bombFactory.getBomb("Fatal"));
 		elements.add(fruitFactory.getFruit("SpecialApple"));
 		elements.add(fruitFactory.getFruit("Orange"));
 		elements.add(fruitFactory.getFruit("Pear"));
@@ -64,12 +64,12 @@ public class Hard implements LevelStrategy {
 		elements.add(fruitFactory.getFruit("Banana"));
 		elements.add(fruitFactory.getFruit("Pineapple"));
 		elements.add(fruitFactory.getFruit("Orange"));
-		elements.add(fruitFactory.getFruit("SpecialApple"));
+		elements.add(bombFactory.getBomb("Dangerous"));
 		elements.add(fruitFactory.getFruit("Apple"));
 		elements.add(fruitFactory.getFruit("Strawberry"));
 		elements.add(fruitFactory.getFruit("Pear"));
 		elements.add(fruitFactory.getFruit("SpecialApple"));
-		elements.add(fruitFactory.getFruit("Orange"));
+		elements.add(fruitFactory.getFruit("Banana"));
 		elements.add(bombFactory.getBomb("Dangerous"));
 
 		return elements;

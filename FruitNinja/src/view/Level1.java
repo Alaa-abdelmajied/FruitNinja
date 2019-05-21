@@ -492,6 +492,7 @@ public void redApple(AnchorPane root, int elementNumber) {
 			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
+			controller.undoBestScore(controller.score(),bestScore);
 			Banana.setVisible(false);
 			SlicedBanana.setVisible(true);
 		});
