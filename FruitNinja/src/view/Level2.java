@@ -39,6 +39,7 @@ import java.util.TimerTask;
 import controller.Controller;
 
 public class Level2 {
+
 	Stage stage;
 	Controller controller;
 
@@ -49,6 +50,7 @@ public class Level2 {
 
 	AnchorPane root;
 	Scene scene;
+	MainMenu mainMenu;
 	Image background;
 	ImageView image;
 	ImageView live1;
@@ -78,8 +80,8 @@ public class Level2 {
 	ImageView fSCOREVIEW;
 	Label fscore;
 
-	Integer startTime = 0;
-	Integer seconds = startTime;
+//	Integer startTime = 0;
+	Integer seconds = 0;
 	Integer minutes = 0;
 	Integer hours = 0;
 	Label timer;
@@ -95,6 +97,8 @@ public class Level2 {
 	private AudioClip sliceFruit;
 	private AudioClip sliceBomb;
 
+	private AudioClip throwFruit;
+
 	private double delay;
 	private int timelinetest = 0;
 	private int TIME = 0;
@@ -105,8 +109,8 @@ public class Level2 {
 	private boolean isSlicedStrawberry = false;
 	private boolean isSlicedOrange = false;
 	private boolean isSlicedPear = false;
-	private boolean isSlicedBanana = false;
 	private int playMusic = 0;
+	private int finalScore;
 
 	public void buildScene() {
 		stage.setTitle("Normal");
@@ -154,7 +158,7 @@ public class Level2 {
 		back.setX(1113);
 		back.setY(19);
 		back.setOnMouseClicked(e -> {
-			controller.undoBestScore(bestScore);
+			controller.undoBestScore(bestScore,bestScore);
 			MainMenu main = new MainMenu(stage);
 			main.buildScene();
 			main.mediaPlayer.setMute(false);
@@ -185,6 +189,7 @@ public class Level2 {
 			back.setX(1110);
 			back.setY(16);
 		});
+
 		RESET = new Image("reset.png");
 		reset = new ImageView(RESET);
 		reset.setFitHeight(66);
@@ -199,7 +204,7 @@ public class Level2 {
             clean();
             playMusic = 0;
 			MainMenu mainMenu = new MainMenu(stage);
-				mainMenu.startMedium();;
+				mainMenu.startMedium();
 			elements = controller.reset();
 		});
 		reset.setOnMouseEntered(e -> {
@@ -226,8 +231,6 @@ public class Level2 {
 			reset.setX(1110);
 			reset.setY(82);
 		});
-
-
 
 		heart = new Image("live.png");
 		splash = new Image("redSplash.png");
@@ -268,8 +271,8 @@ public class Level2 {
 		loss3.setX(955);
 		loss3.setY(12);
 
-		root.getChildren().addAll(image, SCOREVIEW, BESTSCOREView, score, best, back, reset, live1, live2, live3, loss1,
-				loss2, loss3);
+		root.getChildren().addAll(image, SCOREVIEW, BESTSCOREView, score, best, back, live1, live2, live3, loss1, loss2,
+				loss3, reset);
 
 		backGround = new Image("Slider.png");
 		BACKGROUND = new ImageView(backGround);
@@ -295,6 +298,7 @@ public class Level2 {
 		BACK.setY(392);
 		BACK.setOnMouseClicked(e -> {
 			endSound().stop();
+			controller.undoBestScore(finalScore,bestScore);
 			MainMenu main = new MainMenu(stage);
 			main.buildScene();
 			main.mediaPlayer.setMute(false);
@@ -360,8 +364,9 @@ public class Level2 {
 
 		bombSound = new Media((new File("src/Bomb1.mp3")).toURI().toString());
 		sliceBomb = new AudioClip(bombSound.getSource());
+		
 
-		timeline = new Timeline(new KeyFrame(Duration.millis(1060), (event) -> {
+		timeline = new Timeline(new KeyFrame(Duration.millis(1000), (event) -> {
 
 			elements = controller.getElements();
 			if (elementCounter > 19) {
@@ -373,12 +378,8 @@ public class Level2 {
 
 			else if (elements.get(elementCounter) instanceof model.fruit.Orange)
 				Orange(root, elementCounter);
-
 			else if (elements.get(elementCounter) instanceof model.fruit.Strawberry)
 				Strawberry(root, elementCounter);
-
-			else if (elements.get(elementCounter) instanceof Pear)
-				Pear(root, elementCounter);
 
 			else if (elements.get(elementCounter) instanceof SpecialApple)
 				greenApple(root, elementCounter);
@@ -447,6 +448,7 @@ public class Level2 {
 		});
 		Throw(RedApple, randomX, randomY, 2, false);
 		Throw(SlicedRedApple, randomX, randomY, 2, true);
+		
 
 		transition.setOnFinished(new EventHandler<ActionEvent>() {
 
@@ -465,6 +467,42 @@ public class Level2 {
 		});
 
 		root.getChildren().addAll(RedApple, SlicedRedApple);
+	}
+
+	public void Banana(AnchorPane root, int elementNumber) {
+		Random X = new Random();
+		int randomX = 100 + X.nextInt(1000);
+		Random Y = new Random();
+		int randomY = 300 + Y.nextInt(300);
+		Image banana = new Image("Banana.png");
+		ImageView Banana = new ImageView(banana);
+		Banana.setVisible(true);
+		Image slicedbanana = new Image("SlicedBanana.png");
+		ImageView SlicedBanana = new ImageView(slicedbanana);
+		SlicedBanana.setVisible(false);
+
+		Banana.setFitHeight(65);
+		Banana.setFitWidth(65);
+		Banana.setX(randomX);
+		Banana.setY(721);
+		SlicedBanana.setFitHeight(85);
+		SlicedBanana.setFitWidth(85);
+		SlicedBanana.setX(randomX);
+		SlicedBanana.setY(721);
+
+		Banana.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
+			controller.undoBestScore(controller.score(),bestScore);
+			Banana.setVisible(false);
+			SlicedBanana.setVisible(true);
+		});
+		Throw(Banana, randomX, randomY, 2, false);
+		Throw(SlicedBanana, randomX, randomY, 2, true);
+
+		root.getChildren().addAll(Banana, SlicedBanana);
+
 	}
 
 	public void greenApple(AnchorPane root, int elementNumber) {
@@ -500,42 +538,6 @@ public class Level2 {
 		});
 
 		root.getChildren().addAll(GreenApple1, SlicedGreenApple1);
-	}
-
-	public void Banana(AnchorPane root, int elementNumber) {
-		Random X = new Random();
-		int randomX = 100 + X.nextInt(1000);
-		Random Y = new Random();
-		int randomY = 300 + Y.nextInt(300);
-		Image banana = new Image("Banana.png");
-		ImageView Banana = new ImageView(banana);
-		Banana.setVisible(true);
-		Image slicedbanana = new Image("SlicedBanana.png");
-		ImageView SlicedBanana = new ImageView(slicedbanana);
-		SlicedBanana.setVisible(false);
-
-		Banana.setFitHeight(65);
-		Banana.setFitWidth(65);
-		Banana.setX(randomX);
-		Banana.setY(721);
-		SlicedBanana.setFitHeight(85);
-		SlicedBanana.setFitWidth(85);
-		SlicedBanana.setX(randomX);
-		SlicedBanana.setY(721);
-
-		Banana.setOnMouseMoved(e -> {
-			sliceFruitSound().play();
-			controller.slice(elementNumber);
-			score.setText(Integer.toString(controller.score()));
-			Banana.setVisible(false);
-			SlicedBanana.setVisible(true);
-			isSlicedBanana = true;
-		});
-		Throw(Banana, randomX, randomY, 2, false);
-		Throw(SlicedBanana, randomX, randomY, 2, true);
-
-		root.getChildren().addAll(Banana, SlicedBanana);
-
 	}
 
 	public void Strawberry(AnchorPane root, int elementNumber) {
@@ -588,6 +590,56 @@ public class Level2 {
 		root.getChildren().addAll(Strawberry, SlicedStrawberry);
 	}
 
+	public void Pear(AnchorPane root, int elementNumber) {
+		Random X = new Random();
+		int randomX = 100 + X.nextInt(1000);
+		Random Y = new Random();
+		int randomY = 300 + Y.nextInt(300);
+		Image pear = new Image("Orange.png");
+		ImageView Pear = new ImageView(pear);
+		Pear.setVisible(true);
+		Image slicedpear = new Image("SlicedOrange.png");
+		ImageView SlicedPear = new ImageView(slicedpear);
+		SlicedPear.setVisible(false);
+
+		Pear.setFitHeight(80);
+		Pear.setFitWidth(80);
+		Pear.setX(randomX);
+		Pear.setY(721);
+		SlicedPear.setFitHeight(85);
+		SlicedPear.setFitWidth(85);
+		SlicedPear.setX(randomX);
+		SlicedPear.setY(721);
+
+		Throw(Pear, randomX, randomY, 2, false);
+		Throw(SlicedPear, randomX, randomY, 2, true);
+
+		Pear.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
+			Pear.setVisible(false);
+			SlicedPear.setVisible(true);
+			isSlicedOrange = true;
+		});
+		transition.setOnFinished(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent actionEvent) {
+				if (!isSlicedPear) {
+					controller.fallenFruit();
+					isSlicedPear = false;
+					lossLife();
+
+				}
+				if (isSlicedPear) {
+					isSlicedPear = false;
+				}
+			}
+		});
+		root.getChildren().addAll(Pear, SlicedPear);
+	}
+
 	public void Orange(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -627,8 +679,8 @@ public class Level2 {
 				if (!isSlicedOrange) {
 					controller.fallenFruit();
 					isSlicedOrange = false;
-
 					lossLife();
+
 				}
 				if (isSlicedOrange) {
 					isSlicedOrange = false;
@@ -636,56 +688,6 @@ public class Level2 {
 			}
 		});
 		root.getChildren().addAll(Orange, SlicedOrange);
-	}
-
-	public void Pear(AnchorPane root, int elementNumber) {
-		Random X = new Random();
-		int randomX = 100 + X.nextInt(1000);
-		Random Y = new Random();
-		int randomY = 300 + Y.nextInt(300);
-		Image pear = new Image("Pear.png");
-		ImageView Pear = new ImageView(pear);
-		Pear.setVisible(true);
-		Image slicedpear = new Image("SlicedPear.png");
-		ImageView SlicedPear = new ImageView(slicedpear);
-		SlicedPear.setVisible(false);
-
-		Pear.setFitHeight(80);
-		Pear.setFitWidth(80);
-		Pear.setX(randomX);
-		Pear.setY(721);
-		SlicedPear.setFitHeight(85);
-		SlicedPear.setFitWidth(85);
-		SlicedPear.setX(randomX);
-		SlicedPear.setY(721);
-
-		Throw(Pear, randomX, randomY, 2, false);
-		Throw(SlicedPear, randomX, randomY, 2, true);
-
-		Pear.setOnMouseMoved(e -> {
-			sliceFruitSound().play();
-			controller.slice(elementNumber);
-			score.setText(Integer.toString(controller.score()));
-			Pear.setVisible(false);
-			SlicedPear.setVisible(true);
-			isSlicedPear = true;
-		});
-		transition.setOnFinished(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent actionEvent) {
-				if (!isSlicedPear) {
-					controller.fallenFruit();
-					isSlicedPear = false;
-					lossLife();
-
-				}
-				if (isSlicedPear) {
-					isSlicedPear = false;
-				}
-			}
-		});
-		root.getChildren().addAll(Pear, SlicedPear);
 	}
 
 	public void Grapes(AnchorPane root, int elementNumber) {
@@ -798,7 +800,7 @@ public class Level2 {
 
 		root.getChildren().addAll(Heart, SlicedHeart);
 	}
-	
+
 	public void oneLiveBomb(int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -829,7 +831,7 @@ public class Level2 {
 			lossLife();
 			DBomb.setVisible(false);
 			Boom.setVisible(true);
-        	transition.stop();
+			transition.stop();
 			rotateTransition.stop();
 
 			Timer time = new Timer();
@@ -875,8 +877,8 @@ public class Level2 {
 
 			DBomb.setVisible(false);
 			Boom.setVisible(true);
-			transition.stop();
-			rotateTransition.stop();
+      		transition.stop();
+      		rotateTransition.stop();
 
 			Timer time = new Timer();
 			time.schedule(new TimerTask() {
@@ -896,9 +898,8 @@ public class Level2 {
 			delay = d.nextDouble();
 		} else
 			delay = delay;
-
 		Random randY = new Random();
-		int y = 400 + randY.nextInt(100);
+		int y = 550 + randY.nextInt(100);
 
 		timelinetest += 0;
 		transition = new TranslateTransition();
@@ -910,12 +911,15 @@ public class Level2 {
 		transition.setNode(node);
 		transition.play();
 
-		rotateTransition = new RotateTransition(Duration.seconds(2));
+		rotateTransition = new RotateTransition(Duration.seconds(1.5));
 		rotateTransition.setByAngle(360 * 10);
 		rotateTransition.setRate(0.05);
 		rotateTransition.setCycleCount(RotateTransition.INDEFINITE);
 		rotateTransition.setNode(node);
 		rotateTransition.play();
+		
+		
+		
 
 	}
 
@@ -970,6 +974,7 @@ public class Level2 {
 			fSCOREVIEW.setVisible(true);
 			fscore.setVisible(true);
 			fscore.setText(Integer.toString(controller.score()));
+			finalScore = controller.score();
 			timeline.stop();
 			playMusic += 1;
 		}
@@ -1016,6 +1021,13 @@ public class Level2 {
 		AudioClip end = new AudioClip(sound.getSource());
 		end.setVolume(200.0D);
 		return end;
+	}
+	
+	public AudioClip throwSound() {
+		Media throwFruitSound = new Media((new File("src/throwFruit.mpeg")).toURI().toString());
+		throwFruit = new AudioClip(fruitSound.getSource());
+		throwFruit.setVolume(200.0D);
+		return throwFruit;
 	}
 	
 	public void clean(){

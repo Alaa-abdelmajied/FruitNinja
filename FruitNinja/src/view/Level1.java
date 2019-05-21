@@ -112,6 +112,7 @@ public class Level1 {
 	private boolean isSlicedOrange = false;
 	private boolean isSlicedPear = false;
 	private int playMusic = 0;
+	private int finalScore;
 
 	public void buildScene() {
 		stage.setTitle("Easy");
@@ -159,7 +160,7 @@ public class Level1 {
 		back.setX(1113);
 		back.setY(19);
 		back.setOnMouseClicked(e -> {
-			controller.undoBestScore(bestScore);
+			controller.undoBestScore(bestScore,bestScore);
 			MainMenu main = new MainMenu(stage);
 			main.buildScene();
 			main.mediaPlayer.setMute(false);
@@ -299,6 +300,7 @@ public class Level1 {
 		BACK.setY(392);
 		BACK.setOnMouseClicked(e -> {
 			endSound().stop();
+			controller.undoBestScore(finalScore,bestScore);
 			MainMenu main = new MainMenu(stage);
 			main.buildScene();
 			main.mediaPlayer.setMute(false);
@@ -366,7 +368,7 @@ public class Level1 {
 		sliceBomb = new AudioClip(bombSound.getSource());
 		
 
-		timeline = new Timeline(new KeyFrame(Duration.millis(1100), (event) -> {
+		timeline = new Timeline(new KeyFrame(Duration.millis(1000), (event) -> {
 
 			elements = controller.getElements();
 			if (elementCounter > 19) {
@@ -418,10 +420,6 @@ public class Level1 {
 	}
 
 	public void redApple(AnchorPane root, int elementNumber) {
-		
-		
-		throwSound();
-		
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
@@ -498,6 +496,7 @@ public class Level1 {
 			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
+			controller.undoBestScore(controller.score(),bestScore);
 			Banana.setVisible(false);
 			SlicedBanana.setVisible(true);
 		});
@@ -977,6 +976,7 @@ public class Level1 {
 			fSCOREVIEW.setVisible(true);
 			fscore.setVisible(true);
 			fscore.setText(Integer.toString(controller.score()));
+			finalScore = controller.score();
 			timeline.stop();
 			playMusic += 1;
 		}

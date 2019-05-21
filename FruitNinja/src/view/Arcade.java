@@ -84,6 +84,7 @@ public class Arcade {
 	private ArrayList<Element> elements = new ArrayList<Element>();
 	private int elementCounter = 0;
 	private boolean produceMango = true;
+	private int finalScore;
 
 	public void buildScene() {
 		stage.setTitle("Arcade");
@@ -135,7 +136,7 @@ public class Arcade {
 			time.stop();
 			alertSound().stop();
 			endAlertSound().stop();
-			controller.undoBestScore(bestScore);
+			controller.undoBestScore(bestScore,bestScore);
 			MainMenu main = new MainMenu(stage);
 			main.buildScene();
 			main.mediaPlayer.setMute(false);
@@ -233,6 +234,7 @@ public class Arcade {
 		BACK.setY(392);
 		BACK.setOnMouseClicked(e -> {
 			endAlertSound().stop();
+			controller.undoBestScore(finalScore,bestScore);
 			MainMenu main = new MainMenu(stage);
 			main.buildScene();
 			main.mediaPlayer.setMute(false);
@@ -618,6 +620,7 @@ public class Arcade {
 			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
+			controller.undoBestScore(controller.score(),bestScore);
 			Banana.setVisible(false);
 			SlicedBanana.setVisible(true);
 		});
@@ -710,6 +713,7 @@ public class Arcade {
                     fSCOREVIEW.setVisible(true);
                     fscore.setVisible(true);
                     fscore.setText(Integer.toString(controller.score()));
+                    finalScore = controller.score();
                     time.stop();
                     timeline.stop();
                     alertSound().stop();
