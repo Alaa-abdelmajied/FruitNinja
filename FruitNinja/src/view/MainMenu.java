@@ -3,6 +3,8 @@ package view;
 import java.io.File;
 
 import controller.Controller;
+import javafx.animation.RotateTransition;
+import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -66,6 +68,8 @@ public class MainMenu {
     MediaPlayer mediaPlayer;
     AnchorPane StartSlider;
     AnchorPane CreditSlider;
+
+    RotateTransition rotateTransition;
 
     Controller controller = new Controller();
     public MainMenu(Stage stage){
@@ -427,13 +431,18 @@ public class MainMenu {
         slider2.setY(325);
 
 
-        cred = new Image("no credits yet.png");
+        cred = new Image("Credits.png");
         Credits = new ImageView(cred);
         Credits.setVisible(false);
-        Credits.setFitHeight(32);
-        Credits.setFitWidth(200);
-        Credits.setX(898);
-        Credits.setY(403);
+//        slider1.setFitHeight(320);
+//        slider1.setFitWidth(540);
+//        slider1.setX(730);
+//        slider1.setY(325);
+
+        Credits.setFitHeight(256);
+        Credits.setFitWidth(256);
+        Credits.setX(863);
+        Credits.setY(357);
 
 
         Mon = new Image("MusicOn.png");
@@ -594,12 +603,19 @@ public class MainMenu {
         slider2.setVisible(true);
         back2.setVisible(true);
         Credits.setVisible(true);
+        rotateTransition = new RotateTransition();
+        rotateTransition.setByAngle(360);
+//        rotateTransition.setDuration(Duration.INDEFINITE);
+        rotateTransition.setRate(0.05);
+        rotateTransition.setCycleCount(RotateTransition.INDEFINITE);
+        rotateTransition.setNode(Credits);
+        rotateTransition.play();
     }
     public void HideCredit(){
         slider2.setVisible(false);
         back2.setVisible(false);
         Credits.setVisible(false);
-
+        rotateTransition.stop();
     }
 
     public void turnMusicOn(){
