@@ -773,7 +773,7 @@ public class Level2 {
 		ImageView SlicedHeart = new ImageView(slicedHeart);
 		SlicedHeart.setVisible(false);
 
-		SlicedHeart.setFitHeight(65);
+		SlicedHeart.setFitHeight(45);
 		SlicedHeart.setFitWidth(65);
 		SlicedHeart.setX(randomX);
 		SlicedHeart.setY(721);
