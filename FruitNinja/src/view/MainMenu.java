@@ -408,18 +408,18 @@ public class MainMenu {
         back2.setVisible(false);
         back2.setFitHeight(35);
         back2.setFitWidth(35);
-        back2.setX(716);
+        back2.setX(800);
         back2.setY(319);
         back2.setOnMouseEntered(e->{
             back2.setFitWidth(41);
             back2.setFitHeight(41);
-            back2.setX(713);
+            back2.setX(797);
             back2.setY(316);
         });
         back2.setOnMouseExited(e->{
             back2.setFitWidth(35);
             back2.setFitHeight(35);
-            back2.setX(716);
+            back2.setX(800);
             back2.setY(319);
         });
 
@@ -601,8 +601,9 @@ public class MainMenu {
     }
 
     public void ViewCredit(){
-        slider2.setVisible(true);
+        slider2.setVisible(false);
         back2.setVisible(true);
+        back2.setX(800);
         Credits.setVisible(true);
         rotateTransition = new RotateTransition();
         rotateTransition.setByAngle(360);

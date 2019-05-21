@@ -764,7 +764,7 @@ public void redApple(AnchorPane root, int elementNumber) {
 	}
 
 	public void oneLiveBomb(int elementNumber) {
-		Random X = new Random();
+        Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
 		int randomY = 300 + Y.nextInt(300);
@@ -801,7 +801,9 @@ public void redApple(AnchorPane root, int elementNumber) {
 				@Override
 				public void run() {
 					Boom.setVisible(false);
-				}
+                    transition.play();
+                    rotateTransition.play();
+                }
 			}, 1000);
 		});
 
@@ -847,6 +849,8 @@ public void redApple(AnchorPane root, int elementNumber) {
 				@Override
 				public void run() {
 					Boom.setVisible(false);
+					transition.play();
+					rotateTransition.play();
 				}
 			}, 1000);
 		});
