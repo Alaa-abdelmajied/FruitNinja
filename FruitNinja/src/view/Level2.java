@@ -185,7 +185,6 @@ public class Level2 {
 			back.setX(1110);
 			back.setY(16);
 		});
-
 		RESET = new Image("reset.png");
 		reset = new ImageView(RESET);
 		reset.setFitHeight(66);
@@ -200,7 +199,7 @@ public class Level2 {
             clean();
             playMusic = 0;
 			MainMenu mainMenu = new MainMenu(stage);
-				mainMenu.startMedium();
+				mainMenu.startMedium();;
 			elements = controller.reset();
 		});
 		reset.setOnMouseEntered(e -> {
@@ -227,6 +226,8 @@ public class Level2 {
 			reset.setX(1110);
 			reset.setY(82);
 		});
+
+
 
 		heart = new Image("live.png");
 		splash = new Image("redSplash.png");
@@ -360,7 +361,7 @@ public class Level2 {
 		bombSound = new Media((new File("src/Bomb1.mp3")).toURI().toString());
 		sliceBomb = new AudioClip(bombSound.getSource());
 
-		timeline = new Timeline(new KeyFrame(Duration.millis(1000), (event) -> {
+		timeline = new Timeline(new KeyFrame(Duration.millis(1100), (event) -> {
 
 			elements = controller.getElements();
 			if (elementCounter > 19) {

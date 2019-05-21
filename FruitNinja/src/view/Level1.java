@@ -366,7 +366,7 @@ public class Level1 {
 		sliceBomb = new AudioClip(bombSound.getSource());
 		
 
-		timeline = new Timeline(new KeyFrame(Duration.millis(1000), (event) -> {
+		timeline = new Timeline(new KeyFrame(Duration.millis(1200), (event) -> {
 
 			elements = controller.getElements();
 			if (elementCounter > 19) {

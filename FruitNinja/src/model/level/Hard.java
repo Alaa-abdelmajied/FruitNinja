@@ -36,7 +36,6 @@ public class Hard implements LevelStrategy {
 		elements.add(fruitFactory.getFruit("Banana"));
 		elements.add(fruitFactory.getFruit("Apple"));
 		elements.add(bombFactory.getBomb("Fatal"));
-		elements.add(fruitFactory.getFruit("Orange"));
 		
 		return elements;
 
