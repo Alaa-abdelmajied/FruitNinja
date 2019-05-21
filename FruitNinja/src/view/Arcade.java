@@ -348,7 +348,8 @@ public class Arcade {
 		stage.setScene(scene);
 	}
 
-	public void redApple(AnchorPane root, int elementNumber) {
+public void redApple(AnchorPane root, int elementNumber) {
+		
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
@@ -378,8 +379,43 @@ public class Arcade {
 		});
 		Throw(RedApple, randomX, randomY, 2, false);
 		Throw(SlicedRedApple, randomX, randomY, 2, true);
-
+		
 		root.getChildren().addAll(RedApple, SlicedRedApple);
+	}
+
+	public void Banana(AnchorPane root, int elementNumber) {
+		Random X = new Random();
+		int randomX = 100 + X.nextInt(1000);
+		Random Y = new Random();
+		int randomY = 300 + Y.nextInt(300);
+		Image banana = new Image("Banana.png");
+		ImageView Banana = new ImageView(banana);
+		Banana.setVisible(true);
+		Image slicedbanana = new Image("SlicedBanana.png");
+		ImageView SlicedBanana = new ImageView(slicedbanana);
+		SlicedBanana.setVisible(false);
+
+		Banana.setFitHeight(95);
+		Banana.setFitWidth(95);
+		Banana.setX(randomX);
+		Banana.setY(721);
+		SlicedBanana.setFitHeight(95);
+		SlicedBanana.setFitWidth(95);
+		SlicedBanana.setX(randomX);
+		SlicedBanana.setY(721);
+
+		Banana.setOnMouseMoved(e -> {
+			sliceFruitSound().play();
+			controller.slice(elementNumber);
+			score.setText(Integer.toString(controller.score()));
+			Banana.setVisible(false);
+			SlicedBanana.setVisible(true);
+		});
+		Throw(Banana, randomX, randomY, 2, false);
+		Throw(SlicedBanana, randomX, randomY, 2, true);
+
+		root.getChildren().addAll(Banana, SlicedBanana);
+
 	}
 
 	public void greenApple(AnchorPane root, int elementNumber) {
@@ -387,15 +423,15 @@ public class Arcade {
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
 		int randomY = 300 + Y.nextInt(300);
-		Image greenapple1 = new Image("greenApple.png");
+		Image greenapple1 = new Image("SgreenApple.png");
 		ImageView GreenApple1 = new ImageView(greenapple1);
 		GreenApple1.setVisible(true);
 		Image slicedgreenapple1 = new Image("SlicedGreenApple.png");
 		ImageView SlicedGreenApple1 = new ImageView(slicedgreenapple1);
 		SlicedGreenApple1.setVisible(false);
 
-		GreenApple1.setFitHeight(65);
-		GreenApple1.setFitWidth(65);
+		GreenApple1.setFitHeight(90);
+		GreenApple1.setFitWidth(90);
 		GreenApple1.setX(randomX);
 		GreenApple1.setY(721);
 		SlicedGreenApple1.setFitHeight(85);
@@ -413,7 +449,7 @@ public class Arcade {
 			GreenApple1.setVisible(false);
 			SlicedGreenApple1.setVisible(true);
 		});
-	
+
 		root.getChildren().addAll(GreenApple1, SlicedGreenApple1);
 	}
 
@@ -437,7 +473,7 @@ public class Arcade {
 		SlicedStrawberry.setFitWidth(85);
 		SlicedStrawberry.setX(randomX);
 		SlicedStrawberry.setY(721);
-		
+
 		Throw(Strawberry, randomX, randomY, 2, false);
 		Throw(SlicedStrawberry, randomX, randomY, 2, true);
 
@@ -448,19 +484,18 @@ public class Arcade {
 			Strawberry.setVisible(false);
 			SlicedStrawberry.setVisible(true);
 		});
-
 		root.getChildren().addAll(Strawberry, SlicedStrawberry);
 	}
-	
+
 	public void Pear(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
 		int randomY = 300 + Y.nextInt(300);
-		Image pear = new Image("Pear.png");
+		Image pear = new Image("Orange.png");
 		ImageView Pear = new ImageView(pear);
 		Pear.setVisible(true);
-		Image slicedpear = new Image("SlicedPear.png");
+		Image slicedpear = new Image("SlicedOrange.png");
 		ImageView SlicedPear = new ImageView(slicedpear);
 		SlicedPear.setVisible(false);
 
@@ -506,7 +541,7 @@ public class Arcade {
 		SlicedOrange.setFitWidth(85);
 		SlicedOrange.setX(randomX);
 		SlicedOrange.setY(721);
-		
+
 		Throw(Orange, randomX, randomY, 2, false);
 		Throw(SlicedOrange, randomX, randomY, 2, true);
 
@@ -515,9 +550,8 @@ public class Arcade {
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
 			Orange.setVisible(false);
-			SlicedOrange.setVisible(true);			
+			SlicedOrange.setVisible(true);
 		});
-
 		root.getChildren().addAll(Orange, SlicedOrange);
 	}
 
@@ -526,19 +560,19 @@ public class Arcade {
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
 		int randomY = 300 + Y.nextInt(300);
-		Image grapes = new Image("Grapes.png");
+		Image grapes = new Image("SGrapes.png");
 		ImageView Grapes = new ImageView(grapes);
 		Grapes.setVisible(true);
 		Image slicedgrapes = new Image("SlicedGrapes.png");
 		ImageView SlicedGrapes = new ImageView(slicedgrapes);
 		SlicedGrapes.setVisible(false);
 
-		Grapes.setFitHeight(65);
-		Grapes.setFitWidth(65);
+		Grapes.setFitHeight(110);
+		Grapes.setFitWidth(110);
 		Grapes.setX(randomX);
 		Grapes.setY(721);
-		SlicedGrapes.setFitHeight(85);
-		SlicedGrapes.setFitWidth(85);
+		SlicedGrapes.setFitHeight(110);
+		SlicedGrapes.setFitWidth(110);
 		SlicedGrapes.setX(randomX);
 		SlicedGrapes.setY(721);
 
@@ -551,12 +585,12 @@ public class Arcade {
 			score.setText(Integer.toString(controller.score()));
 			Grapes.setVisible(false);
 			SlicedGrapes.setVisible(true);
-			
+
 		});
-		
+
 		root.getChildren().addAll(Grapes, SlicedGrapes);
 	}
-	
+
 	public void pinapple(AnchorPane root, int elementNumber) {
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -565,8 +599,8 @@ public class Arcade {
 		Image pinapple = new Image("Pinapple.png");
 		ImageView Pinapple = new ImageView(pinapple);
 		Pinapple.setVisible(true);
-		Pinapple.setFitHeight(80);
-		Pinapple.setFitWidth(80);
+		Pinapple.setFitHeight(120);
+		Pinapple.setFitWidth(120);
 		Pinapple.setX(randomX);
 		Pinapple.setY(721);
 
@@ -574,10 +608,8 @@ public class Arcade {
 		ImageView SlicedPinapple = new ImageView(slicedPinapple);
 		SlicedPinapple.setVisible(false);
 
-		SlicedPinapple.setFitHeight(65);
-		SlicedPinapple.setFitWidth(65);
-		SlicedPinapple.setFitHeight(85);
-		SlicedPinapple.setFitWidth(85);
+		SlicedPinapple.setFitHeight(120);
+		SlicedPinapple.setFitWidth(120);
 		SlicedPinapple.setX(randomX);
 		SlicedPinapple.setY(721);
 
@@ -591,43 +623,8 @@ public class Arcade {
 			Pinapple.setVisible(false);
 			SlicedPinapple.setVisible(true);
 		});
-	
+
 		root.getChildren().addAll(Pinapple, SlicedPinapple);
-	}
-	
-	public void Banana(AnchorPane root, int elementNumber) {
-		Random X = new Random();
-		int randomX = 100 + X.nextInt(1000);
-		Random Y = new Random();
-		int randomY = 300 + Y.nextInt(300);
-		Image banana = new Image("Banana.png");
-		ImageView Banana = new ImageView(banana);
-		Banana.setVisible(true);
-		Image slicedbanana = new Image("SlicedBanana.png");
-		ImageView SlicedBanana = new ImageView(slicedbanana);
-		SlicedBanana.setVisible(false);
-
-		Banana.setFitHeight(65);
-		Banana.setFitWidth(65);
-		Banana.setX(randomX);
-		Banana.setY(721);
-		SlicedBanana.setFitHeight(85);
-		SlicedBanana.setFitWidth(85);
-		SlicedBanana.setX(randomX);
-		SlicedBanana.setY(721);
-
-		Banana.setOnMouseMoved(e -> {
-			sliceFruitSound().play();
-			controller.slice(elementNumber);
-			score.setText(Integer.toString(controller.score()));
-			controller.undoBestScore(controller.score(),bestScore);
-			Banana.setVisible(false);
-			SlicedBanana.setVisible(true);
-		});
-		Throw(Banana, randomX, randomY, 2, false);
-		Throw(SlicedBanana, randomX, randomY, 2, true);
-
-		root.getChildren().addAll(Banana, SlicedBanana);
 	}
 	
 	public void Mango(AnchorPane root, int elementNumber) {
@@ -642,12 +639,12 @@ public class Arcade {
 		ImageView SlicedMango = new ImageView(slicedmango);
 		SlicedMango.setVisible(false);
 
-		Mango.setFitHeight(65);
-		Mango.setFitWidth(65);
+		Mango.setFitHeight(120);
+		Mango.setFitWidth(120);
 		Mango.setX(randomX);
 		Mango.setY(721);
-		SlicedMango.setFitHeight(85);
-		SlicedMango.setFitWidth(85);
+		SlicedMango.setFitHeight(120);
+		SlicedMango.setFitWidth(120);
 		SlicedMango.setX(randomX);
 		SlicedMango.setY(721);
 

@@ -412,7 +412,11 @@ public class Level2 {
 		stage.setScene(scene);
 	}
 
-	public void redApple(AnchorPane root, int elementNumber) {
+public void redApple(AnchorPane root, int elementNumber) {
+		
+		
+		throwSound();
+		
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
@@ -476,12 +480,12 @@ public class Level2 {
 		ImageView SlicedBanana = new ImageView(slicedbanana);
 		SlicedBanana.setVisible(false);
 
-		Banana.setFitHeight(65);
-		Banana.setFitWidth(65);
+		Banana.setFitHeight(95);
+		Banana.setFitWidth(95);
 		Banana.setX(randomX);
 		Banana.setY(721);
-		SlicedBanana.setFitHeight(85);
-		SlicedBanana.setFitWidth(85);
+		SlicedBanana.setFitHeight(95);
+		SlicedBanana.setFitWidth(95);
 		SlicedBanana.setX(randomX);
 		SlicedBanana.setY(721);
 
@@ -489,7 +493,6 @@ public class Level2 {
 			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
-			controller.undoBestScore(controller.score(),bestScore);
 			Banana.setVisible(false);
 			SlicedBanana.setVisible(true);
 		});
@@ -512,8 +515,8 @@ public class Level2 {
 		ImageView SlicedGreenApple1 = new ImageView(slicedgreenapple1);
 		SlicedGreenApple1.setVisible(false);
 
-		GreenApple1.setFitHeight(65);
-		GreenApple1.setFitWidth(65);
+		GreenApple1.setFitHeight(90);
+		GreenApple1.setFitWidth(90);
 		GreenApple1.setX(randomX);
 		GreenApple1.setY(721);
 		SlicedGreenApple1.setFitHeight(85);
@@ -697,12 +700,12 @@ public class Level2 {
 		ImageView SlicedGrapes = new ImageView(slicedgrapes);
 		SlicedGrapes.setVisible(false);
 
-		Grapes.setFitHeight(65);
-		Grapes.setFitWidth(65);
+		Grapes.setFitHeight(110);
+		Grapes.setFitWidth(110);
 		Grapes.setX(randomX);
 		Grapes.setY(721);
-		SlicedGrapes.setFitHeight(85);
-		SlicedGrapes.setFitWidth(85);
+		SlicedGrapes.setFitHeight(110);
+		SlicedGrapes.setFitWidth(110);
 		SlicedGrapes.setX(randomX);
 		SlicedGrapes.setY(721);
 
@@ -729,8 +732,8 @@ public class Level2 {
 		Image pinapple = new Image("Pinapple.png");
 		ImageView Pinapple = new ImageView(pinapple);
 		Pinapple.setVisible(true);
-		Pinapple.setFitHeight(80);
-		Pinapple.setFitWidth(80);
+		Pinapple.setFitHeight(120);
+		Pinapple.setFitWidth(120);
 		Pinapple.setX(randomX);
 		Pinapple.setY(721);
 
@@ -738,10 +741,8 @@ public class Level2 {
 		ImageView SlicedPinapple = new ImageView(slicedPinapple);
 		SlicedPinapple.setVisible(false);
 
-		SlicedPinapple.setFitHeight(65);
-		SlicedPinapple.setFitWidth(65);
-		SlicedPinapple.setFitHeight(85);
-		SlicedPinapple.setFitWidth(85);
+		SlicedPinapple.setFitHeight(120);
+		SlicedPinapple.setFitWidth(120);
 		SlicedPinapple.setX(randomX);
 		SlicedPinapple.setY(721);
 
@@ -872,8 +873,8 @@ public class Level2 {
 
 			DBomb.setVisible(false);
 			Boom.setVisible(true);
-      		transition.stop();
-      		rotateTransition.stop();
+			transition.stop();
+			rotateTransition.stop();
 
 			Timer time = new Timer();
 			time.schedule(new TimerTask() {
@@ -886,6 +887,7 @@ public class Level2 {
 
 		root.getChildren().addAll(DBomb, Boom);
 	}
+
 
 	public void Throw(Node node, int X, int oldy, double speed, Boolean slice) {
 		if (!slice) {
