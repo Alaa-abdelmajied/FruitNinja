@@ -787,8 +787,8 @@ public class Level3 {
 			lossLife();
 			DBomb.setVisible(false);
 			Boom.setVisible(true);
-//			transition.stop();
-//			rotateTransition.stop();
+			transition.stop();
+			rotateTransition.stop();
 
 			Timer time = new Timer();
 			time.schedule(new TimerTask() {
@@ -833,8 +833,8 @@ public class Level3 {
 
 			DBomb.setVisible(false);
 			Boom.setVisible(true);
-//			transition.stop();
-//			rotateTransition.stop();
+	    	transition.stop();
+			rotateTransition.stop();
 
 			Timer time = new Timer();
 			time.schedule(new TimerTask() {
