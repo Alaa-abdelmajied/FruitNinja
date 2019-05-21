@@ -153,7 +153,7 @@ public class Level2 {
 		back.setX(1113);
 		back.setY(19);
 		back.setOnMouseClicked(e -> {
-			controller.undoBestScore(bestScore,bestScore);
+			controller.undoBestScore(bestScore, bestScore);
 			MainMenu main = new MainMenu(stage);
 			main.buildScene();
 			main.mediaPlayer.setMute(false);
@@ -192,14 +192,14 @@ public class Level2 {
 		reset.setX(1113);
 		reset.setY(85);
 		reset.setOnMouseClicked(e -> {
-			timeline.stop();			
+			timeline.stop();
 			time.stop();
-            transition.stop();
-            rotateTransition.stop();
-            clean();
-            playMusic = 0;
+			transition.stop();
+			rotateTransition.stop();
+			clean();
+			playMusic = 0;
 			MainMenu mainMenu = new MainMenu(stage);
-				mainMenu.startMedium();
+			mainMenu.startMedium();
 			elements = controller.reset();
 		});
 		reset.setOnMouseEntered(e -> {
@@ -293,7 +293,7 @@ public class Level2 {
 		BACK.setY(392);
 		BACK.setOnMouseClicked(e -> {
 			endSound().stop();
-			controller.undoBestScore(finalScore,bestScore);
+			controller.undoBestScore(finalScore, bestScore);
 			MainMenu main = new MainMenu(stage);
 			main.buildScene();
 			main.mediaPlayer.setMute(false);
@@ -359,7 +359,6 @@ public class Level2 {
 
 		bombSound = new Media((new File("src/Bomb1.mp3")).toURI().toString());
 		sliceBomb = new AudioClip(bombSound.getSource());
-		
 
 		timeline = new Timeline(new KeyFrame(Duration.millis(1000), (event) -> {
 
@@ -412,11 +411,8 @@ public class Level2 {
 		stage.setScene(scene);
 	}
 
-public void redApple(AnchorPane root, int elementNumber) {
-		
-		
-		throwSound();
-		
+	public void redApple(AnchorPane root, int elementNumber) {
+
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
 		Random Y = new Random();
@@ -447,7 +443,6 @@ public void redApple(AnchorPane root, int elementNumber) {
 		});
 		Throw(RedApple, randomX, randomY, 2, false);
 		Throw(SlicedRedApple, randomX, randomY, 2, true);
-		
 
 		transition.setOnFinished(new EventHandler<ActionEvent>() {
 
@@ -493,7 +488,7 @@ public void redApple(AnchorPane root, int elementNumber) {
 			sliceFruitSound().play();
 			controller.slice(elementNumber);
 			score.setText(Integer.toString(controller.score()));
-			controller.undoBestScore(controller.score(),bestScore);
+			controller.undoBestScore(controller.score(), bestScore);
 			Banana.setVisible(false);
 			SlicedBanana.setVisible(true);
 		});
@@ -774,7 +769,7 @@ public void redApple(AnchorPane root, int elementNumber) {
 		Heart.setX(randomX);
 		Heart.setY(721);
 
-		Image slicedHeart = new Image("SlicedHeart.png");
+		Image slicedHeart = new Image("Live up.png");
 		ImageView SlicedHeart = new ImageView(slicedHeart);
 		SlicedHeart.setVisible(false);
 
@@ -889,7 +884,6 @@ public void redApple(AnchorPane root, int elementNumber) {
 		root.getChildren().addAll(DBomb, Boom);
 	}
 
-
 	public void Throw(Node node, int X, int oldy, double speed, Boolean slice) {
 		if (!slice) {
 			Random d = new Random();
@@ -915,9 +909,6 @@ public void redApple(AnchorPane root, int elementNumber) {
 		rotateTransition.setCycleCount(RotateTransition.INDEFINITE);
 		rotateTransition.setNode(node);
 		rotateTransition.play();
-		
-		
-		
 
 	}
 
@@ -1020,15 +1011,9 @@ public void redApple(AnchorPane root, int elementNumber) {
 		end.setVolume(200.0D);
 		return end;
 	}
-	
-	public AudioClip throwSound() {
-		Media throwFruitSound = new Media((new File("src/throwFruit.mpeg")).toURI().toString());
-		throwFruit = new AudioClip(fruitSound.getSource());
-		throwFruit.setVolume(200.0D);
-		return throwFruit;
+
+	public void clean() {
+		root.getChildren().removeAll(image, live1, loss1, live2, loss2, live3, loss3, SCOREVIEW, BESTSCOREView, back,
+				BACKGROUND, BACK, reset, GAMEOVER, fSCOREVIEW);
 	}
-	
-	public void clean(){
-        root.getChildren().removeAll(image,live1,loss1,live2,loss2,live3,loss3,SCOREVIEW,BESTSCOREView,back,BACKGROUND,BACK,reset,GAMEOVER,fSCOREVIEW);
-    }
 }

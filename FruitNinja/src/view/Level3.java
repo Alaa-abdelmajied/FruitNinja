@@ -418,7 +418,6 @@ public class Level3 {
 public void redApple(AnchorPane root, int elementNumber) {
 		
 		
-		throwSound();
 		
 		Random X = new Random();
 		int randomX = 100 + X.nextInt(1000);
@@ -986,12 +985,6 @@ public void redApple(AnchorPane root, int elementNumber) {
 		return end;
 	}
 	
-	public AudioClip throwSound() {
-		Media throwFruitSound = new Media((new File("src/throwFruit.mpeg")).toURI().toString());
-		throwFruit = new AudioClip(fruitSound.getSource());
-		throwFruit.setVolume(200.0D);
-		return throwFruit;
-	}
 	
 	public void clean(){
         root.getChildren().removeAll(image,live1,loss1,live2,loss2,live3,loss3,SCOREVIEW,BESTSCOREView,back,BACKGROUND,BACK,reset,GAMEOVER,fSCOREVIEW);

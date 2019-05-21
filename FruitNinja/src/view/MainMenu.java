@@ -70,6 +70,7 @@ public class MainMenu {
     AnchorPane CreditSlider;
 
     RotateTransition rotateTransition;
+    boolean creditPlay = false;
 
     Controller controller = new Controller();
     public MainMenu(Stage stage){
@@ -610,12 +611,16 @@ public class MainMenu {
         rotateTransition.setCycleCount(RotateTransition.INDEFINITE);
         rotateTransition.setNode(Credits);
         rotateTransition.play();
+        creditPlay = true;
     }
     public void HideCredit(){
         slider2.setVisible(false);
         back2.setVisible(false);
         Credits.setVisible(false);
-        rotateTransition.stop();
+        if(creditPlay) {
+        	rotateTransition.stop();
+        	creditPlay = false;
+        }
     }
 
     public void turnMusicOn(){
