@@ -651,7 +651,7 @@ public void redApple(AnchorPane root, int elementNumber) {
 
 		Mango.setOnMouseMoved(e -> {
 			sliceFruitSound().play();
-			produceMango = true;
+//			produceMango = true;
 			seconds += controller.increaseTime(elementNumber);
 			score.setText(Integer.toString(controller.score()));
 			Mango.setVisible(false);
